@@ -1,0 +1,39 @@
+---
+import { SITE } from '../data/site';
+
+const stats = [
+  {
+    value: SITE.stats.references,
+    label: 'Elvégzett Referencia',
+    icon: 'star',
+  },
+  {
+    value: `${SITE.stats.experience} év`,
+    label: 'Szakmai Tapasztalat',
+    icon: 'calendar',
+  },
+  {
+    value: SITE.stats.warranty,
+    label: 'Garancia',
+    icon: 'shield',
+  },
+  {
+    value: SITE.stats.districts,
+    label: 'Budapest Kerület',
+    icon: 'map',
+  },
+];
+---
+
+<section class="bg-blue-900 text-white py-8" aria-label="Statisztikák és megbízhatóság">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      {stats.map((stat) => (
+        <div class="group">
+          <div class="text-3xl md:text-4xl font-bold text-orange-400 mb-1">{stat.value}</div>
+          <div class="text-sm text-blue-200">{stat.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

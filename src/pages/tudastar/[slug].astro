@@ -1,0 +1,141 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import RelatedPosts from '../../components/RelatedPosts.astro';
+import ContactForm from '../../components/ContactForm.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('tudastar');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'tudastar'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.data.title,
+  description: post.data.description,
+  author: {
+    '@type': 'Person',
+    name: post.data.author,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'KlimaFirst',
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/images/logo.png` },
+  },
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': `${siteUrl}/tudastar/${post.slug}`,
+  },
+  image: post.data.image ? `${siteUrl}${post.data.image}` : `${siteUrl}/images/og-default.jpg`,
+  keywords: post.data.keywords.join(', '),
+};
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  canonical={`/tudastar/${post.slug}`}
+  ogType="article"
+  ogImage={post.data.image}
+  schema={articleSchema}
+  breadcrumbs={[
+    { name: 'Tudástár', url: '/tudastar' },
+    { name: post.data.title, url: `/tudastar/${post.slug}` },
+  ]}
+>
+  <div class="bg-gray-50 border-b border-gray-200">
+    <div class="container mx-auto px-4">
+      <Breadcrumb
+        items={[
+          { name: 'Tudástár', href: '/tudastar' },
+          { name: post.data.title, href: `/tudastar/${post.slug}` },
+        ]}
+      />
+    </div>
+  </div>
+
+  <article class="py-10 bg-white">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <!-- Header -->
+      <header class="mb-8">
+        <div class="flex flex-wrap gap-2 mb-4">
+          {post.data.tags.map((tag: string) => (
+            <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">{tag}</span>
+          ))}
+        </div>
+
+        <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 leading-tight">
+          {post.data.title}
+        </h1>
+
+        <p class="text-lg text-gray-600 leading-relaxed mb-6">{post.data.description}</p>
+
+        <div class="flex items-center gap-4 text-sm text-gray-500 border-t border-b border-gray-100 py-3">
+          <div class="flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+            </svg>
+            <span>{post.data.author}</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <time datetime={post.data.pubDate.toISOString()}>
+              {post.data.pubDate.toLocaleDateString('hu-HU', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </time>
+          </div>
+          {post.data.updatedDate && (
+            <div class="flex items-center gap-1.5 text-blue-600">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              <span>
+                Frissítve: <time datetime={post.data.updatedDate.toISOString()}>
+                  {post.data.updatedDate.toLocaleDateString('hu-HU', { year: 'numeric', month: 'long', day: 'numeric' })}
+                </time>
+              </span>
+            </div>
+          )}
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="prose-klima max-w-none">
+        <Content />
+      </div>
+
+      <!-- CTA box -->
+      <div class="mt-10 bg-blue-50 border border-blue-200 rounded-2xl p-6">
+        <h2 class="font-bold text-blue-900 text-lg mb-2">Kérdése van? Forduljon hozzánk!</h2>
+        <p class="text-blue-700 text-sm mb-4">Ingyenes helyszíni felmérés és kötelezettségmentes árajánlat Budapest egész területén.</p>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="tel:+36203394164" class="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm text-center transition-colors">
+            ☎ +36 20 339 4164
+          </a>
+          <a href="/ajanlatkeres" class="border border-blue-900 text-blue-900 hover:bg-blue-100 px-5 py-2.5 rounded-xl font-semibold text-sm text-center transition-colors">
+            Online Árajánlat
+          </a>
+        </div>
+      </div>
+
+      <!-- Related posts -->
+      <RelatedPosts currentSlug={post.slug} tags={post.data.tags} />
+    </div>
+  </article>
+</BaseLayout>

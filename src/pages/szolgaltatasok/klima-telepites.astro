@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FAQ from '../../components/FAQ.astro';
+import PriceTable from '../../components/PriceTable.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import TrustBar from '../../components/TrustBar.astro';
+import { SITE } from '../../data/site';
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Klíma Telepítés és Értékesítés Budapest',
+  description: 'Professzionális split és multi-split klímarendszerek telepítése Budapesten. Fisher, Fujitsu, Toshiba, Daikin márkák. Ingyenes helyszíni felmérés.',
+  provider: {
+    '@type': 'HVACBusiness',
+    name: 'KlimaFirst',
+    telephone: SITE.phoneTel,
+    url: `${siteUrl}/`,
+  },
+  areaServed: { '@type': 'City', name: 'Budapest' },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Klíma Telepítés Árak',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        name: 'Split klíma telepítés (2.5 kW)',
+        priceSpecification: { '@type': 'PriceSpecification', minPrice: 35000, priceCurrency: 'HUF' },
+      },
+    ],
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.9',
+    reviewCount: '98',
+    bestRating: '5',
+  },
+};
+
+const priceItems = [
+  { service: 'Split klíma telepítés (2.5 kW)', description: 'Beltéri + kültéri egység, szokásos falvastagság', price: '35.000', note: 'Munkadíj' },
+  { service: 'Split klíma telepítés (3.5 kW)', description: 'Beltéri + kültéri egység, szokásos falvastagság', price: '38.000', note: 'Munkadíj' },
+  { service: 'Split klíma telepítés (5.0 kW+)', description: 'Nagy teljesítményű egységek, irodai felhasználás', price: '45.000', note: 'Munkadíj' },
+  { service: 'Multi-split 2 beltéri egység', description: '1 kültéri + 2 beltéri egység telepítése', price: '65.000', note: 'Munkadíj' },
+  { service: 'Multi-split 3 beltéri egység', description: '1 kültéri + 3 beltéri egység telepítése', price: '85.000', note: 'Munkadíj' },
+  { service: 'Rézcső hosszabbítás (méterenkénti)', description: 'Standard 3/8" + 1/4" rézcső pár', price: '3.500', note: '/fm' },
+  { service: 'Klíma készülék ár (2.5–3.5 kW)', description: 'Fisher, Fujitsu vagy Toshiba split klíma', price: '130.000', highlight: true, note: 'Készülékár' },
+];
+
+const faqs = [
+  {
+    question: 'Mennyi idő alatt szerelik fel a klímát?',
+    answer: 'Egy split klíma telepítése általában 3–6 óra alatt elvégezhető. Multi-split rendszereknél ez 1–2 napot vehet igénybe, a beltéri egységek számától függően.',
+  },
+  {
+    question: 'Hol helyezik el a kültéri egységet?',
+    answer: 'A kültéri egységet általában az erkélyen, homlokzaton, tetőn vagy az épület oldalán helyezzük el. Minden esetben figyelünk a szabályos elhelyezésre, a megfelelő áramlásra és a zaj minimalizálására.',
+  },
+  {
+    question: 'Kell-e engedély a klíma telepítéséhez?',
+    answer: 'Önálló lakóháznál általában nem kell engedély. Társasházi lakásoknál a kültéri egység elhelyezéséhez esetenként a közös képviselő vagy az önkormányzat engedélye szükséges – erről a helyszíni felmérésnél tájékoztatjuk.',
+  },
+  {
+    question: 'Milyen típusú klímákat szerelnek?',
+    answer: 'Split, multi-split és kazettás klímarendszereket szerelünk. Forgalmazott márkák: Fisher, Fujitsu, Toshiba, Daikin. Más márkák szervizét is elvégezzük.',
+  },
+  {
+    question: 'Mi az ingyenes helyszíni felmérés menete?',
+    answer: 'Szerelőink kiszállnak (kiszállási díj nélkül), felmérjük a helyiséget és az épületet, meghatározzuk a szükséges teljesítményt, javaslatot teszünk a telepítési helyre, majd írásos, tételes árajánlatot küldünk.',
+  },
+];
+---
+
+<BaseLayout
+  title="Klíma Telepítés Budapest – Split és Multi-Split Rendszerek | KlimaFirst"
+  description="Professzionális klíma telepítés Budapesten. Fisher, Fujitsu, Toshiba, Daikin klímarendszerek. Ingyenes helyszíni felmérés, kiszállási díj nélkül. ☎ +36 20 339 4164"
+  canonical="/szolgaltatasok/klima-telepites"
+  schema={serviceSchema}
+  breadcrumbs={[{ name: 'Klíma Telepítés', url: '/szolgaltatasok/klima-telepites' }]}
+>
+  <!-- Breadcrumb -->
+  <div class="bg-gray-50 border-b border-gray-200">
+    <div class="container mx-auto px-4">
+      <Breadcrumb items={[{ name: 'Klíma Telepítés', href: '/szolgaltatasok/klima-telepites' }]} />
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-blue-900 to-blue-800 text-white py-14">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+      <div class="text-5xl mb-4" aria-hidden="true">❄️</div>
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-4">
+        Klíma Telepítés és Értékesítés Budapest
+      </h1>
+      <p class="text-lg text-blue-100 mb-6 max-w-2xl mx-auto">
+        Fisher, Fujitsu, Toshiba és Daikin split és multi-split klímarendszerek professzionális telepítése. Ingyenes helyszíni felmérés, kiszállási díj nélkül mind a 23 kerületben.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="/ajanlatkeres" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-bold transition-colors">
+          Ingyenes Árajánlat
+        </a>
+        <a href="tel:+36203394164" class="border-2 border-white/40 hover:border-white text-white px-6 py-3 rounded-xl font-bold hover:bg-white/10 transition-colors">
+          ☎ +36 20 339 4164
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <TrustBar />
+
+  <!-- Content -->
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <div class="prose-klima">
+        <h2>Miért Válassza a KlimaFirst Klíma Telepítési Szolgáltatását?</h2>
+        <p>
+          A KlimaFirst csapata 10+ év tapasztalattal rendelkezik Budapesten. Minden telepítési munkát precízen, magas minőségű eszközökkel végzünk el, és <strong>2 év garanciát</strong> vállalunk az elvégzett munkára. Kiszállási díjat nem számítunk fel Budapest területén.
+        </p>
+
+        <h2>Milyen Klímarendszereket Szerelünk?</h2>
+        <ul>
+          <li><strong>Split klíma:</strong> 1 kültéri + 1 beltéri egység – ideális egy szobához vagy kisebb helyiséghez</li>
+          <li><strong>Multi-split klíma:</strong> 1 kültéri + 2–5 beltéri egység – több helyiség egyidejű klimatizálása</li>
+          <li><strong>Kazettás klíma:</strong> Mennyezetbe süllyesztett, irodai alkalmazáshoz</li>
+          <li><strong>Inverteres klíma:</strong> Energiatakarékos, 30–50%-kal alacsonyabb villanyszámla</li>
+        </ul>
+
+        <h2>A Telepítés Menete – 5 Lépés</h2>
+        <ol>
+          <li><strong>Ingyenes helyszíni felmérés:</strong> Kiszállunk, felmérjük a helyiséget és meghatározzuk az optimális teljesítményt</li>
+          <li><strong>Árajánlat:</strong> Írásban, tételes bontásban küldjük az ajánlatot</li>
+          <li><strong>Időpontegyeztetés:</strong> Rugalmasan alkalmazkodunk az Ön időbeosztásához</li>
+          <li><strong>Telepítés:</strong> Precíz munkavégzés, tisztán hagyott munkaterület</li>
+          <li><strong>Átadás + Betanítás:</strong> Megmutatjuk a kezelési funkciókat, átadjuk a dokumentációt</li>
+        </ol>
+
+        <h2>Forgalmazott Márkák</h2>
+        <p>Kizárólag elismert, megbízható gyártók termékeit értékesítjük:</p>
+        <ul>
+          <li><a href="/keszulekek/fisher-klima"><strong>Fisher klíma</strong></a> – Kiváló ár-érték arány, megbízható minőség</li>
+          <li><a href="/keszulekek/fujitsu-klima"><strong>Fujitsu klíma</strong></a> – Japán precizitás, csendes működés, magas hatékonyság</li>
+          <li><a href="/keszulekek/toshiba-klima"><strong>Toshiba klíma</strong></a> – Innovatív technológia, prémium kategória</li>
+          <li><strong>Daikin klíma</strong> – A világ piacvezetője, kiemelkedő megbízhatóság</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Price table -->
+  <section class="py-8 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <PriceTable items={priceItems} title="Klíma Telepítés Árak 2025" />
+      <div class="text-center mt-6">
+        <a href="/arak" class="text-blue-800 font-semibold hover:text-blue-600 transition-colors">
+          Teljes árlistát megtekintése →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <FAQ items={faqs} title="Klíma Telepítés – Leggyakoribb Kérdések" />
+
+  <!-- CTA + Form -->
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-xl">
+      <ContactForm title="Klíma Telepítés Árajánlat Kérése" />
+    </div>
+  </section>
+</BaseLayout>

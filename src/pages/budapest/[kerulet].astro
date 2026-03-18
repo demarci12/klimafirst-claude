@@ -1,0 +1,239 @@
+---
+import { districts, type District } from '../../data/districts';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FAQ from '../../components/FAQ.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import { SITE } from '../../data/site';
+
+export async function getStaticPaths() {
+  return districts.map((district) => ({
+    params: { kerulet: district.slug },
+    props: { district },
+  }));
+}
+
+interface Props {
+  district: District;
+}
+
+const { district } = Astro.props;
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HVACBusiness',
+  name: `KlimaFirst – Klímaszerelés Budapest ${district.name}`,
+  description: `Professzionális klímaszerelés, javítás és karbantartás Budapest ${district.name}ában. Ingyenes helyszíni felmérés, kiszállási díj nélkül.`,
+  url: `${siteUrl}/budapest/${district.slug}`,
+  telephone: SITE.phoneTel,
+  email: SITE.email,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: `Budapest ${district.name}`,
+    addressCountry: 'HU',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: district.lat,
+    longitude: district.lng,
+  },
+  areaServed: {
+    '@type': 'AdministrativeArea',
+    name: `Budapest ${district.name}`,
+    containedInPlace: { '@type': 'City', name: 'Budapest' },
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.9',
+    reviewCount: '127',
+    bestRating: '5',
+  },
+};
+
+const districtFaqs = [
+  {
+    question: `Mennyibe kerül a klímaszerelés Budapest ${district.name}ában?`,
+    answer: `Budapest ${district.name}ában a klímaszerelés munkadíja 35.000 Ft-tól indul, kiszállási díj nélkül. A pontos ár az ingyenes helyszíni felmérés alapján kerül meghatározásra.`,
+  },
+  {
+    question: `Milyen gyorsan érnek Budapest ${district.name}ába?`,
+    answer: `Budapest ${district.name}ában 1–3 napon belül tudunk kiszállni a helyszíni felmérésre. Sürgős esetben, lehetőségeink szerint, aznapi vagy másnapi időpontot is biztosítunk.`,
+  },
+  {
+    question: `Van kiszállási díj Budapest ${district.name}ában?`,
+    answer: `Nem, Budapest ${district.name}ában sem számítunk fel kiszállási díjat sem a helyszíni felmérésnél, sem a munkavégzésnél. Ez vonatkozik Budapest mind a 23 kerületére.`,
+  },
+  {
+    question: `Vállalnak-e klímaszerelést ${district.neighborhoods[0] ?? district.name} területén?`,
+    answer: `Igen, ${district.neighborhoods[0] ?? district.name} és Budapest ${district.name} teljes területén rendszeresen végzünk klímaszerelési, javítási és karbantartási munkákat.`,
+  },
+];
+
+// Other districts for internal linking (exclude current)
+const otherDistricts = districts
+  .filter((d) => d.slug !== district.slug)
+  .slice(0, 8);
+---
+
+<BaseLayout
+  title={`Klímaszerelés Budapest ${district.name} – Telepítés, Javítás | KlimaFirst`}
+  description={`Professzionális klímaszerelés Budapest ${district.name}ában – telepítés, javítás, karbantartás. Kiszállási díj nélkül, ingyenes helyszíni felmérés. ☎ +36 20 339 4164`}
+  canonical={`/budapest/${district.slug}`}
+  schema={localBusinessSchema}
+  breadcrumbs={[
+    { name: 'Budapest', url: '/budapest/i-kerulet' },
+    { name: district.name, url: `/budapest/${district.slug}` },
+  ]}
+>
+  <!-- Breadcrumb -->
+  <div class="bg-gray-50 border-b border-gray-200">
+    <div class="container mx-auto px-4">
+      <Breadcrumb
+        items={[
+          { name: 'Budapest kerületek', href: '/budapest/i-kerulet' },
+          { name: `Klímaszerelés ${district.name}`, href: `/budapest/${district.slug}` },
+        ]}
+      />
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-blue-900 to-blue-800 text-white py-14">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <div class="text-center">
+        <div class="inline-flex items-center gap-2 bg-blue-800/60 text-orange-300 text-sm font-semibold px-3 py-1.5 rounded-full mb-4">
+          📍 Budapest {district.name}
+        </div>
+        <h1 class="text-3xl md:text-4xl font-extrabold mb-4">
+          Klímaszerelés Budapest {district.name}
+        </h1>
+        <p class="text-lg text-blue-100 mb-6 max-w-2xl mx-auto">
+          {district.description} Kiszállási díj nélkül, ingyenes helyszíni felmérés, 2 év garancia.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="/ajanlatkeres" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-bold transition-colors">
+            Ingyenes Árajánlat – {district.name}
+          </a>
+          <a href="tel:+36203394164" class="border-2 border-white/40 hover:border-white text-white px-6 py-3 rounded-xl font-bold hover:bg-white/10 transition-colors">
+            ☎ +36 20 339 4164
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2">
+          <div class="prose-klima">
+            <h2>Klímaszerelés Budapest {district.name} – Teljes Körű Szolgáltatás</h2>
+            <p>
+              A KlimaFirst csapata rendszeresen végez klímaszerelési, javítási és karbantartási munkákat Budapest {district.name}ában.
+              {district.description} Professzionális munkavégzés, ingyenes helyszíni felmérés, 2 év garancia.
+            </p>
+
+            <h2>Ellátott területek – {district.name}</h2>
+            <ul>
+              {district.neighborhoods.map((n) => (
+                <li>{n} – klímaszerelés, javítás, karbantartás</li>
+              ))}
+            </ul>
+
+            <h2>Elérhető Szolgáltatások {district.name}ban</h2>
+            <ul>
+              <li>
+                <a href="/szolgaltatasok/klima-telepites">
+                  <strong>Klíma telepítés {district.name}ban</strong>
+                </a>
+                – Fisher, Fujitsu, Toshiba, Daikin split és multi-split rendszerek
+              </li>
+              <li>
+                <a href="/szolgaltatasok/klima-javitas">
+                  <strong>Klíma javítás {district.name}ban</strong>
+                </a>
+                – Minden márka, gyors kiszállással
+              </li>
+              <li>
+                <a href="/szolgaltatasok/klima-tisztitas">
+                  <strong>Klíma karbantartás {district.name}ban</strong>
+                </a>
+                – Éves tisztítás és szerviz
+              </li>
+              <li>
+                <a href="/szolgaltatasok/futes-klimaval">
+                  <strong>Fűtés klímával {district.name}ban</strong>
+                </a>
+                – Hatékony hőszivattyús fűtés
+              </li>
+            </ul>
+
+            <h2>Miért Válassza a KlimaFirst-et {district.name}ban?</h2>
+            <ul>
+              <li>✅ Kiszállási díj nélkül a {district.name}ba</li>
+              <li>✅ Ingyenes helyszíni felmérés, kötelezettség nélkül</li>
+              <li>✅ 10+ év tapasztalat Budapesten</li>
+              <li>✅ 5000+ elvégzett referencia</li>
+              <li>✅ 2 év garancia minden munkára</li>
+              <li>✅ Precíz, tiszta munkavégzés</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-4">
+          <!-- Contact widget -->
+          <ContactForm title="Árajánlat – Budapest {district.name}" compact={true} />
+
+          <!-- Quick info -->
+          <div class="bg-blue-50 rounded-2xl border border-blue-200 p-4">
+            <h3 class="font-bold text-blue-900 mb-3 text-sm">Gyors információk</h3>
+            <dl class="space-y-2 text-sm">
+              <div>
+                <dt class="text-gray-500">Kerület</dt>
+                <dd class="font-semibold text-gray-900">Budapest {district.romanNumeral}. kerület</dd>
+              </div>
+              <div>
+                <dt class="text-gray-500">Kiszállás</dt>
+                <dd class="font-semibold text-green-700">Díjmentes</dd>
+              </div>
+              <div>
+                <dt class="text-gray-500">Felmérés</dt>
+                <dd class="font-semibold text-green-700">Ingyenes</dd>
+              </div>
+              <div>
+                <dt class="text-gray-500">Garancia</dt>
+                <dd class="font-semibold text-gray-900">2 év</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <FAQ items={districtFaqs} title={`Klímaszerelés Budapest ${district.name} – Leggyakoribb Kérdések`} />
+
+  <!-- Other districts -->
+  <section class="py-10 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <h2 class="text-xl font-bold text-gray-900 mb-4">Klímaszerelés Budapest többi kerületében is</h2>
+      <div class="flex flex-wrap gap-2">
+        {otherDistricts.map((d) => (
+          <a
+            href={`/budapest/${d.slug}`}
+            class="bg-white border border-gray-200 hover:border-blue-300 text-gray-700 hover:text-blue-800 px-3 py-1.5 rounded-lg text-sm transition-colors"
+          >
+            {d.name}
+          </a>
+        ))}
+        <a href="/budapest/i-kerulet" class="bg-blue-900 text-white px-3 py-1.5 rounded-lg text-sm hover:bg-blue-800 transition-colors">
+          Összes kerület →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

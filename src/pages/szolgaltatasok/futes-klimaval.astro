@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FAQ from '../../components/FAQ.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import { SITE } from '../../data/site';
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Fűtés Klímával Budapest – Hőszivattyús Fűtés',
+  description: 'Inverteres klíma hőszivattyúként is működik – hatékonyabb és olcsóbb, mint a villany- vagy gázfűtés. Akár -15°C-ig garantált teljesítmény.',
+  provider: { '@type': 'HVACBusiness', name: 'KlimaFirst', telephone: SITE.phoneTel, url: `${siteUrl}/` },
+  areaServed: { '@type': 'City', name: 'Budapest' },
+};
+
+const faqs = [
+  {
+    question: 'Mennyire hatékony a klíma fűtési módban?',
+    answer: 'A modern inverteres klíma COP (hatékonysági) értéke 3.0–4.5, ami azt jelenti, hogy 1 kWh elektromos energiából 3–4.5 kWh hőt állít elő. Összehasonlításképpen: az elektromos fűtőtest 1:1 arányú. A klíma 3–4-szer hatékonyabb.',
+  },
+  {
+    question: 'Milyen hidegig fűt a klíma?',
+    answer: 'A modern inverteres klímák -15°C-ig, egyes modellek (pl. Daikin Ururu Sarara) -25°C-ig is hatékonyan fűtenek. Budapest éghajlatán ez több mint elegendő.',
+  },
+  {
+    question: 'Megéri-e klímával fűteni gáz helyett?',
+    answer: 'Ez az aktuális energiaáraktól függ. Jelenlegi magyarországi árak mellett a klíma fűtés általában olcsóbb vagy hasonló költségű, mint a gáz – de az árkalkulust érdemes egyedileg elvégezni.',
+  },
+  {
+    question: 'Kell-e külön fűtésre engedélyezett klíma?',
+    answer: 'Nem. Minden modern inverteres split klíma egyszerre képes hűteni és fűteni – ez a hőszivattyú funkció. Speciális engedély nem szükséges.',
+  },
+];
+---
+
+<BaseLayout
+  title="Fűtés Klímával Budapest – Hőszivattyús Fűtés 2025 | KlimaFirst"
+  description="Inverteres klíma fűtési módban 3-4x hatékonyabb, mint az elektromos fűtés. Akár -15°C-ig megbízható fűtés. Ingyenes felmérés Budapesten. ☎ +36 20 339 4164"
+  canonical="/szolgaltatasok/futes-klimaval"
+  schema={serviceSchema}
+  breadcrumbs={[{ name: 'Fűtés Klímával', url: '/szolgaltatasok/futes-klimaval' }]}
+>
+  <div class="bg-gray-50 border-b border-gray-200">
+    <div class="container mx-auto px-4">
+      <Breadcrumb items={[{ name: 'Fűtés Klímával', href: '/szolgaltatasok/futes-klimaval' }]} />
+    </div>
+  </div>
+
+  <section class="bg-gradient-to-br from-orange-700 to-red-700 text-white py-14">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+      <div class="text-5xl mb-4" aria-hidden="true">🌡️</div>
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Fűtés Klímával Budapest</h1>
+      <p class="text-lg text-orange-100 mb-6 max-w-2xl mx-auto">
+        A modern inverteres klíma nem csak hűt – hőszivattyúként is funkcionál. 3-4x hatékonyabb, mint az elektromos fűtés, és akár -15°C külső hőmérsékleten is garantált teljesítménnyel fűt.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="/ajanlatkeres" class="bg-white text-orange-700 hover:bg-orange-50 px-6 py-3 rounded-xl font-bold transition-colors">
+          Ingyenes Felmérés Kérése
+        </a>
+        <a href="tel:+36203394164" class="border-2 border-white/40 hover:border-white text-white px-6 py-3 rounded-xl font-bold hover:bg-white/10 transition-colors">
+          ☎ +36 20 339 4164
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <div class="prose-klima">
+        <h2>Hogyan Fűt a Klíma? – A Hőszivattyú Elve</h2>
+        <p>
+          Az inverteres klímaberendezés egy megfordítható hőszivattyú. Hűtési módban a helyiségből elvont hőt a kültéri levegőbe adja. Fűtési módban megfordítja a folyamatot: a kültéri levegőből nyeri ki a hőt (még -15°C-on is van hő a levegőben!), és azt a belső térbe juttatja.
+        </p>
+
+        <h2>Összehasonlítás: Klíma vs. Gáz vs. Villany Fűtés</h2>
+        <div class="overflow-x-auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Fűtési mód</th>
+                <th>COP / hatékonyság</th>
+                <th>Beruházási ár</th>
+                <th>Üzemeltetési ktg.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Inverteres klíma</strong></td>
+                <td>3.0 – 4.5 COP</td>
+                <td>150.000–350.000 Ft</td>
+                <td>Alacsony–Közepes</td>
+              </tr>
+              <tr>
+                <td>Gázfűtés</td>
+                <td>0.9 – 1.05 COP</td>
+                <td>300.000–800.000 Ft+</td>
+                <td>Közepes (gázár-függő)</td>
+              </tr>
+              <tr>
+                <td>Villany fűtőtest</td>
+                <td>1.0 COP</td>
+                <td>5.000–30.000 Ft</td>
+                <td>Magas</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Ajánlott Klíma Márkák Fűtési Célra</h2>
+        <ul>
+          <li><strong>Daikin Perfera / Stylish:</strong> Kiemelkedő alacsony hőmérsékletű teljesítmény</li>
+          <li><strong>Fujitsu KE sorozat:</strong> -25°C-ig garantált fűtési teljesítmény</li>
+          <li><strong>Toshiba Haori / Shorai Edge:</strong> Intelligens fűtési algoritmus</li>
+          <li><strong>Fisher:</strong> Kiváló ár-érték arányú fűtési klíma</li>
+        </ul>
+
+        <h2>Mekkora Klíma Szükséges a Fűtéshez?</h2>
+        <p>
+          Általános szabály: 50 W/m³ szükséges jól szigetelt épületnél, 70–100 W/m³ régi, szigeteletlen épületnél. Pontosabb méretezéshez használja <a href="/klima-meretezo-kalkulator">ingyenes klíma méretező kalkulátorunkat</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <FAQ items={faqs} title="Fűtés Klímával – Leggyakoribb Kérdések" />
+
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-xl">
+      <ContactForm title="Fűtési Klíma Árajánlat Kérése" />
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { SITE } from '../data/site';
+---
+
+<BaseLayout
+  title="Ingyenes Klíma Árajánlat Kérése Online | KlimaFirst Budapest"
+  description="Kérjen ingyenes klímaszerelési árajánlatot online! Töltse ki az részletes űrlapot és 24 órán belül visszahívjuk. Kiszállási díj nélkül Budapest egész területén."
+  canonical="/ajanlatkeres"
+  breadcrumbs={[{ name: 'Árajánlat Kérés', url: '/ajanlatkeres' }]}
+>
+  <div class="bg-gray-50 border-b border-gray-200">
+    <div class="container mx-auto px-4">
+      <Breadcrumb items={[{ name: 'Ingyenes Árajánlat Kérése', href: '/ajanlatkeres' }]} />
+    </div>
+  </div>
+
+  <section class="bg-gradient-to-br from-blue-900 to-blue-800 text-white py-12">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-3">Ingyenes Klíma Árajánlat Kérése</h1>
+      <p class="text-blue-100 text-lg max-w-2xl mx-auto">
+        Töltse ki a részletes árajánlatkérő űrlapot – 24 órán belül visszahívjuk személyre szabott ajánlattal. Kiszállási díj nélkül.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-10 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-2xl">
+      <div class="bg-white rounded-2xl shadow-card border border-gray-100 p-8">
+        <h2 class="text-xl font-bold text-gray-900 mb-6">Részletes Árajánlatkérő Űrlap</h2>
+
+        <form id="quote-form" novalidate class="space-y-5">
+          <!-- Honeypot -->
+          <div class="absolute opacity-0 pointer-events-none" aria-hidden="true">
+            <input type="text" name="website" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="q-name" class="block text-sm font-medium text-gray-700 mb-1">Neve *</label>
+              <input type="text" id="q-name" name="name" required placeholder="Kovács János" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors" />
+            </div>
+            <div>
+              <label for="q-phone" class="block text-sm font-medium text-gray-700 mb-1">Telefonszám *</label>
+              <input type="tel" id="q-phone" name="phone" required placeholder="+36 20 123 4567" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors" />
+            </div>
+          </div>
+
+          <div>
+            <label for="q-email" class="block text-sm font-medium text-gray-700 mb-1">E-mail cím</label>
+            <input type="email" id="q-email" name="email" placeholder="pelda@email.hu" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors" />
+          </div>
+
+          <div>
+            <label for="q-service" class="block text-sm font-medium text-gray-700 mb-1">Milyen szolgáltatásra van szüksége? *</label>
+            <select id="q-service" name="service" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white transition-colors">
+              <option value="">-- Válasszon --</option>
+              <option value="telepites">Klíma Telepítés (új klíma)</option>
+              <option value="javitas">Klíma Javítás</option>
+              <option value="tisztitas">Klíma Tisztítás / Karbantartás</option>
+              <option value="futes">Fűtés Klímával (hőszivattyú)</option>
+              <option value="egyeb">Egyéb / Nem tudom még</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="q-district" class="block text-sm font-medium text-gray-700 mb-1">Budapest – kerület</label>
+              <select id="q-district" name="district" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white transition-colors">
+                <option value="">-- Kerület --</option>
+                {Array.from({ length: 23 }, (_, i) => i + 1).map((n) => (
+                  <option value={`${n}. kerület`}>Budapest {n}. kerület</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label for="q-area" class="block text-sm font-medium text-gray-700 mb-1">Helyiség mérete (m²)</label>
+              <input type="number" id="q-area" name="area" min="5" max="500" placeholder="Pl. 35" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors" />
+            </div>
+          </div>
+
+          <div>
+            <label for="q-rooms" class="block text-sm font-medium text-gray-700 mb-1">Hány helyiségbe kerülne a klíma?</label>
+            <select id="q-rooms" name="rooms" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white transition-colors">
+              <option value="1">1 helyiség</option>
+              <option value="2">2 helyiség</option>
+              <option value="3">3 helyiség</option>
+              <option value="4+">4 vagy több helyiség</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="q-brand" class="block text-sm font-medium text-gray-700 mb-1">Van már konkrét márkaelképzelése?</label>
+            <select id="q-brand" name="brand" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white transition-colors">
+              <option value="">Nem, szakértői javaslatot kérek</option>
+              <option value="fisher">Fisher klíma</option>
+              <option value="fujitsu">Fujitsu klíma</option>
+              <option value="toshiba">Toshiba klíma</option>
+              <option value="daikin">Daikin klíma</option>
+              <option value="egyeb">Egyéb márka</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="q-timing" class="block text-sm font-medium text-gray-700 mb-1">Mikor lenne szükséges a munkavégzés?</label>
+            <select id="q-timing" name="timing" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white transition-colors">
+              <option value="asap">Minél előbb (sürgős)</option>
+              <option value="1het">1 héten belül</option>
+              <option value="1ho">1 hónapon belül</option>
+              <option value="hamarosan">2–3 hónap múlva</option>
+              <option value="kesobb">Csak tájékozódnék</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="q-message" class="block text-sm font-medium text-gray-700 mb-1">Egyéb megjegyzés, kérdés</label>
+            <textarea id="q-message" name="message" rows="4" placeholder="Pl. 3. emeleti erkélyen kellene elhelyezni a külső egységet, az épület 1980-as téglaépítés..." class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors resize-none"></textarea>
+          </div>
+
+          <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg">
+            Árajánlatot Kérek (Ingyenes, Kötelezettségmentes)
+          </button>
+
+          <p class="text-xs text-gray-400 text-center">🔒 Adatait bizalmasan kezeljük, kizárólag kapcsolatfelvételre használjuk.</p>
+        </form>
+      </div>
+
+      <!-- Contact alternatives -->
+      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <a href="tel:+36203394164" class="flex items-center gap-3 bg-blue-900 text-white rounded-2xl p-4 hover:bg-blue-800 transition-colors">
+          <svg class="w-8 h-8 text-orange-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+          </svg>
+          <div>
+            <div class="text-xs text-blue-300">Hívjon közvetlenül</div>
+            <div class="font-bold">{SITE.phone}</div>
+          </div>
+        </a>
+        <a href={`mailto:${SITE.email}`} class="flex items-center gap-3 bg-white border border-gray-200 text-gray-900 rounded-2xl p-4 hover:border-blue-300 transition-colors">
+          <svg class="w-8 h-8 text-blue-800 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          <div>
+            <div class="text-xs text-gray-500">E-mail küldése</div>
+            <div class="font-bold text-sm">{SITE.email}</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const form = document.getElementById('quote-form') as HTMLFormElement;
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      btn.textContent = 'Küldés...';
+      btn.disabled = true;
+      await new Promise((r) => setTimeout(r, 800));
+
+      const success = document.createElement('div');
+      success.className = 'mt-4 p-4 bg-green-50 border border-green-200 rounded-xl text-sm text-green-800';
+      success.textContent = '✅ Köszönjük! Árajánlatkérését megkaptuk, 24 órán belül visszahívjuk.';
+      form.appendChild(success);
+
+      btn.textContent = 'Elküldve ✓';
+    });
+  </script>
+</BaseLayout>

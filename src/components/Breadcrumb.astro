@@ -1,0 +1,39 @@
+---
+export interface BreadcrumbItem {
+  name: string;
+  href: string;
+}
+
+export interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav aria-label="Navigációs útvonal" class="py-3">
+  <ol class="flex flex-wrap items-center gap-1 text-sm text-gray-500" role="list" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li role="listitem" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item" class="hover:text-blue-800 transition-colors">
+        <span itemprop="name">Főoldal</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+
+    {items.map((item, i) => (
+      <>
+        <li aria-hidden="true" class="text-gray-300">/</li>
+        <li role="listitem" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          {i === items.length - 1 ? (
+            <span itemprop="name" class="text-gray-700 font-medium">{item.name}</span>
+          ) : (
+            <a href={item.href} itemprop="item" class="hover:text-blue-800 transition-colors">
+              <span itemprop="name">{item.name}</span>
+            </a>
+          )}
+          <meta itemprop="position" content={String(i + 2)} />
+        </li>
+      </>
+    ))}
+  </ol>
+</nav>

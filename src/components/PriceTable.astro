@@ -1,0 +1,72 @@
+---
+export interface PriceItem {
+  service: string;
+  description: string;
+  price: string;
+  note?: string;
+  highlight?: boolean;
+}
+
+export interface Props {
+  items: PriceItem[];
+  title?: string;
+  disclaimer?: string;
+}
+
+const {
+  items,
+  title = 'Klímaszerelés Árak',
+  disclaimer = 'Az árak tájékoztató jellegűek. A pontos ár a helyszíni felmérés alapján kerül meghatározásra. Az ingyenes felmérés kötelezettségmentes.',
+} = Astro.props;
+---
+
+<section class="py-8" aria-labelledby="price-table-heading">
+  {title && (
+    <h2 id="price-table-heading" class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+      {title}
+    </h2>
+  )}
+
+  <div class="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
+    <table class="w-full text-sm" role="table">
+      <thead>
+        <tr class="bg-blue-900 text-white">
+          <th class="text-left px-6 py-4 font-semibold rounded-tl-2xl" scope="col">Szolgáltatás</th>
+          <th class="text-left px-6 py-4 font-semibold hidden md:table-cell" scope="col">Leírás</th>
+          <th class="text-right px-6 py-4 font-semibold rounded-tr-2xl whitespace-nowrap" scope="col">Ár (Ft-tól)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {items.map((item, i) => (
+          <tr
+            class={`border-t border-gray-100 transition-colors hover:bg-gray-50 ${
+              item.highlight ? 'bg-orange-50' : i % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'
+            }`}
+          >
+            <td class="px-6 py-4">
+              <div class={`font-semibold ${item.highlight ? 'text-orange-700' : 'text-gray-900'}`}>
+                {item.service}
+              </div>
+              {item.note && (
+                <div class="text-xs text-gray-500 mt-0.5">{item.note}</div>
+              )}
+              <div class="md:hidden text-gray-600 text-xs mt-1">{item.description}</div>
+            </td>
+            <td class="px-6 py-4 text-gray-600 hidden md:table-cell">{item.description}</td>
+            <td class="px-6 py-4 text-right">
+              <span class={`font-bold text-lg ${item.highlight ? 'text-orange-600' : 'text-blue-900'}`}>
+                {item.price}
+              </span>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  {disclaimer && (
+    <p class="text-xs text-gray-500 mt-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
+      <strong>Megjegyzés:</strong> {disclaimer}
+    </p>
+  )}
+</section>

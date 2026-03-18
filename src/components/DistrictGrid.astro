@@ -1,0 +1,60 @@
+---
+import { districts } from '../data/districts';
+
+export interface Props {
+  title?: string;
+  limit?: number;
+  showAll?: boolean;
+}
+
+const {
+  title = 'Klímaszerelés Budapest Mind a 23 Kerületében',
+  limit,
+  showAll = true,
+} = Astro.props;
+
+const displayDistricts = limit ? districts.slice(0, limit) : districts;
+---
+
+<section class="py-12 bg-gray-50" aria-labelledby="district-grid-heading">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-8">
+      <h2 id="district-grid-heading" class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+        {title}
+      </h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        Budapesten belül kiszállási díj nélkül vállalunk klímaszerelési, javítási és karbantartási munkákat mind a 23 kerületben.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
+      {displayDistricts.map((district) => (
+        <a
+          href={`/budapest/${district.slug}`}
+          class="group bg-white rounded-xl border border-gray-200 p-3 text-center hover:border-blue-300 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+          aria-label={`Klímaszerelés ${district.name}`}
+        >
+          <div class="text-2xl font-bold text-blue-900 group-hover:text-blue-700 transition-colors leading-none mb-1">
+            {district.romanNumeral}
+          </div>
+          <div class="text-xs text-gray-600 font-medium">kerület</div>
+          <div class="text-xs text-gray-500 mt-1 truncate">{district.neighborhoods[0]}</div>
+        </a>
+      ))}
+    </div>
+
+    {!showAll && limit && districts.length > limit && (
+      <div class="text-center mt-6">
+        <a
+          href="/budapest/i-kerulet"
+          class="inline-flex items-center gap-2 text-blue-800 font-semibold hover:text-blue-600 transition-colors"
+        >
+          Összes kerület megtekintése
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    )}
+  </div>
+</section>

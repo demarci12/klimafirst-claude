@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FAQ from '../../components/FAQ.astro';
+import ContactForm from '../../components/ContactForm.astro';
+
+const faqs = [
+  { question: 'Van Wi-Fi vezérlés Toshiba klímáknál?', answer: 'Igen, a Toshiba Shorai Edge és Haori sorozatok beépített Wi-Fi modullal rendelkeznek, így az Intesishome app segítségével bárhonnan vezérelhető.' },
+  { question: 'Mi az a Toshiba Plasma ionizátor?', answer: 'A Toshiba Plasma ionizátor technológiája ionokat juttat a levegőbe, amelyek megsemmisítik a baktériumokat, vírusokat és allergéneket, egészségesebb beltéri levegőt biztosítva.' },
+  { question: 'Mennyibe kerül a Toshiba klíma telepítéssel?', answer: 'A Toshiba 2.5 kW-os klíma telepítéssel együtt kb. 220.000–245.000 Ft. Pontos ár az ingyenes helyszíni felmérésen alapul.' },
+];
+---
+
+<BaseLayout
+  title="Toshiba Klíma Budapest – Prémium Technológia, Telepítés | KlimaFirst"
+  description="Toshiba klíma értékesítés és telepítés Budapesten. Wi-Fi vezérlés, öntisztító funkció, Plasma ionizátor. Ingyenes felmérés. ☎ +36 20 339 4164"
+  canonical="/keszulekek/toshiba-klima"
+  breadcrumbs={[{ name: 'Klímakészülékek', url: '/keszulekek' }, { name: 'Toshiba Klíma', url: '/keszulekek/toshiba-klima' }]}
+>
+  <div class="bg-gray-50 border-b border-gray-200">
+    <div class="container mx-auto px-4">
+      <Breadcrumb items={[{ name: 'Klímakészülékek', href: '/keszulekek' }, { name: 'Toshiba Klíma', href: '/keszulekek/toshiba-klima' }]} />
+    </div>
+  </div>
+
+  <section class="bg-gradient-to-br from-blue-900 to-blue-800 text-white py-14">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Toshiba Klíma Budapest</h1>
+      <p class="text-lg text-blue-100 mb-6 max-w-2xl mx-auto">
+        Toshiba klíma értékesítés és profi telepítés Budapesten. Intelligens Wi-Fi vezérlés, öntisztító funkció és Plasma ionizátor – prémium technológia elérhető áron.
+      </p>
+      <a href="/ajanlatkeres" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-bold transition-colors inline-block">
+        Toshiba Klíma Árajánlat
+      </a>
+    </div>
+  </section>
+
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <div class="prose-klima">
+        <h2>Toshiba Klíma – Okos Technológia, Magyar Minőség</h2>
+        <p>A Toshiba klímák a prémium kategória meghatározó képviselői. A Shorai Edge és Haori sorozatok Wi-Fi vezérléssel, önkikapcsoló mód utáni öntisztítással és az allergiások számára is előnyös Plasma ionizátorral rendelkeznek.</p>
+
+        <h2>Toshiba Shorai Edge Sorozat – Főbb Jellemzők</h2>
+        <ul>
+          <li><strong>Wi-Fi vezérlés:</strong> Intesishome app, Alexa/Google Home kompatibilis</li>
+          <li><strong>Öntisztító (Self-cleaning):</strong> Automatikusan kiszárítja a hőcserélőt leállás után</li>
+          <li><strong>Plasma ionizátor:</strong> Baktérium- és vírusmentesítés</li>
+          <li><strong>SEER:</strong> 9.4 – kiemelkedő hatékonyság</li>
+          <li><strong>Energiaosztály:</strong> A+++ hűtés és fűtés</li>
+          <li><strong>Hang (beltéri):</strong> 21 dB – ultra csendes</li>
+        </ul>
+
+        <h2>Toshiba Modellek és Árak</h2>
+        <ul>
+          <li><strong>Toshiba RAS-B10J2KVRG-E (2.5 kW):</strong> ~185.000 Ft</li>
+          <li><strong>Toshiba RAS-B13J2KVRG-E (3.5 kW):</strong> ~215.000 Ft</li>
+          <li><strong>Toshiba RAS-B16J2KVRG-E (5.0 kW):</strong> ~265.000 Ft</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <FAQ items={faqs} title="Toshiba Klíma – Leggyakoribb Kérdések" />
+
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-xl">
+      <ContactForm title="Toshiba Klíma Árajánlat Kérése" />
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,219 @@
+---
+export interface Props {
+  title?: string;
+  compact?: boolean;
+}
+
+const { title = 'Ingyenes Árajánlatkérés', compact = false } = Astro.props;
+---
+
+<div class={`bg-white rounded-2xl shadow-card border border-gray-100 ${compact ? 'p-6' : 'p-8'}`}>
+  <h3 class="text-xl font-bold text-gray-900 mb-2">{title}</h3>
+  <p class="text-sm text-gray-500 mb-6">Töltse ki az űrlapot és 24 órán belül felvesszük Önnel a kapcsolatot!</p>
+
+  <form
+    id="contact-form"
+    novalidate
+    class="space-y-4"
+    action="/api/contact"
+    method="POST"
+  >
+    <!-- Honeypot field (hidden from humans) -->
+    <div class="absolute opacity-0 pointer-events-none" aria-hidden="true">
+      <label for="website">Website (leave empty)</label>
+      <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <div class={compact ? 'space-y-4' : 'grid grid-cols-1 sm:grid-cols-2 gap-4'}>
+      <!-- Name -->
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
+          Neve <span class="text-red-500" aria-label="kötelező">*</span>
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          autocomplete="name"
+          placeholder="Pl. Kovács János"
+          class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+        />
+        <span class="text-xs text-red-500 hidden mt-1" data-error="name">Kérem adja meg a nevét.</span>
+      </div>
+
+      <!-- Phone -->
+      <div>
+        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">
+          Telefonszám <span class="text-red-500" aria-label="kötelező">*</span>
+        </label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          required
+          autocomplete="tel"
+          placeholder="+36 20 123 4567"
+          class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+        />
+        <span class="text-xs text-red-500 hidden mt-1" data-error="phone">Érvényes telefonszámot adjon meg.</span>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div>
+      <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+        E-mail cím
+      </label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        autocomplete="email"
+        placeholder="pelda@email.hu"
+        class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+      />
+      <span class="text-xs text-red-500 hidden mt-1" data-error="email">Érvényes e-mail címet adjon meg.</span>
+    </div>
+
+    <!-- Service type -->
+    <div>
+      <label for="service" class="block text-sm font-medium text-gray-700 mb-1">
+        Milyen szolgáltatásra van szüksége?
+      </label>
+      <select
+        id="service"
+        name="service"
+        class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors bg-white"
+      >
+        <option value="">-- Válasszon --</option>
+        <option value="telepites">Klíma Telepítés</option>
+        <option value="javitas">Klíma Javítás</option>
+        <option value="tisztitas">Klíma Tisztítás / Karbantartás</option>
+        <option value="futes">Fűtés Klímával</option>
+        <option value="egyeb">Egyéb kérdés</option>
+      </select>
+    </div>
+
+    <!-- Message -->
+    <div>
+      <label for="message" class="block text-sm font-medium text-gray-700 mb-1">
+        Üzenet / Részletek
+      </label>
+      <textarea
+        id="message"
+        name="message"
+        rows={compact ? 3 : 4}
+        placeholder="Pl. 50 m² nappali, Budapest XIV. kerület..."
+        class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-none"
+      ></textarea>
+    </div>
+
+    <!-- Submit -->
+    <button
+      type="submit"
+      id="submit-btn"
+      class="w-full bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg text-sm"
+    >
+      Árajánlatot Kérek (Ingyenes)
+    </button>
+
+    <!-- Success/Error messages -->
+    <div id="form-success" class="hidden bg-green-50 border border-green-200 rounded-xl p-4 text-sm text-green-800" role="alert" aria-live="polite">
+      ✅ Köszönjük! Üzenetét megkaptuk, hamarosan felvesszük Önnel a kapcsolatot.
+    </div>
+    <div id="form-error" class="hidden bg-red-50 border border-red-200 rounded-xl p-4 text-sm text-red-800" role="alert" aria-live="polite">
+      ❌ Hiba történt. Kérjük, hívjon minket közvetlenül: <a href="tel:+36203394164" class="font-semibold underline">+36 20 339 4164</a>
+    </div>
+
+    <p class="text-xs text-gray-400 text-center">
+      🔒 Adatait bizalmasan kezeljük. Kizárólag kapcsolatfelvételre használjuk.
+    </p>
+  </form>
+</div>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const successMsg = document.getElementById('form-success') as HTMLElement;
+  const errorMsg = document.getElementById('form-error') as HTMLElement;
+
+  function showError(fieldName: string) {
+    const errorEl = form.querySelector(`[data-error="${fieldName}"]`);
+    if (errorEl) errorEl.classList.remove('hidden');
+  }
+
+  function hideError(fieldName: string) {
+    const errorEl = form.querySelector(`[data-error="${fieldName}"]`);
+    if (errorEl) errorEl.classList.add('hidden');
+  }
+
+  function validateForm(): boolean {
+    let valid = true;
+
+    const name = (form.querySelector('#name') as HTMLInputElement)?.value.trim();
+    const phone = (form.querySelector('#phone') as HTMLInputElement)?.value.trim();
+    const email = (form.querySelector('#email') as HTMLInputElement)?.value.trim();
+    const honeypot = (form.querySelector('#website') as HTMLInputElement)?.value;
+
+    // Honeypot check
+    if (honeypot) return false;
+
+    if (!name || name.length < 2) {
+      showError('name');
+      valid = false;
+    } else {
+      hideError('name');
+    }
+
+    if (!phone || phone.length < 8) {
+      showError('phone');
+      valid = false;
+    } else {
+      hideError('phone');
+    }
+
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showError('email');
+      valid = false;
+    } else {
+      hideError('email');
+    }
+
+    return valid;
+  }
+
+  // Real-time validation
+  ['name', 'phone', 'email'].forEach((field) => {
+    const input = form.querySelector(`#${field}`) as HTMLInputElement;
+    input?.addEventListener('blur', () => validateForm());
+  });
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Küldés...';
+
+    try {
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      // For static site — show success message (backend integration to be added)
+      // In production, replace with actual API endpoint
+      await new Promise((resolve) => setTimeout(resolve, 800));
+
+      successMsg.classList.remove('hidden');
+      errorMsg.classList.add('hidden');
+      form.reset();
+      submitBtn.textContent = 'Elküldve ✓';
+    } catch {
+      errorMsg.classList.remove('hidden');
+      successMsg.classList.add('hidden');
+      submitBtn.textContent = 'Árajánlatot Kérek (Ingyenes)';
+      submitBtn.disabled = false;
+    }
+  });
+</script>

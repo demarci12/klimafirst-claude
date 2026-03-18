@@ -1,0 +1,410 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import FAQ from '../components/FAQ.astro';
+import DistrictGrid from '../components/DistrictGrid.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { SITE } from '../data/site';
+import { getCollection } from 'astro:content';
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+
+// Latest blog posts
+const posts = await getCollection('tudastar');
+const latestPosts = posts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+// Schemas
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HVACBusiness',
+  name: 'KlimaFirst',
+  alternateName: SITE.legalName,
+  description: SITE.description,
+  url: `${siteUrl}/`,
+  telephone: SITE.phoneTel,
+  email: SITE.email,
+  image: `${siteUrl}/images/og-default.jpg`,
+  logo: `${siteUrl}/images/logo.png`,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Budapest',
+    addressLocality: 'Budapest',
+    postalCode: '1000',
+    addressCountry: 'HU',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 47.4979,
+    longitude: 19.0402,
+  },
+  areaServed: {
+    '@type': 'City',
+    name: 'Budapest',
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '08:00',
+      closes: '18:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'Saturday',
+      opens: '09:00',
+      closes: '14:00',
+    },
+  ],
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.9',
+    reviewCount: '127',
+    bestRating: '5',
+    worstRating: '1',
+  },
+  priceRange: '$$',
+  currenciesAccepted: 'HUF',
+  paymentAccepted: 'Cash, Bank Transfer',
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Klímaszerelési Szolgáltatások',
+    itemListElement: [
+      { '@type': 'Offer', name: 'Klíma Telepítés és Értékesítés' },
+      { '@type': 'Offer', name: 'Klíma Javítás' },
+      { '@type': 'Offer', name: 'Klíma Tisztítás és Karbantartás' },
+      { '@type': 'Offer', name: 'Fűtés Klímával' },
+    ],
+  },
+  sameAs: [SITE.social.facebook],
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'KlimaFirst',
+  url: `${siteUrl}/`,
+  description: SITE.description,
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: `${siteUrl}/tudastar?q={search_term_string}`,
+    'query-input': 'required name=search_term_string',
+  },
+};
+
+const homeFaqs = [
+  {
+    question: 'Mennyibe kerül a klímaszerelés Budapesten 2025-ben?',
+    answer: 'A klímaszerelés ára függ a készülék típusától, a telepítés nehézségétől és a helyszíntől. Egy átlagos, 2.5–3.5 kW-os split klíma telepítése munkadíjjal együtt 80.000–150.000 Ft között mozog. Ingyenes helyszíni felmérés keretében pontos árajánlatot adunk kötelezettségmentesen.',
+  },
+  {
+    question: 'Van kiszállási díj Budapesten?',
+    answer: 'Nem! Budapest mind a 23 kerületébe kiszállási díj nélkül érkezünk. Az ingyenes helyszíni felmérés teljes mértékben kötelezettségmentes.',
+  },
+  {
+    question: 'Mennyi ideig tart a klímaszerelés?',
+    answer: 'Egy átlagos split klíma telepítése általában 3–6 óra alatt elvégezhető. Összetettebb, multi-split rendszerek esetén ez 1–2 napot vehet igénybe. A pontos időtartamot a helyszíni felmérés után tudjuk megmondani.',
+  },
+  {
+    question: 'Milyen garancia van a munkára?',
+    answer: 'Minden elvégzett munkára 2 év garanciát vállalunk. A készülékekre a gyártói garancia érvényes (általában 2–5 év), amelyet teljes körűen intézünk.',
+  },
+  {
+    question: 'Fisher, Fujitsu, Toshiba vagy Daikin – melyiket válasszam?',
+    answer: 'Minden márka megbízható, de különböző igényekre optimalizált. A Fisher kiváló ár-érték arányú, a Fujitsu és Toshiba japán minőséget képvisel, a Daikin a globális piacvezető. A helyszíni felmérés során személyre szabott javaslatot teszünk.',
+  },
+  {
+    question: 'Tudnak-e fűteni is a klímaberendezések?',
+    answer: 'Igen! A modern inverteres klíma hőszivattyúként is működik, és akár -15°C-ig is hatékonyan fűt. A hőszivattyús klíma fűtési hatékonysága 300-400% körüli (COP 3-4), ami azt jelenti, hogy 1 kWh elektromos energiából 3-4 kWh hőt állít elő.',
+  },
+  {
+    question: 'Mikor érdemes klímát szereltetni?',
+    answer: 'A legoptimálisabb időpont a szezon előtti időszak: tavasszal (március–április) vagy kora ősszel. Ebben az időszakban elkerülhető a nyári csúcsszezon torlódása, és gyorsabb időpontot kaphat. Január–február hónapban szintén rövid határidővel tudunk érkezni.',
+  },
+];
+
+const services = [
+  {
+    title: 'Klíma Telepítés és Értékesítés',
+    description: 'Fisher, Fujitsu, Toshiba és Daikin split klímarendszerek telepítése ingyenes helyszíni felméréssel. Kiszállási díj nélkül, Budapesten belül.',
+    href: '/szolgaltatasok/klima-telepites',
+    icon: '❄️',
+  },
+  {
+    title: 'Klíma Javítás',
+    description: 'Gyors és megbízható klímajavítás Budapest egész területén. Minden márkát javítunk, eredeti alkatrészekkel, garanciával.',
+    href: '/szolgaltatasok/klima-javitas',
+    icon: '🔧',
+  },
+  {
+    title: 'Klíma Tisztítás és Karbantartás',
+    description: 'Éves karbantartással meghosszabbítja klímája élettartamát, csökkenti energiafogyasztását és megelőzi a meghibásodásokat.',
+    href: '/szolgaltatasok/klima-tisztitas',
+    icon: '✨',
+    highlight: true,
+  },
+  {
+    title: 'Fűtés Klímával',
+    description: 'Modern inverteres klíma hőszivattyúként is működik. Hatékonyabb és olcsóbb, mint a hagyományos villanyfűtés – akár -15°C-ig.',
+    href: '/szolgaltatasok/futes-klimaval',
+    icon: '🌡️',
+  },
+];
+
+const brands = [
+  { name: 'Fisher', desc: 'Megbízható, megfizethető', href: '/keszulekek/fisher-klima' },
+  { name: 'Fujitsu', desc: 'Japán minőség, csendes működés', href: '/keszulekek/fujitsu-klima' },
+  { name: 'Toshiba', desc: 'Prémium technológia', href: '/keszulekek/toshiba-klima' },
+  { name: 'Daikin', desc: 'Globális piacvezető', href: '/keszulekek/daikin-klima' },
+];
+
+const processSteps = [
+  { step: '1', title: 'Kapcsolatfelvétel', desc: 'Hívjon minket vagy töltse ki az online árajánlatkérőt.' },
+  { step: '2', title: 'Ingyenes Felmérés', desc: 'Szerelőink kiszállnak, felmérnek és pontos ajánlatot adnak.' },
+  { step: '3', title: 'Árajánlat', desc: 'Átlátható, tételes árajánlatot küldünk írásban.' },
+  { step: '4', title: 'Telepítés', desc: 'Precíz, tiszta munkavégzés a megbeszélt időpontban.' },
+  { step: '5', title: 'Átadás + Garancia', desc: 'Betanítás, dokumentáció, 2 év garancia.' },
+];
+---
+
+<BaseLayout
+  title="KlimaFirst – Klímaszerelés Budapest | Telepítés, Javítás, Karbantartás"
+  description="Professzionális klímaszerelés, javítás és karbantartás Budapesten. Ingyenes helyszíni felmérés, kiszállási díj nélkül mind a 23 kerületbe. Fisher, Fujitsu, Toshiba, Daikin. ☎ +36 20 339 4164"
+  canonical="/"
+  ogType="website"
+  schema={[localBusinessSchema, websiteSchema]}
+>
+  <!-- HERO -->
+  <section class="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white overflow-hidden">
+    <div class="absolute inset-0 opacity-10" aria-hidden="true">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-orange-400 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl"></div>
+      <div class="absolute bottom-0 left-0 w-64 h-64 bg-blue-400 rounded-full translate-y-1/2 -translate-x-1/4 blur-3xl"></div>
+    </div>
+
+    <div class="container mx-auto px-4 py-16 md:py-24 relative">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <!-- Text content -->
+        <div>
+          <div class="inline-flex items-center gap-2 bg-blue-800/60 text-orange-300 text-xs font-semibold px-3 py-1.5 rounded-full mb-4">
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+            5000+ elvégzett referencia Budapesten
+          </div>
+
+          <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-4">
+            Klímaszerelés Budapest –<br />
+            <span class="text-orange-400">Profi, Gyors, Megbízható</span>
+          </h1>
+
+          <p class="text-lg text-blue-100 leading-relaxed mb-6">
+            Fisher, Fujitsu, Toshiba és Daikin klímarendszerek telepítése, javítása és karbantartása.
+            <strong class="text-white">Ingyenes helyszíni felmérés, kiszállási díj nélkül</strong> Budapest mind a 23 kerületében.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-3 mb-8">
+            <a
+              href="/ajanlatkeres"
+              class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3.5 rounded-xl font-bold text-base shadow-lg hover:shadow-xl transition-all duration-300 text-center"
+            >
+              Ingyenes Árajánlat Kérése
+            </a>
+            <a
+              href="tel:+36203394164"
+              class="border-2 border-white/40 hover:border-white text-white px-6 py-3.5 rounded-xl font-bold text-base text-center hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg>
+              +36 20 339 4164
+            </a>
+          </div>
+
+          <!-- Trust badges -->
+          <div class="flex flex-wrap gap-4 text-sm text-blue-200">
+            <div class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+              Kiszállási díj nélkül
+            </div>
+            <div class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+              2 év garancia
+            </div>
+            <div class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+              Ingyenes helyszíni felmérés
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact form widget -->
+        <div class="lg:max-w-md w-full">
+          <ContactForm title="Kérjen Ingyenes Árajánlatot" compact={false} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <TrustBar />
+
+  <!-- SERVICES -->
+  <section class="py-16 bg-white" aria-labelledby="services-heading">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-10">
+        <h2 id="services-heading" class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+          Klímaszerelési Szolgáltatásaink Budapesten
+        </h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          Teljes körű klímaszolgáltatás – a telepítéstől a karbantartásig. Minden munkára 2 év garanciát vállalunk.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        {services.map((s) => (
+          <ServiceCard
+            title={s.title}
+            description={s.description}
+            href={s.href}
+            icon={s.icon}
+            highlight={s.highlight}
+          />
+        ))}
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="/arak" class="inline-flex items-center gap-2 text-blue-800 font-semibold hover:text-blue-600 transition-colors">
+          Árak megtekintése
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5-STEP PROCESS -->
+  <section class="py-16 bg-gray-50" aria-labelledby="process-heading">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-10">
+        <h2 id="process-heading" class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+          Hogyan Dolgozunk? – 5 Egyszerű Lépés
+        </h2>
+        <p class="text-gray-600">Átlátható folyamat, meglepetések nélkül.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        {processSteps.map((step) => (
+          <div class="relative text-center">
+            <div class="w-14 h-14 bg-blue-900 text-white rounded-2xl flex items-center justify-center text-xl font-extrabold mx-auto mb-3 shadow-md">
+              {step.step}
+            </div>
+            <h3 class="font-bold text-gray-900 mb-1">{step.title}</h3>
+            <p class="text-sm text-gray-600">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- BRANDS -->
+  <section class="py-16 bg-white" aria-labelledby="brands-heading">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-8">
+        <h2 id="brands-heading" class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+          Forgalmazott Klíma Márkák
+        </h2>
+        <p class="text-gray-600">Csak elismert, megbízható gyártók termékeit értékesítjük és szervizeljük.</p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {brands.map((brand) => (
+          <a
+            href={brand.href}
+            class="group bg-white rounded-2xl border border-gray-200 p-6 text-center hover:border-blue-300 hover:shadow-md transition-all duration-300 hover:-translate-y-0.5"
+            aria-label={`${brand.name} klíma részletei`}
+          >
+            <div class="text-2xl font-extrabold text-blue-900 group-hover:text-blue-700 transition-colors mb-1">
+              {brand.name}
+            </div>
+            <div class="text-xs text-gray-500">{brand.desc}</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- DISTRICT GRID -->
+  <DistrictGrid />
+
+  <!-- FAQ -->
+  <FAQ items={homeFaqs} title="Klímaszerelés GYIK – Leggyakoribb Kérdések" />
+
+  <!-- BLOG POSTS -->
+  {latestPosts.length > 0 && (
+    <section class="py-16 bg-gray-50" aria-labelledby="blog-heading">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-8">
+          <h2 id="blog-heading" class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+            Tudástár – Klíma Tippek és Útmutatók
+          </h2>
+          <p class="text-gray-600">Szakértői cikkek klímaszerelésről, karbantartásról és energiatakarékosságról.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {latestPosts.map((post) => (
+            <article class="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden group">
+              <div class="p-5">
+                <div class="flex flex-wrap gap-1 mb-3">
+                  {post.data.tags.slice(0, 2).map((tag: string) => (
+                    <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full">{tag}</span>
+                  ))}
+                </div>
+                <h3 class="font-bold text-gray-900 group-hover:text-blue-800 transition-colors mb-2 leading-snug">
+                  <a href={`/tudastar/${post.slug}`}>{post.data.title}</a>
+                </h3>
+                <p class="text-sm text-gray-600 line-clamp-2 mb-3">{post.data.description}</p>
+                <div class="flex items-center justify-between text-xs text-gray-400">
+                  <span>{post.data.author}</span>
+                  <time datetime={post.data.pubDate.toISOString()}>
+                    {post.data.pubDate.toLocaleDateString('hu-HU', { year: 'numeric', month: 'long', day: 'numeric' })}
+                  </time>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div class="text-center mt-6">
+          <a href="/tudastar" class="inline-flex items-center gap-2 text-blue-800 font-semibold hover:text-blue-600 transition-colors">
+            Összes cikk megtekintése
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- FINAL CTA -->
+  <section class="py-16 bg-blue-900 text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold mb-3">
+        Kész a Klímaszerelésre? Hívjon Minket Most!
+      </h2>
+      <p class="text-blue-200 mb-8 max-w-xl mx-auto">
+        Ingyenes helyszíni felmérés, kötelezettségmentes árajánlat. Kiszállási díj nélkül Budapest egész területén.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="tel:+36203394164"
+          class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
+        >
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg>
+          +36 20 339 4164
+        </a>
+        <a
+          href="/ajanlatkeres"
+          class="border-2 border-white/40 hover:border-white text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/10 transition-all duration-300"
+        >
+          Online Árajánlatkérés
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

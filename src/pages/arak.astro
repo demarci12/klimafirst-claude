@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import PriceTable from '../components/PriceTable.astro';
+import FAQ from '../components/FAQ.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { SITE } from '../data/site';
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+
+const priceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Klímaszerelés Árak Budapest 2025',
+  provider: { '@type': 'HVACBusiness', name: 'KlimaFirst', telephone: SITE.phoneTel, url: `${siteUrl}/` },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Klímaszerelés Árlista 2025',
+    itemListElement: [
+      { '@type': 'Offer', name: 'Split klíma telepítés', priceSpecification: { '@type': 'PriceSpecification', minPrice: 35000, priceCurrency: 'HUF' } },
+      { '@type': 'Offer', name: 'Klíma karbantartás', priceSpecification: { '@type': 'PriceSpecification', minPrice: 15000, priceCurrency: 'HUF' } },
+      { '@type': 'Offer', name: 'Klíma javítás', priceSpecification: { '@type': 'PriceSpecification', minPrice: 8000, priceCurrency: 'HUF' } },
+    ],
+  },
+};
+
+const installPrices = [
+  { service: 'Split klíma telepítés (2.5 kW)', description: 'Normál falvastagság, max 3m rézcső', price: '35.000', note: 'Munkadíj' },
+  { service: 'Split klíma telepítés (3.5 kW)', description: 'Normál falvastagság, max 3m rézcső', price: '38.000', note: 'Munkadíj' },
+  { service: 'Split klíma telepítés (5.0 kW)', description: 'Nagy teljesítmény, normál falvastagság', price: '42.000', note: 'Munkadíj' },
+  { service: 'Multi-split 2 beltéri egység', description: '1 kültéri + 2 beltéri, max 5m rézcső/ág', price: '65.000', note: 'Munkadíj', highlight: true },
+  { service: 'Multi-split 3 beltéri egység', description: '1 kültéri + 3 beltéri, max 5m rézcső/ág', price: '85.000', note: 'Munkadíj' },
+  { service: 'Rézcső pár (méterenkénti)', description: '3/8" + 1/4" standard rézcső pár', price: '3.500', note: '/fm' },
+  { service: 'Extra falátvezetés', description: 'Vastag fal, lépcsős fal, stb.', price: '3.000–8.000', note: 'Eseti díjszabás' },
+];
+
+const devicePrices = [
+  { service: 'Fisher split klíma (2.5 kW)', description: 'Beltéri + kültéri egység, távirányítóval', price: '130.000' },
+  { service: 'Fisher split klíma (3.5 kW)', description: 'Beltéri + kültéri egység, távirányítóval', price: '155.000' },
+  { service: 'Fujitsu split klíma (2.5 kW)', description: 'Japán minőség, A++++ energiaosztály', price: '180.000', highlight: true },
+  { service: 'Toshiba split klíma (2.5 kW)', description: 'Prémium, Wi-Fi vezérlés, self-cleaning', price: '185.000' },
+  { service: 'Daikin split klíma (2.5 kW)', description: 'Piacvezető, maximális megbízhatóság', price: '200.000' },
+];
+
+const servicePrices = [
+  { service: 'Helyszíni diagnosztika', description: 'Hiba azonosítás, hibakód kiolvasás', price: '8.000' },
+  { service: 'Hűtőközeg utántöltés (R32)', description: 'per 100g + munkadíj', price: '5.000' },
+  { service: 'Vákuum + töltés', description: 'Teljes rendszer feltöltés', price: '25.000' },
+  { service: 'Split klíma karbantartás', description: 'Beltéri egység tisztítás, ellenőrzés', price: '15.000' },
+  { service: 'Split klíma karbantartás (teljes)', description: 'Beltéri + kültéri, rendszerellenőrzés', price: '25.000', highlight: true },
+  { service: 'Mélytisztítás + fertőtlenítés', description: 'Professzionális klímatisztítás', price: '30.000' },
+];
+
+const faqs = [
+  {
+    question: 'Tartalmaz-e az ár ÁFÁ-t?',
+    answer: 'Az árlistán szereplő munkadíjak nettó árak. Magánszemélyeknek és vállalkozásoknak egyaránt pontosítjuk az árajánlatban, hogy az bruttó vagy nettó-e.',
+  },
+  {
+    question: 'Van-e egyéb rejtett költség?',
+    answer: 'Nem. Az összes tételt az írásos árajánlatban rögzítjük. Amit az ajánlat tartalmaz, azt számlázunk – nem számítunk fel meglepetés pótdíjakat.',
+  },
+  {
+    question: 'Készülékárat tartalmaz a telepítési díj?',
+    answer: 'Nem, a telepítési munkadíj és a készülékár külön kezeljük. Lehetőség van csomagajánlatra is, ahol a készülékkel együtt adjuk meg a végső árat.',
+  },
+  {
+    question: 'Fizethetünk részletben?',
+    answer: 'Igen, nagyobb összegű megrendelések esetén rugalmas fizetési feltételekről is egyezhetünk. Elfogadunk készpénzt és banki átutalást.',
+  },
+];
+---
+
+<BaseLayout
+  title="Klímaszerelés Árak Budapest 2025 – Teljes Árlista | KlimaFirst"
+  description="Klímaszerelés árak Budapesten 2025-ben. Telepítési munkadíjak, készülékárak, karbantartási és javítási díjak tételesen. Ingyenes árajánlat kérése. ☎ +36 20 339 4164"
+  canonical="/arak"
+  schema={priceSchema}
+  breadcrumbs={[{ name: 'Árak', url: '/arak' }]}
+>
+  <div class="bg-gray-50 border-b border-gray-200">
+    <div class="container mx-auto px-4">
+      <Breadcrumb items={[{ name: 'Klímaszerelés Árak 2025', href: '/arak' }]} />
+    </div>
+  </div>
+
+  <section class="bg-gradient-to-br from-blue-900 to-blue-800 text-white py-14">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Klímaszerelés Árak Budapest 2025</h1>
+      <p class="text-lg text-blue-100 mb-4 max-w-2xl mx-auto">
+        Átlátható, tételes árjegyzék a klíma telepítés, javítás, karbantartás és készülékek aktuális áraival. Ingyenes helyszíni felmérés után pontos, személyre szabott árajánlatot adunk.
+      </p>
+      <p class="text-orange-300 font-semibold">Kiszállási díj nélkül – Budapest mind a 23 kerületébe</p>
+    </div>
+  </section>
+
+  <section class="py-10 bg-white">
+    <div class="container mx-auto px-4 max-w-5xl">
+      <div class="bg-blue-50 border border-blue-200 rounded-2xl p-5 mb-10">
+        <h2 class="font-bold text-blue-900 mb-2">Fontos tudnivalók az árakról</h2>
+        <ul class="text-sm text-blue-800 space-y-1">
+          <li>✅ Ingyenes helyszíni felmérés és árajánlat – kötelezettség nélkül</li>
+          <li>✅ Kiszállási díj nélkül Budapest mind a 23 kerületébe</li>
+          <li>✅ Az árak az alábbi feltételek mellett érvényesek: standard falvastagság, akadálymentes hozzáférés</li>
+          <li>✅ Minden munkára 2 év garancia</li>
+        </ul>
+      </div>
+
+      <PriceTable items={installPrices} title="Klíma Telepítés Munkadíjak 2025" />
+      <div class="mt-10">
+        <PriceTable items={devicePrices} title="Klímakészülékek Árai 2025" disclaimer="A készülékárak a mindenkori gyártói listaáron alapulnak, és változhatnak. Pontos ár az ajánlatban." />
+      </div>
+      <div class="mt-10">
+        <PriceTable items={servicePrices} title="Klíma Javítás és Karbantartás Árak 2025" />
+      </div>
+    </div>
+  </section>
+
+  <FAQ items={faqs} title="Klímaszerelés Árak – Leggyakoribb Kérdések" />
+
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-xl">
+      <ContactForm title="Pontos Árajánlat Kérése" />
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FAQ from '../../components/FAQ.astro';
+import PriceTable from '../../components/PriceTable.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import { SITE } from '../../data/site';
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Klíma Javítás Budapest',
+  description: 'Gyors és megbízható klímajavítás Budapesten. Minden márka, eredeti alkatrészek, garanciával. Kiszállási díj nélkül.',
+  provider: { '@type': 'HVACBusiness', name: 'KlimaFirst', telephone: SITE.phoneTel, url: `${siteUrl}/` },
+  areaServed: { '@type': 'City', name: 'Budapest' },
+  aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '74', bestRating: '5' },
+};
+
+const priceItems = [
+  { service: 'Helyszíni diagnosztika', description: 'Hiba azonosítása, hibakód kiolvasás', price: '8.000', note: 'Munkadíj' },
+  { service: 'Hűtőközeg utántöltés (R32)', description: '250g töltőgáz és munkadíj', price: '15.000', note: 'anyag+munka' },
+  { service: 'Hűtőközeg utántöltés (R410A)', description: '250g töltőgáz és munkadíj', price: '14.000', note: 'anyag+munka' },
+  { service: 'Vákuumszivattyúzás és töltés', description: 'Teljes körű rendszer feltöltés', price: '25.000', note: 'Munkadíj' },
+  { service: 'Vezérlőpanel csere', description: 'Beltéri egység vezérlő csere', price: '18.000', note: 'Munkadíj (+alkatrész)' },
+  { service: 'Ventilátor motor csere', description: 'Beltéri vagy kültéri ventilátormotor', price: '15.000', note: 'Munkadíj (+alkatrész)', highlight: true },
+];
+
+const faqs = [
+  {
+    question: 'Miért nem hűt a klímám?',
+    answer: 'A leggyakoribb okok: alacsony hűtőközeg szint (szivárgás), eltömött szűrő, hibás kompresszor, vagy problémás vezérlő. Helyszíni diagnosztikával gyorsan azonosítjuk a hibát.',
+  },
+  {
+    question: 'Meddig tart egy klímajavítás?',
+    answer: 'Egyszerűbb hibák (pl. hűtőközeg utántöltés, szűrő csere) 1–2 óra alatt elvégezhetők. Komplex javítások (pl. kompresszor csere) 3–8 óra munkaidőt igényelnek, de ez alkatrész rendelhetőségtől is függ.',
+  },
+  {
+    question: 'Van garancia a javításra?',
+    answer: 'Igen, minden elvégzett javítási munkára 6 hónap garanciát vállalunk. Beépített alkatrészekre az alkatrész gyártói garanciája érvényes.',
+  },
+  {
+    question: 'Minden klíma márkát javítanak?',
+    answer: 'Igen, szervizeljük az összes elterjedt klíma márkát: Samsung, LG, Mitsubishi, Panasonic, Gree, Midea, Fisher, Fujitsu, Toshiba, Daikin és más márkákat is.',
+  },
+];
+---
+
+<BaseLayout
+  title="Klíma Javítás Budapest – Gyors Szerviz Minden Márkára | KlimaFirst"
+  description="Professzionális klímajavítás Budapesten. Minden márka szervize, eredeti alkatrészekkel, 6 hónap garanciával. Kiszállási díj nélkül. ☎ +36 20 339 4164"
+  canonical="/szolgaltatasok/klima-javitas"
+  schema={serviceSchema}
+  breadcrumbs={[{ name: 'Klíma Javítás', url: '/szolgaltatasok/klima-javitas' }]}
+>
+  <div class="bg-gray-50 border-b border-gray-200">
+    <div class="container mx-auto px-4">
+      <Breadcrumb items={[{ name: 'Klíma Javítás', href: '/szolgaltatasok/klima-javitas' }]} />
+    </div>
+  </div>
+
+  <section class="bg-gradient-to-br from-blue-900 to-blue-800 text-white py-14">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+      <div class="text-5xl mb-4" aria-hidden="true">🔧</div>
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Klíma Javítás Budapest</h1>
+      <p class="text-lg text-blue-100 mb-6 max-w-2xl mx-auto">
+        Gyors, megbízható klímajavítás minden márkára. Helyszíni diagnosztika, eredeti alkatrészek, 6 hónap garancia. Kiszállási díj nélkül Budapest egész területén.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="/ajanlatkeres" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-bold transition-colors">
+          Javítás Kérése
+        </a>
+        <a href="tel:+36203394164" class="border-2 border-white/40 hover:border-white text-white px-6 py-3 rounded-xl font-bold hover:bg-white/10 transition-colors">
+          ☎ +36 20 339 4164
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <div class="prose-klima">
+        <h2>Klímajavítás – Minden Hibát Megoldunk</h2>
+        <p>
+          Ha a klímája nem hűt megfelelően, furcsán zúg, csöpög, vagy hibakódot jelez, ne halassza tovább a javítást! A késedelmes szerviz súlyosabb és drágább meghibásodáshoz vezethet.
+        </p>
+
+        <h2>Leggyakoribb Klíma Hibák és Megoldásaink</h2>
+        <ul>
+          <li><strong>Nem hűt / nem fűt:</strong> Alacsony hűtőközeg szint, szivárgás diagnosztika és töltés</li>
+          <li><strong>Csöpög a beltéri egység:</strong> Eltömött kondenzvíz elvezető cső tisztítása</li>
+          <li><strong>Szokatlan zajok:</strong> Laza alkatrészek, ventilátor hiba javítása</li>
+          <li><strong>Hibakód jelzés:</strong> Hibakód kiolvasás, elektronikai javítás</li>
+          <li><strong>Nem indul be:</strong> Elektromos hiba diagnosztika és javítás</li>
+          <li><strong>Kellemetlen szag:</strong> Mélytisztítás, fertőtlenítés</li>
+        </ul>
+
+        <h2>Szervizelt Márkák</h2>
+        <p>Szervizeljük az összes elterjedt márkát: Fisher, Fujitsu, Toshiba, Daikin, Samsung, LG, Mitsubishi Electric, Midea, Gree, Panasonic, és más gyártók termékeit.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-8 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <PriceTable items={priceItems} title="Klíma Javítás Árak 2025" />
+    </div>
+  </section>
+
+  <FAQ items={faqs} title="Klíma Javítás – Leggyakoribb Kérdések" />
+
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-xl">
+      <ContactForm title="Klíma Javítás Kérése" />
+    </div>
+  </section>
+</BaseLayout>

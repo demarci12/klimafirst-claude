@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { SITE } from '../../data/site';
+
+const brands = [
+  {
+    name: 'Fisher',
+    slug: 'fisher-klima',
+    description: 'A Fisher klíma kiváló ár-érték arányt kínál. Megbízható minőség, modern funkciók, hosszú élettartam – ideális választás azoknak, akik megfizethető áron szeretnének minőségi klímát.',
+    pros: ['Kiváló ár-érték arány', 'Megbízható alkatrészek', 'Hatékony inverteres motor', 'Könnyű kezelhetőség'],
+    range: '130.000 Ft-tól',
+    icon: '🔵',
+  },
+  {
+    name: 'Fujitsu',
+    slug: 'fujitsu-klima',
+    description: 'A Fujitsu japán precizitással gyártott klímái a csendes működés és a magas energiahatékonyság terén kiemelkedők. Kiváló választás, ha a minőség és a tartósság az elsődleges szempont.',
+    pros: ['Japán minőség', 'Rendkívül csendes működés', 'A+++ energiaosztály', 'Hosszú élettartam'],
+    range: '180.000 Ft-tól',
+    icon: '🟢',
+  },
+  {
+    name: 'Toshiba',
+    slug: 'toshiba-klima',
+    description: 'A Toshiba klímák innovatív technológiával, beépített Wi-Fi vezérléssel és öntisztító funkcióval rendelkeznek. Prémium kategória azoknak, akik a legmodernebb funkciókra vágynak.',
+    pros: ['Beépített Wi-Fi', 'Öntisztító funkció', 'Intelligens hőmérséklet-szabályozás', 'Prémium kategória'],
+    range: '185.000 Ft-tól',
+    icon: '🔴',
+  },
+  {
+    name: 'Daikin',
+    slug: '#',
+    description: 'A Daikin a világ klímapiaci vezető márkája. Páratlan megbízhatóság, kiemelkedő hatékonyság és a legjobb fűtési teljesítmény -25°C-ig. A profi választás.',
+    pros: ['Világ piacvezető', 'Kiemelkedő megbízhatóság', '-25°C fűtési teljesítmény', 'A++++ energiaosztály'],
+    range: '200.000 Ft-tól',
+    icon: '🟡',
+  },
+];
+---
+
+<BaseLayout
+  title="Klímakészülékek – Fisher, Fujitsu, Toshiba, Daikin Budapest | KlimaFirst"
+  description="Fisher, Fujitsu, Toshiba és Daikin klímakészülékek Budapesten. Összehasonlítás, árak, telepítés egyben. Szakértői tanácsadás ingyenesen. ☎ +36 20 339 4164"
+  canonical="/keszulekek"
+  breadcrumbs={[{ name: 'Klímakészülékek', url: '/keszulekek' }]}
+>
+  <div class="bg-gray-50 border-b border-gray-200">
+    <div class="container mx-auto px-4">
+      <Breadcrumb items={[{ name: 'Klímakészülékek', href: '/keszulekek' }]} />
+    </div>
+  </div>
+
+  <section class="bg-gradient-to-br from-blue-900 to-blue-800 text-white py-14">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Klímakészülékek Budapesten</h1>
+      <p class="text-lg text-blue-100 max-w-2xl mx-auto">
+        Forgalmazott márkák összehasonlítása – segítünk megtalálni az Önnek legjobb klímát. Telepítéssel, garanciával.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-4 max-w-5xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {brands.map((brand) => (
+          <article class="bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-3xl" aria-hidden="true">{brand.icon}</span>
+              <h2 class="text-2xl font-extrabold text-gray-900">{brand.name} Klíma</h2>
+            </div>
+            <p class="text-gray-600 text-sm mb-4">{brand.description}</p>
+            <ul class="space-y-1 mb-5">
+              {brand.pros.map((pro) => (
+                <li class="flex items-center gap-2 text-sm text-gray-700">
+                  <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                  {pro}
+                </li>
+              ))}
+            </ul>
+            <div class="flex items-center justify-between">
+              <span class="text-blue-900 font-bold">{brand.range}</span>
+              {brand.slug !== '#' ? (
+                <a href={`/keszulekek/${brand.slug}`} class="bg-blue-900 hover:bg-blue-800 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors">
+                  Részletek →
+                </a>
+              ) : (
+                <a href="/ajanlatkeres" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors">
+                  Árajánlat →
+                </a>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="mt-10 bg-blue-50 border border-blue-200 rounded-2xl p-6 text-center">
+        <h2 class="text-xl font-bold text-blue-900 mb-2">Nem tudja melyiket válassza?</h2>
+        <p class="text-blue-700 mb-4">Ingyenes szakértői tanácsadás keretében segítünk kiválasztani az Ön igényeinek és otthonának legjobban megfelelő klímát.</p>
+        <a href="/ajanlatkeres" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-bold inline-block transition-colors">
+          Ingyenes Tanácsadás Kérése
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

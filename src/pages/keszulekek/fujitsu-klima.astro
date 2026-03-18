@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FAQ from '../../components/FAQ.astro';
+import ContactForm from '../../components/ContactForm.astro';
+
+const faqs = [
+  { question: 'Miben jobb a Fujitsu más márkáknál?', answer: 'A Fujitsu kiemelkedő a csendes működésben (19–21 dB), az extrém hideg időben való fűtési teljesítményben (-25°C-ig), és az A++++ energiaosztályban. Japán precizitás a kivitelezésben.' },
+  { question: 'Mennyibe kerül a Fujitsu klíma telepítéssel?', answer: 'Egy Fujitsu 2.5 kW-os klíma telepítéssel kb. 215.000–235.000 Ft közé esik. Pontos árajánlatot ingyenes helyszíni felméréssel adunk.' },
+  { question: 'Elérhető-e Fujitsu multi-split rendszer?', answer: 'Igen, a Fujitsu kínálata tartalmaz multi-split rendszereket is. Kérjen árajánlatot a konkrét konfigurációra.' },
+];
+---
+
+<BaseLayout
+  title="Fujitsu Klíma Budapest – Japán Minőség, Telepítés, Szerviz | KlimaFirst"
+  description="Fujitsu klíma telepítés és értékesítés Budapesten. Japán minőség, csendes működés, A++++ energiaosztály. Ingyenes helyszíni felmérés. ☎ +36 20 339 4164"
+  canonical="/keszulekek/fujitsu-klima"
+  breadcrumbs={[{ name: 'Klímakészülékek', url: '/keszulekek' }, { name: 'Fujitsu Klíma', url: '/keszulekek/fujitsu-klima' }]}
+>
+  <div class="bg-gray-50 border-b border-gray-200">
+    <div class="container mx-auto px-4">
+      <Breadcrumb items={[{ name: 'Klímakészülékek', href: '/keszulekek' }, { name: 'Fujitsu Klíma', href: '/keszulekek/fujitsu-klima' }]} />
+    </div>
+  </div>
+
+  <section class="bg-gradient-to-br from-blue-900 to-blue-800 text-white py-14">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Fujitsu Klíma Budapest</h1>
+      <p class="text-lg text-blue-100 mb-6 max-w-2xl mx-auto">
+        Japán minőség, kivételes csendességgel és A++++ energiaosztállyal. Fujitsu klíma értékesítés és telepítés Budapesten, ingyenes helyszíni felméréssel.
+      </p>
+      <a href="/ajanlatkeres" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-bold transition-colors inline-block">
+        Fujitsu Klíma Árajánlat
+      </a>
+    </div>
+  </section>
+
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <div class="prose-klima">
+        <h2>Fujitsu Klíma – A Minőség Szimbóluma</h2>
+        <p>A Fujitsu a japán légkondicionálás egyik legismertebb és legelismertebb márkája. Az ASYG sorozat rendkívül csendes, hatékony és megbízható – kiváló választás hálószobákba, irodákba és prémium otthonokba.</p>
+
+        <h2>Fujitsu KE/KG Sorozat – Fő Jellemzők</h2>
+        <ul>
+          <li><strong>Hangszint:</strong> Mindössze 19 dB beltéri egységnél – alig hallható</li>
+          <li><strong>Energiaosztály:</strong> A++++ hűtés, A+++ fűtés</li>
+          <li><strong>Fűtési határ:</strong> -25°C-ig garantált teljesítmény</li>
+          <li><strong>Wi-Fi:</strong> Opcionális, okostelefon-vezérlés</li>
+          <li><strong>Hűtőközeg:</strong> R32 – alacsonyabb GWP</li>
+          <li><strong>Filtráció:</strong> Anti-allergiás szűrő, ionizátor</li>
+        </ul>
+
+        <h2>Fujitsu Modellek és Árak</h2>
+        <ul>
+          <li><strong>Fujitsu ASYG09KETA (2.5 kW):</strong> ~180.000 Ft – ideális hálószobába</li>
+          <li><strong>Fujitsu ASYG12KETA (3.5 kW):</strong> ~210.000 Ft – nappalihoz</li>
+          <li><strong>Fujitsu ASYG14KETA (4.2 kW):</strong> ~240.000 Ft – nagy terekhez</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <FAQ items={faqs} title="Fujitsu Klíma – Leggyakoribb Kérdések" />
+
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-xl">
+      <ContactForm title="Fujitsu Klíma Árajánlat Kérése" />
+    </div>
+  </section>
+</BaseLayout>

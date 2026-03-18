@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import KlimaCalculator from '../components/KlimaCalculator.astro';
+import FAQ from '../components/FAQ.astro';
+import { SITE } from '../data/site';
+
+const faqs = [
+  {
+    question: 'Hogyan számítják ki a szükséges klíma teljesítményt?',
+    answer: 'Az alapszabály: 50 W/m³ jól szigetelt épületnél. A kalkulátor figyelembe veszi a szoba alapterületét, a belmagasságot, a szigetelés minőségét, a tájolást és a tartózkodó személyek hőtermelését is.',
+  },
+  {
+    question: 'Mennyire pontos a kalkulátor eredménye?',
+    answer: 'A kalkulátor becsült értéket ad. A pontos méretezéshez figyelembe kell venni az épület szerkezetét, az ablakok elhelyezkedését és méretét, a tetőterületet, a szomszédos helyiségek hőmérsékletét és más tényezőket. Ezért ajánlunk ingyenes helyszíni felmérést.',
+  },
+  {
+    question: 'Mi van, ha a kalkulátor eredménye nem egyezik a kereskedő ajánlatával?',
+    answer: 'A kereskedők sokszor túlméretezik a klímát (nagyobb értékesítési haszon érdekében). A túlméretezett klíma rövid ciklusokban fut, és nem szárítja ki megfelelően a levegőt. Kérjen szakértői véleményt!',
+  },
+  {
+    question: 'Multi-split rendszernél hogyan számolják a teljesítményt?',
+    answer: 'Multi-split rendszernél minden helyiséget külön kell méretezni, majd összeadni a szükséges teljesítményeket. A kültéri egység kapacitásának ez alapján kell meghaladnia az összes beltéri egység maximumát.',
+  },
+];
+---
+
+<BaseLayout
+  title="Klíma Méretező Kalkulátor – Szükséges Teljesítmény Kiszámítása | KlimaFirst"
+  description="Ingyenes online klíma méretező kalkulátor. Adja meg a szoba alapterületét és belmagasságát – megmutatjuk, mekkora klíma szükséges az Ön otthonába."
+  canonical="/klima-meretezo-kalkulator"
+  breadcrumbs={[{ name: 'Klíma Méretező Kalkulátor', url: '/klima-meretezo-kalkulator' }]}
+>
+  <div class="bg-gray-50 border-b border-gray-200">
+    <div class="container mx-auto px-4">
+      <Breadcrumb items={[{ name: 'Klíma Méretező Kalkulátor', href: '/klima-meretezo-kalkulator' }]} />
+    </div>
+  </div>
+
+  <section class="bg-gradient-to-br from-blue-900 to-blue-800 text-white py-12">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-3">Klíma Méretező Kalkulátor</h1>
+      <p class="text-blue-100 text-lg max-w-2xl mx-auto">
+        Számítsa ki, mekkora teljesítményű klíma szükséges az Ön helyiségébe – ingyenesen, azonnal.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-10 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-2xl">
+      <KlimaCalculator />
+
+      <div class="mt-8 bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+        <h2 class="text-lg font-bold text-gray-900 mb-3">Hogyan Értelmezze az Eredményt?</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead>
+              <tr class="bg-blue-900 text-white">
+                <th class="px-4 py-2 text-left rounded-tl-lg">Szoba mérete</th>
+                <th class="px-4 py-2 text-left">Ajánlott teljesítmény</th>
+                <th class="px-4 py-2 text-left rounded-tr-lg">Tipikus klímamodell</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-gray-100">
+                <td class="px-4 py-2">~15 m² (h: 2.7m)</td>
+                <td class="px-4 py-2 font-semibold text-blue-900">2.0–2.5 kW</td>
+                <td class="px-4 py-2">09-es sorozat (9.000 BTU)</td>
+              </tr>
+              <tr class="bg-gray-50 border-b border-gray-100">
+                <td class="px-4 py-2">~25 m² (h: 2.7m)</td>
+                <td class="px-4 py-2 font-semibold text-blue-900">2.5–3.5 kW</td>
+                <td class="px-4 py-2">12-es sorozat (12.000 BTU)</td>
+              </tr>
+              <tr class="border-b border-gray-100">
+                <td class="px-4 py-2">~35 m² (h: 2.7m)</td>
+                <td class="px-4 py-2 font-semibold text-blue-900">3.5–5.0 kW</td>
+                <td class="px-4 py-2">14–18-as sorozat</td>
+              </tr>
+              <tr class="bg-gray-50">
+                <td class="px-4 py-2">~50 m²+ (h: 2.7m)</td>
+                <td class="px-4 py-2 font-semibold text-blue-900">5.0+ kW</td>
+                <td class="px-4 py-2">24-es sorozat, multi-split</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FAQ items={faqs} title="Klíma Méretezés – Leggyakoribb Kérdések" />
+</BaseLayout>

@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import FAQ from '../../components/FAQ.astro';
+import PriceTable from '../../components/PriceTable.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import { SITE } from '../../data/site';
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Klíma Tisztítás és Karbantartás Budapest',
+  description: 'Professzionális klíma tisztítás, fertőtlenítés és éves karbantartás Budapesten. Meghosszabbítja a készülék élettartamát és csökkenti energiafogyasztását.',
+  provider: { '@type': 'HVACBusiness', name: 'KlimaFirst', telephone: SITE.phoneTel, url: `${siteUrl}/` },
+  areaServed: { '@type': 'City', name: 'Budapest' },
+  aggregateRating: { '@type': 'AggregateRating', ratingValue: '5.0', reviewCount: '55', bestRating: '5' },
+};
+
+const priceItems = [
+  { service: 'Split klíma karbantartás', description: 'Szűrő tisztítás, hőcserélő mosás, rendszer ellenőrzés', price: '15.000', note: 'Beltéri egység' },
+  { service: 'Split klíma + kültéri karbantartás', description: 'Teljes körű karbantartás, mindkét egység', price: '25.000', note: 'Teljes rendszer', highlight: true },
+  { service: 'Mélytisztítás + fertőtlenítés', description: 'Professzionális tisztítás baktérium- és gombamentesítéssel', price: '30.000', note: 'Teljes rendszer' },
+  { service: 'Multi-split karbantartás (2 beltéri)', description: '2 beltéri + 1 kültéri egység karbantartása', price: '38.000', note: 'Munkadíj' },
+  { service: 'Kondenzvíz elvezető tisztítás', description: 'Csővezeték átmosás, lerakódás eltávolítása', price: '5.000', note: 'Munkadíj' },
+];
+
+const faqs = [
+  {
+    question: 'Milyen gyakran kell klímát karbantartani?',
+    answer: 'Évenként egyszer ajánlott, lehetőleg a hűtési szezon előtt (tavasszal) vagy után. Ha a klíma fűtésre is használják, akkor kétévente elvégzett karbantartás is elegendő lehet, de az éves karbantartás a legjobb.',
+  },
+  {
+    question: 'Mi történik, ha nem tartom karban a klímát?',
+    answer: 'Eltömödnek a szűrők, csökken a hatékonyság (akár 30%-kal), nő az energiafogyasztás, baktériumok és gombák szaporodhatnak el, és a készülék élettartama lerövidülhet. A megelőző karbantartás olcsóbb, mint a javítás.',
+  },
+  {
+    question: 'Mennyi ideig tart a karbantartás?',
+    answer: 'Egy split klíma karbantartása 1–2 óra alatt elvégezhető. Mélytisztítással és fertőtlenítéssel együtt 2–3 órát vesz igénybe.',
+  },
+  {
+    question: 'Egészséges-e a be nem tartott klíma?',
+    answer: 'Nem. A piszkos klíma szűrőkben baktériumok, gombák és poratka tartózkodhatnak, amelyeket a klíma a levegőbe juttat. Ez allergiás reakciókat és légúti problémákat okozhat. A rendszeres tisztítás egészségesebb levegőt biztosít.',
+  },
+];
+---
+
+<BaseLayout
+  title="Klíma Tisztítás és Karbantartás Budapest | KlimaFirst"
+  description="Professzionális klíma tisztítás, fertőtlenítés és éves karbantartás Budapesten. Megelőzze a meghibásodást, csökkentse az energiaszámlát. ☎ +36 20 339 4164"
+  canonical="/szolgaltatasok/klima-tisztitas"
+  schema={serviceSchema}
+  breadcrumbs={[{ name: 'Klíma Tisztítás', url: '/szolgaltatasok/klima-tisztitas' }]}
+>
+  <div class="bg-gray-50 border-b border-gray-200">
+    <div class="container mx-auto px-4">
+      <Breadcrumb items={[{ name: 'Klíma Tisztítás és Karbantartás', href: '/szolgaltatasok/klima-tisztitas' }]} />
+    </div>
+  </div>
+
+  <section class="bg-gradient-to-br from-blue-900 to-blue-800 text-white py-14">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+      <div class="text-5xl mb-4" aria-hidden="true">✨</div>
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Klíma Tisztítás és Karbantartás Budapest</h1>
+      <p class="text-lg text-blue-100 mb-6 max-w-2xl mx-auto">
+        Éves klíma karbantartással meghosszabbítja készüléke élettartamát, csökkenti energiafogyasztását és egészségesebb levegőt biztosít otthonában.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="/ajanlatkeres" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-bold transition-colors">
+          Karbantartás Kérése
+        </a>
+        <a href="tel:+36203394164" class="border-2 border-white/40 hover:border-white text-white px-6 py-3 rounded-xl font-bold hover:bg-white/10 transition-colors">
+          ☎ +36 20 339 4164
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <div class="prose-klima">
+        <h2>Mit Tartalmaz a Klíma Karbantartás?</h2>
+        <ul>
+          <li>Beltéri szűrők tisztítása vagy cseréje</li>
+          <li>Beltéri hőcserélő (evaporátor) mosása</li>
+          <li>Kültéri kondenzátor egység tisztítása</li>
+          <li>Kondenzvíz elvezető cső ellenőrzése és átmosása</li>
+          <li>Elektromos kapcsolatok ellenőrzése</li>
+          <li>Hűtőközeg nyomás ellenőrzése</li>
+          <li>Működési tesztek elvégzése</li>
+        </ul>
+
+        <h2>Mélytisztítás + Fertőtlenítés</h2>
+        <p>
+          Prémium szolgáltatásunkban professzionális tisztítószerekkel és nagynyomású mosóval eltávolítjuk az összes szennyeződést, baktériumot, gombát és penészt. A karbantartás után a klíma olyan hatékonyan és higiénikusan üzemel, mint az új korában.
+        </p>
+
+        <h2>Mikor Érdemes Karbantartást Végeztetni?</h2>
+        <p>A legoptimálisabb időpontok:</p>
+        <ul>
+          <li><strong>Tavasszal (március–április):</strong> Nyári szezon előtt – optimális hűtési teljesítmény garantálva</li>
+          <li><strong>Ősszel (szeptember–október):</strong> Fűtési szezon előtt – hatékony téli fűtés biztosítva</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-8 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <PriceTable items={priceItems} title="Klíma Karbantartás Árak 2025" />
+    </div>
+  </section>
+
+  <FAQ items={faqs} title="Klíma Karbantartás – GYIK" />
+
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-xl">
+      <ContactForm title="Karbantartás Időpont Egyeztetése" />
+    </div>
+  </section>
+</BaseLayout>

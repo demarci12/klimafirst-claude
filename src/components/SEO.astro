@@ -1,0 +1,115 @@
+---
+import { SITE } from '../data/site';
+
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: string;
+  noindex?: boolean;
+  schema?: object | object[];
+  breadcrumbs?: Array<{ name: string; url: string }>;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage = '/images/og-default.jpg',
+  ogType = 'website',
+  noindex = false,
+  schema,
+  breadcrumbs,
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const canonicalUrl = canonical ? `${siteUrl}${canonical}` : `${siteUrl}${Astro.url.pathname}`;
+const fullTitle = title.includes('KlimaFirst') ? title : `${title} | KlimaFirst Budapest`;
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+
+// Build schema array
+const schemas: object[] = [];
+if (schema) {
+  if (Array.isArray(schema)) {
+    schemas.push(...schema);
+  } else {
+    schemas.push(schema);
+  }
+}
+
+// Always add BreadcrumbList if breadcrumbs provided
+if (breadcrumbs && breadcrumbs.length > 0) {
+  schemas.push({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Főoldal',
+        item: `${siteUrl}/`,
+      },
+      ...breadcrumbs.map((b, i) => ({
+        '@type': 'ListItem',
+        position: i + 2,
+        name: b.name,
+        item: `${siteUrl}${b.url}`,
+      })),
+    ],
+  });
+}
+---
+
+<!-- Primary Meta Tags -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<meta name="author" content={SITE.owner} />
+<meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'} />
+
+<!-- Geo Tags -->
+<meta name="geo.region" content={SITE.geo.region} />
+<meta name="geo.placename" content={SITE.geo.placename} />
+<meta name="geo.position" content={SITE.geo.position} />
+<meta name="ICBM" content={SITE.geo.icbm} />
+
+<!-- Canonical -->
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Hreflang -->
+<link rel="alternate" hreflang="hu-HU" href={canonicalUrl} />
+<link rel="alternate" hreflang="hu" href={canonicalUrl} />
+<link rel="alternate" hreflang="x-default" href={canonicalUrl} />
+
+<!-- Open Graph -->
+<meta property="og:type" content={ogType} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="hu_HU" />
+<meta property="og:site_name" content="KlimaFirst" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageUrl} />
+
+<!-- Preconnect to external resources -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<!-- JSON-LD Schemas -->
+{schemas.map((s) => (
+  <script type="application/ld+json" set:html={JSON.stringify(s)} />
+))}

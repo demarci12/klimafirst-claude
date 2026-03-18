@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import TrustBar from '../components/TrustBar.astro';
+import { SITE } from '../data/site';
+---
+
+<BaseLayout
+  title="Rólunk – KlimaFirst Klímaszerelő Budapest | Juhász Solutions Kft."
+  description="Ismerje meg a KlimaFirst csapatát! Juhász Solutions Kft., 10+ év tapasztalat, 5000+ elvégzett referencia, 23 kerület. Tulajdonos: Juhász Balázs."
+  canonical="/rolunk"
+  breadcrumbs={[{ name: 'Rólunk', url: '/rolunk' }]}
+>
+  <div class="bg-gray-50 border-b border-gray-200">
+    <div class="container mx-auto px-4">
+      <Breadcrumb items={[{ name: 'Rólunk', href: '/rolunk' }]} />
+    </div>
+  </div>
+
+  <section class="bg-gradient-to-br from-blue-900 to-blue-800 text-white py-14">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-3">Rólunk – KlimaFirst Budapest</h1>
+      <p class="text-blue-100 text-lg max-w-2xl mx-auto">
+        10+ év tapasztalat, 5000+ elvégzett munka, 23 kerület – megbízható klímaszerelési szakértő csapat Budapesten.
+      </p>
+    </div>
+  </section>
+
+  <TrustBar />
+
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">A KlimaFirst Csapata</h2>
+          <div class="prose-klima">
+            <p>
+              A <strong>KlimaFirst</strong> (Juhász Solutions Kft.) Budapesten tevékenykedő, professzionális klímaszerelési vállalkozás. Alapítója és tulajdonosa <strong>Juhász Balázs</strong>, aki 10+ év iparági tapasztalattal rendelkezik.
+            </p>
+            <p>
+              Mottónk: <em>"Elsők a Megoldásban"</em> – ez nem csupán szlogen, hanem minden munkánkat meghatározó elv. Gyorsan reagálunk, pontosan dolgozunk, és minden esetben az ügyfél érdekeit tartjuk szem előtt.
+            </p>
+
+            <h3>Szakterületeink</h3>
+            <ul>
+              <li>Split és multi-split klímarendszerek telepítése</li>
+              <li>Fisher, Fujitsu, Toshiba, Daikin készülékek értékesítése</li>
+              <li>Klímarendszerek javítása és karbantartása</li>
+              <li>Hőszivattyús fűtési rendszerek tervezése és kivitelezése</li>
+            </ul>
+
+            <h3>Miért Vagyunk Mások?</h3>
+            <ul>
+              <li><strong>Ingyenes helyszíni felmérés</strong> – kiszállási díj nélkül</li>
+              <li><strong>Személyre szabott árak</strong> – nem sablonos ajánlatok</li>
+              <li><strong>Precíz munkavégzés</strong> – minőségi eszközök, tiszta munkaterület</li>
+              <li><strong>Gyors kiszállás</strong> – 1–3 napon belül Budapest egész területén</li>
+              <li><strong>2 év garancia</strong> – minden elvégzett munkára</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="space-y-5">
+          <!-- Owner card -->
+          <div class="bg-blue-50 border border-blue-200 rounded-2xl p-6">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-16 h-16 bg-blue-900 rounded-full flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
+                JB
+              </div>
+              <div>
+                <div class="font-bold text-gray-900 text-lg">Juhász Balázs</div>
+                <div class="text-blue-700 text-sm">Tulajdonos, Főszerelő</div>
+                <div class="text-gray-500 text-xs">10+ év tapasztalat</div>
+              </div>
+            </div>
+            <blockquote class="text-gray-700 text-sm italic border-l-4 border-blue-400 pl-3">
+              "Számomra minden egyes ügyfél más és más. Nem sablonos megoldásokat kínálok, hanem az adott ház, az adott igény alapján szabott javaslatot – ez a különbség a KlimaFirst és a többi vállalkozás között."
+            </blockquote>
+          </div>
+
+          <!-- Company info -->
+          <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+            <h3 class="font-bold text-gray-900 mb-4">Cégadatok</h3>
+            <dl class="space-y-2 text-sm">
+              <div class="flex justify-between">
+                <dt class="text-gray-500">Cég neve</dt>
+                <dd class="font-medium text-gray-900">Juhász Solutions Kft.</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-gray-500">Márkanév</dt>
+                <dd class="font-medium text-gray-900">KlimaFirst</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-gray-500">Telephely</dt>
+                <dd class="font-medium text-gray-900">Budapest</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-gray-500">Telefonszám</dt>
+                <dd>
+                  <a href="tel:+36203394164" class="font-medium text-orange-600 hover:text-orange-500 transition-colors">
+                    +36 20 339 4164
+                  </a>
+                </dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-gray-500">E-mail</dt>
+                <dd>
+                  <a href="mailto:info@klimafirst.hu" class="font-medium text-blue-700 hover:text-blue-500 transition-colors">
+                    info@klimafirst.hu
+                  </a>
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          <!-- CTA -->
+          <a
+            href="/ajanlatkeres"
+            class="block bg-orange-500 hover:bg-orange-600 text-white px-6 py-4 rounded-2xl font-bold text-center transition-all duration-300 shadow-md hover:shadow-lg"
+          >
+            Ingyenes Árajánlat Kérése
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
