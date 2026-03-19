@@ -5,6 +5,7 @@ import ServiceCard from '../components/ServiceCard.astro';
 import FAQ from '../components/FAQ.astro';
 import DistrictGrid from '../components/DistrictGrid.astro';
 import ContactForm from '../components/ContactForm.astro';
+import { Image } from 'astro:assets';
 import { SITE } from '../data/site';
 import { getCollection } from 'astro:content';
 
@@ -131,12 +132,16 @@ const services = [
     description: 'Fisher, Fujitsu, Toshiba és Daikin split klímarendszerek telepítése ingyenes helyszíni felméréssel. Kiszállási díj nélkül, Budapesten belül.',
     href: '/szolgaltatasok/klima-telepites',
     icon: '❄️',
+    image: 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=480&h=270&fit=crop&auto=format&q=80',
+    imageAlt: 'Professzionális klímaszerelő technikus split klímarendszert telepít budapesti lakásban',
   },
   {
     title: 'Klíma Javítás',
     description: 'Gyors és megbízható klímajavítás Budapest egész területén. Minden márkát javítunk, eredeti alkatrészekkel, garanciával.',
     href: '/szolgaltatasok/klima-javitas',
     icon: '🔧',
+    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=480&h=270&fit=crop&auto=format&q=80',
+    imageAlt: 'Klímaszerelő szakember diagnosztikai eszközökkel klímaberendezést javít',
   },
   {
     title: 'Klíma Tisztítás és Karbantartás',
@@ -144,12 +149,16 @@ const services = [
     href: '/szolgaltatasok/klima-tisztitas',
     icon: '✨',
     highlight: true,
+    image: 'https://images.unsplash.com/photo-1563453392212-326f5e854473?w=480&h=270&fit=crop&auto=format&q=80',
+    imageAlt: 'Klíma szűrő alapos professzionális tisztítása és karbantartása',
   },
   {
     title: 'Fűtés Klímával',
     description: 'Modern inverteres klíma hőszivattyúként is működik. Hatékonyabb és olcsóbb, mint a hagyományos villanyfűtés – akár -15°C-ig.',
     href: '/szolgaltatasok/futes-klimaval',
     icon: '🌡️',
+    image: 'https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=480&h=270&fit=crop&auto=format&q=80',
+    imageAlt: 'Meleg és kényelmes modern nappali télen klímával fűtve Budapesten',
   },
 ];
 
@@ -235,9 +244,19 @@ const processSteps = [
           </div>
         </div>
 
-        <!-- Contact form widget -->
-        <div class="lg:max-w-md w-full">
-          <ContactForm title="Kérjen Ingyenes Árajánlatot" compact={false} />
+        <!-- Hero image + contact form widget -->
+        <div class="lg:max-w-md w-full flex flex-col gap-4">
+          <div class="hidden lg:block rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/20">
+            <Image
+              src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=560&h=280&fit=crop&auto=format&q=80"
+              alt="Prémium klímaberendezés fali egység egy modern, elegáns budapesti nappaliban"
+              width={560}
+              height={280}
+              class="w-full object-cover"
+              loading="eager"
+            />
+          </div>
+          <ContactForm title="Kérjen Ingyenes Árajánlatot" compact={true} />
         </div>
       </div>
     </div>
@@ -247,13 +266,13 @@ const processSteps = [
   <TrustBar />
 
   <!-- SERVICES -->
-  <section class="py-16 bg-white" aria-labelledby="services-heading">
+  <section class="py-16 bg-gradient-to-b from-white to-gray-50" aria-labelledby="services-heading">
     <div class="container mx-auto px-4">
       <div class="text-center mb-10">
-        <h2 id="services-heading" class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+        <h2 id="services-heading" class="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 mb-3">
           Klímaszerelési Szolgáltatásaink Budapesten
         </h2>
-        <p class="text-gray-600 max-w-2xl mx-auto">
+        <p class="text-gray-600 max-w-2xl mx-auto leading-relaxed">
           Teljes körű klímaszolgáltatás – a telepítéstől a karbantartásig. Minden munkára 2 év garanciát vállalunk.
         </p>
       </div>
@@ -266,13 +285,15 @@ const processSteps = [
             href={s.href}
             icon={s.icon}
             highlight={s.highlight}
+            image={s.image}
+            imageAlt={s.imageAlt}
           />
         ))}
       </div>
 
       <div class="text-center mt-8">
-        <a href="/arak" class="inline-flex items-center gap-2 text-blue-800 font-semibold hover:text-blue-600 transition-colors">
-          Árak megtekintése
+        <a href="/arak" class="inline-flex items-center gap-2 bg-blue-800 hover:bg-blue-900 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-blue-500/30 transition-all duration-300">
+          Árlista megtekintése
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
         </a>
       </div>
@@ -280,23 +301,23 @@ const processSteps = [
   </section>
 
   <!-- 5-STEP PROCESS -->
-  <section class="py-16 bg-gray-50" aria-labelledby="process-heading">
+  <section class="py-16 bg-gradient-to-b from-gray-50 to-white" aria-labelledby="process-heading">
     <div class="container mx-auto px-4">
       <div class="text-center mb-10">
-        <h2 id="process-heading" class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+        <h2 id="process-heading" class="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 mb-3">
           Hogyan Dolgozunk? – 5 Egyszerű Lépés
         </h2>
-        <p class="text-gray-600">Átlátható folyamat, meglepetések nélkül.</p>
+        <p class="text-gray-600 leading-relaxed">Átlátható folyamat, meglepetések nélkül.</p>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
         {processSteps.map((step) => (
-          <div class="relative text-center">
+          <div class="relative text-center bg-white rounded-2xl border border-gray-100 shadow-sm p-5 hover:shadow-md transition-all duration-300">
             <div class="w-14 h-14 bg-blue-900 text-white rounded-2xl flex items-center justify-center text-xl font-extrabold mx-auto mb-3 shadow-md">
               {step.step}
             </div>
-            <h3 class="font-bold text-gray-900 mb-1">{step.title}</h3>
-            <p class="text-sm text-gray-600">{step.desc}</p>
+            <h3 class="font-bold text-gray-900 mb-1 tracking-tight">{step.title}</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">{step.desc}</p>
           </div>
         ))}
       </div>
@@ -307,20 +328,20 @@ const processSteps = [
   <section class="py-16 bg-white" aria-labelledby="brands-heading">
     <div class="container mx-auto px-4">
       <div class="text-center mb-8">
-        <h2 id="brands-heading" class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+        <h2 id="brands-heading" class="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 mb-3">
           Forgalmazott Klíma Márkák
         </h2>
-        <p class="text-gray-600">Csak elismert, megbízható gyártók termékeit értékesítjük és szervizeljük.</p>
+        <p class="text-gray-600 leading-relaxed">Csak elismert, megbízható gyártók termékeit értékesítjük és szervizeljük.</p>
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         {brands.map((brand) => (
           <a
             href={brand.href}
-            class="group bg-white rounded-2xl border border-gray-200 p-6 text-center hover:border-blue-300 hover:shadow-md transition-all duration-300 hover:-translate-y-0.5"
+            class="group bg-white rounded-2xl border border-gray-100 p-6 text-center shadow-md hover:shadow-xl hover:border-blue-200 transition-all duration-300 hover:-translate-y-1"
             aria-label={`${brand.name} klíma részletei`}
           >
-            <div class="text-2xl font-extrabold text-blue-900 group-hover:text-blue-700 transition-colors mb-1">
+            <div class="text-2xl font-extrabold tracking-tight text-blue-900 group-hover:text-blue-700 transition-colors mb-1">
               {brand.name}
             </div>
             <div class="text-xs text-gray-500">{brand.desc}</div>
@@ -338,29 +359,29 @@ const processSteps = [
 
   <!-- BLOG POSTS -->
   {latestPosts.length > 0 && (
-    <section class="py-16 bg-gray-50" aria-labelledby="blog-heading">
+    <section class="py-16 bg-gradient-to-b from-gray-50 to-white" aria-labelledby="blog-heading">
       <div class="container mx-auto px-4">
         <div class="text-center mb-8">
-          <h2 id="blog-heading" class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+          <h2 id="blog-heading" class="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 mb-3">
             Tudástár – Klíma Tippek és Útmutatók
           </h2>
-          <p class="text-gray-600">Szakértői cikkek klímaszerelésről, karbantartásról és energiatakarékosságról.</p>
+          <p class="text-gray-600 leading-relaxed">Szakértői cikkek klímaszerelésről, karbantartásról és energiatakarékosságról.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           {latestPosts.map((post) => (
-            <article class="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden group">
+            <article class="bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden group">
               <div class="p-5">
                 <div class="flex flex-wrap gap-1 mb-3">
                   {post.data.tags.slice(0, 2).map((tag: string) => (
                     <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full">{tag}</span>
                   ))}
                 </div>
-                <h3 class="font-bold text-gray-900 group-hover:text-blue-800 transition-colors mb-2 leading-snug">
+                <h3 class="font-bold tracking-tight text-gray-900 group-hover:text-blue-800 transition-colors mb-2 leading-snug">
                   <a href={`/tudastar/${post.slug}`}>{post.data.title}</a>
                 </h3>
-                <p class="text-sm text-gray-600 line-clamp-2 mb-3">{post.data.description}</p>
-                <div class="flex items-center justify-between text-xs text-gray-400">
+                <p class="text-sm text-gray-600 leading-relaxed line-clamp-2 mb-3">{post.data.description}</p>
+                <div class="flex items-center justify-between text-xs text-gray-500">
                   <span>{post.data.author}</span>
                   <time datetime={post.data.pubDate.toISOString()}>
                     {post.data.pubDate.toLocaleDateString('hu-HU', { year: 'numeric', month: 'long', day: 'numeric' })}

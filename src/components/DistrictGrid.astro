@@ -16,13 +16,13 @@ const {
 const displayDistricts = limit ? districts.slice(0, limit) : districts;
 ---
 
-<section class="py-12 bg-gray-50" aria-labelledby="district-grid-heading">
+<section class="py-12 bg-gradient-to-b from-gray-50 to-white" aria-labelledby="district-grid-heading">
   <div class="container mx-auto px-4">
     <div class="text-center mb-8">
-      <h2 id="district-grid-heading" class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+      <h2 id="district-grid-heading" class="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 mb-3">
         {title}
       </h2>
-      <p class="text-gray-600 max-w-2xl mx-auto">
+      <p class="text-gray-600 max-w-2xl mx-auto leading-relaxed">
         Budapesten belül kiszállási díj nélkül vállalunk klímaszerelési, javítási és karbantartási munkákat mind a 23 kerületben.
       </p>
     </div>
@@ -31,14 +31,14 @@ const displayDistricts = limit ? districts.slice(0, limit) : districts;
       {displayDistricts.map((district) => (
         <a
           href={`/budapest/${district.slug}`}
-          class="group bg-white rounded-xl border border-gray-200 p-3 text-center hover:border-blue-300 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+          class="group bg-white rounded-xl border border-gray-100 p-3 text-center shadow-sm hover:shadow-md hover:border-blue-200 hover:-translate-y-1 transition-all duration-300"
           aria-label={`Klímaszerelés ${district.name}`}
         >
-          <div class="text-2xl font-bold text-blue-900 group-hover:text-blue-700 transition-colors leading-none mb-1">
+          <div class="text-2xl font-extrabold text-blue-900 group-hover:text-blue-700 transition-colors leading-none mb-1">
             {district.romanNumeral}
           </div>
           <div class="text-xs text-gray-600 font-medium">kerület</div>
-          <div class="text-xs text-gray-500 mt-1 truncate">{district.neighborhoods[0]}</div>
+          <div class="text-xs text-gray-400 mt-1 truncate">{district.neighborhoods[0]}</div>
         </a>
       ))}
     </div>

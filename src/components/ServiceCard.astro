@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+
 export interface Props {
   title: string;
   description: string;
@@ -6,56 +8,76 @@ export interface Props {
   icon?: string;
   highlight?: boolean;
   price?: string;
+  image?: string;
+  imageAlt?: string;
 }
 
-const { title, description, href, icon, highlight = false, price } = Astro.props;
+const { title, description, href, icon, highlight = false, price, image, imageAlt } = Astro.props;
 ---
 
 <article
-  class={`rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group flex flex-col ${
+  class={`rounded-2xl transition-all duration-300 hover:-translate-y-1 group flex flex-col overflow-hidden ${
     highlight
-      ? 'bg-blue-900 text-white shadow-lg shadow-blue-900/30'
-      : 'bg-white border border-gray-100 shadow-card hover:shadow-card-hover'
+      ? 'bg-blue-900 text-white shadow-lg shadow-blue-900/30 hover:shadow-xl hover:shadow-blue-900/40'
+      : 'bg-white border border-gray-100 shadow-md hover:shadow-xl'
   }`}
 >
-  {icon && (
-    <div
-      class={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-colors ${
-        highlight ? 'bg-blue-800' : 'bg-blue-50 group-hover:bg-blue-100'
-      }`}
+  {image && (
+    <div class="relative overflow-hidden h-44">
+      <Image
+        src={image}
+        alt={imageAlt ?? title}
+        width={480}
+        height={270}
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        loading="lazy"
+      />
+      {highlight && (
+        <div class="absolute inset-0 bg-blue-900/40"></div>
+      )}
+    </div>
+  )}
+
+  <div class="p-6 flex flex-col flex-grow">
+    {icon && (
+      <div
+        class={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-colors ${
+          highlight ? 'bg-blue-800' : 'bg-blue-50 group-hover:bg-blue-100'
+        }`}
+      >
+        <span class="text-2xl" aria-hidden="true">{icon}</span>
+      </div>
+    )}
+
+    <h3
+      class={`text-lg font-bold mb-2 tracking-tight ${highlight ? 'text-white' : 'text-gray-900'}`}
     >
-      <span class="text-2xl" aria-hidden="true">{icon}</span>
-    </div>
-  )}
+      {title}
+    </h3>
 
-  <h3
-    class={`text-lg font-bold mb-2 ${highlight ? 'text-white' : 'text-gray-900'}`}
-  >
-    {title}
-  </h3>
+    <p class={`text-sm leading-relaxed flex-grow ${highlight ? 'text-blue-200' : 'text-gray-600'}`}>
+      {description}
+    </p>
 
-  <p class={`text-sm leading-relaxed flex-grow ${highlight ? 'text-blue-200' : 'text-gray-600'}`}>
-    {description}
-  </p>
+    {price && (
+      <div class={`mt-3 text-sm font-semibold ${highlight ? 'text-orange-400' : 'text-blue-800'}`}>
+        {price}
+      </div>
+    )}
 
-  {price && (
-    <div class={`mt-3 text-sm font-semibold ${highlight ? 'text-orange-400' : 'text-blue-800'}`}>
-      {price}
-    </div>
-  )}
-
-  <a
-    href={href}
-    class={`mt-4 inline-flex items-center gap-1 text-sm font-semibold transition-colors ${
-      highlight
-        ? 'text-orange-400 hover:text-orange-300'
-        : 'text-blue-800 hover:text-blue-600'
-    }`}
-    aria-label={`Részletek: ${title}`}
-  >
-    Részletek megtekintése
-    <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-    </svg>
-  </a>
+    <a
+      href={href}
+      class={`mt-4 inline-flex items-center gap-1 text-sm font-semibold transition-colors ${
+        highlight
+          ? 'text-orange-400 hover:text-orange-300'
+          : 'text-blue-800 hover:text-blue-600'
+      }`}
+      aria-label={`Részletek: ${title}`}
+    >
+      Részletek megtekintése
+      <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </a>
+  </div>
 </article>

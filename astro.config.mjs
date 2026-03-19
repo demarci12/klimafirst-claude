@@ -40,6 +40,7 @@ export default defineConfig({
     }),
   ],
   image: {
+    domains: ['images.unsplash.com'],
     service: {
       entrypoint: 'astro/assets/services/sharp',
     },
