@@ -5,6 +5,7 @@ import PriceTable from '../components/PriceTable.astro';
 import FAQ from '../components/FAQ.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { SITE } from '../data/site';
+import pricingData from '../data/pricing.json';
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
 
@@ -24,51 +25,7 @@ const priceSchema = {
   },
 };
 
-const installPrices = [
-  { service: 'Split klíma telepítés (2.5 kW)', description: 'Normál falvastagság, max 3m rézcső', price: '35.000', note: 'Munkadíj' },
-  { service: 'Split klíma telepítés (3.5 kW)', description: 'Normál falvastagság, max 3m rézcső', price: '38.000', note: 'Munkadíj' },
-  { service: 'Split klíma telepítés (5.0 kW)', description: 'Nagy teljesítmény, normál falvastagság', price: '42.000', note: 'Munkadíj' },
-  { service: 'Multi-split 2 beltéri egység', description: '1 kültéri + 2 beltéri, max 5m rézcső/ág', price: '65.000', note: 'Munkadíj', highlight: true },
-  { service: 'Multi-split 3 beltéri egység', description: '1 kültéri + 3 beltéri, max 5m rézcső/ág', price: '85.000', note: 'Munkadíj' },
-  { service: 'Rézcső pár (méterenkénti)', description: '3/8" + 1/4" standard rézcső pár', price: '3.500', note: '/fm' },
-  { service: 'Extra falátvezetés', description: 'Vastag fal, lépcsős fal, stb.', price: '3.000–8.000', note: 'Eseti díjszabás' },
-];
-
-const devicePrices = [
-  { service: 'Fisher split klíma (2.5 kW)', description: 'Beltéri + kültéri egység, távirányítóval', price: '130.000' },
-  { service: 'Fisher split klíma (3.5 kW)', description: 'Beltéri + kültéri egység, távirányítóval', price: '155.000' },
-  { service: 'Fujitsu split klíma (2.5 kW)', description: 'Japán minőség, A++++ energiaosztály', price: '180.000', highlight: true },
-  { service: 'Toshiba split klíma (2.5 kW)', description: 'Prémium, Wi-Fi vezérlés, self-cleaning', price: '185.000' },
-  { service: 'Daikin split klíma (2.5 kW)', description: 'Piacvezető, maximális megbízhatóság', price: '200.000' },
-];
-
-const servicePrices = [
-  { service: 'Helyszíni diagnosztika', description: 'Hiba azonosítás, hibakód kiolvasás', price: '8.000' },
-  { service: 'Hűtőközeg utántöltés (R32)', description: 'per 100g + munkadíj', price: '5.000' },
-  { service: 'Vákuum + töltés', description: 'Teljes rendszer feltöltés', price: '25.000' },
-  { service: 'Split klíma karbantartás', description: 'Beltéri egység tisztítás, ellenőrzés', price: '15.000' },
-  { service: 'Split klíma karbantartás (teljes)', description: 'Beltéri + kültéri, rendszerellenőrzés', price: '25.000', highlight: true },
-  { service: 'Mélytisztítás + fertőtlenítés', description: 'Professzionális klímatisztítás', price: '30.000' },
-];
-
-const faqs = [
-  {
-    question: 'Tartalmaz-e az ár ÁFÁ-t?',
-    answer: 'Az árlistán szereplő munkadíjak nettó árak. Magánszemélyeknek és vállalkozásoknak egyaránt pontosítjuk az árajánlatban, hogy az bruttó vagy nettó-e.',
-  },
-  {
-    question: 'Van-e egyéb rejtett költség?',
-    answer: 'Nem. Az összes tételt az írásos árajánlatban rögzítjük. Amit az ajánlat tartalmaz, azt számlázunk – nem számítunk fel meglepetés pótdíjakat.',
-  },
-  {
-    question: 'Készülékárat tartalmaz a telepítési díj?',
-    answer: 'Nem, a telepítési munkadíj és a készülékár külön kezeljük. Lehetőség van csomagajánlatra is, ahol a készülékkel együtt adjuk meg a végső árat.',
-  },
-  {
-    question: 'Fizethetünk részletben?',
-    answer: 'Igen, nagyobb összegű megrendelések esetén rugalmas fizetési feltételekről is egyezhetünk. Elfogadunk készpénzt és banki átutalást.',
-  },
-];
+const { installPrices, devicePrices, servicePrices, faqs } = pricingData;
 ---
 
 <BaseLayout

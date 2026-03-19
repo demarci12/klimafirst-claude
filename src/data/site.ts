@@ -1,19 +1,20 @@
+import siteConfig from './site-config.json';
+
 export const SITE = {
-  name: 'KlimaFirst',
-  legalName: 'Juhász Solutions Kft.',
-  tagline: 'Elsők a Megoldásban',
-  phone: '+36 20 339 4164',
-  phoneTel: '+36203394164',
-  email: 'info@klimafirst.hu',
+  name: siteConfig.name,
+  legalName: siteConfig.legalName,
+  tagline: siteConfig.tagline,
+  phone: siteConfig.phone,
+  phoneTel: siteConfig.phoneTel,
+  email: siteConfig.email,
+  owner: siteConfig.owner,
+  description: siteConfig.description,
   address: {
     streetAddress: 'Budapest',
     addressLocality: 'Budapest',
     postalCode: '1000',
     addressCountry: 'HU',
   },
-  owner: 'Juhász Balázs',
-  description:
-    'Professzionális klímaszerelés, javítás és karbantartás Budapesten. Ingyenes helyszíni felmérés, kiszállási díj nélkül. 5000+ referencia, gyors kiszállás mind a 23 kerületbe.',
   geo: {
     region: 'HU-BU',
     placename: 'Budapest',
@@ -21,14 +22,9 @@ export const SITE = {
     icbm: '47.4979, 19.0402',
   },
   social: {
-    facebook: 'https://www.facebook.com/klimafirst',
+    facebook: siteConfig.facebookUrl,
   },
-  stats: {
-    references: '5000+',
-    experience: '10+',
-    warranty: '2 év',
-    districts: '23',
-  },
+  stats: siteConfig.stats,
   services: [
     { name: 'Klíma Telepítés', slug: 'klima-telepites', icon: 'tools' },
     { name: 'Klíma Javítás', slug: 'klima-javitas', icon: 'wrench' },

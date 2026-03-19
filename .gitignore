@@ -25,3 +25,6 @@ pnpm-debug.log*
 # Astro generated
 .astro/
 src/env.d.ts
+
+# TinaCMS generated
+tina/__generated__/

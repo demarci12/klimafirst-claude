@@ -8,6 +8,7 @@ import ContactForm from '../components/ContactForm.astro';
 import { Image } from 'astro:assets';
 import { SITE } from '../data/site';
 import { getCollection } from 'astro:content';
+import homepageData from '../data/homepage.json';
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
 
@@ -95,87 +96,7 @@ const websiteSchema = {
   },
 };
 
-const homeFaqs = [
-  {
-    question: 'Mennyibe kerül a klímaszerelés Budapesten 2025-ben?',
-    answer: 'A klímaszerelés ára függ a készülék típusától, a telepítés nehézségétől és a helyszíntől. Egy átlagos, 2.5–3.5 kW-os split klíma telepítése munkadíjjal együtt 80.000–150.000 Ft között mozog. Ingyenes helyszíni felmérés keretében pontos árajánlatot adunk kötelezettségmentesen.',
-  },
-  {
-    question: 'Van kiszállási díj Budapesten?',
-    answer: 'Nem! Budapest mind a 23 kerületébe kiszállási díj nélkül érkezünk. Az ingyenes helyszíni felmérés teljes mértékben kötelezettségmentes.',
-  },
-  {
-    question: 'Mennyi ideig tart a klímaszerelés?',
-    answer: 'Egy átlagos split klíma telepítése általában 3–6 óra alatt elvégezhető. Összetettebb, multi-split rendszerek esetén ez 1–2 napot vehet igénybe. A pontos időtartamot a helyszíni felmérés után tudjuk megmondani.',
-  },
-  {
-    question: 'Milyen garancia van a munkára?',
-    answer: 'Minden elvégzett munkára 2 év garanciát vállalunk. A készülékekre a gyártói garancia érvényes (általában 2–5 év), amelyet teljes körűen intézünk.',
-  },
-  {
-    question: 'Fisher, Fujitsu, Toshiba vagy Daikin – melyiket válasszam?',
-    answer: 'Minden márka megbízható, de különböző igényekre optimalizált. A Fisher kiváló ár-érték arányú, a Fujitsu és Toshiba japán minőséget képvisel, a Daikin a globális piacvezető. A helyszíni felmérés során személyre szabott javaslatot teszünk.',
-  },
-  {
-    question: 'Tudnak-e fűteni is a klímaberendezések?',
-    answer: 'Igen! A modern inverteres klíma hőszivattyúként is működik, és akár -15°C-ig is hatékonyan fűt. A hőszivattyús klíma fűtési hatékonysága 300-400% körüli (COP 3-4), ami azt jelenti, hogy 1 kWh elektromos energiából 3-4 kWh hőt állít elő.',
-  },
-  {
-    question: 'Mikor érdemes klímát szereltetni?',
-    answer: 'A legoptimálisabb időpont a szezon előtti időszak: tavasszal (március–április) vagy kora ősszel. Ebben az időszakban elkerülhető a nyári csúcsszezon torlódása, és gyorsabb időpontot kaphat. Január–február hónapban szintén rövid határidővel tudunk érkezni.',
-  },
-];
-
-const services = [
-  {
-    title: 'Klíma Telepítés és Értékesítés',
-    description: 'Fisher, Fujitsu, Toshiba és Daikin split klímarendszerek telepítése ingyenes helyszíni felméréssel. Kiszállási díj nélkül, Budapesten belül.',
-    href: '/szolgaltatasok/klima-telepites',
-    icon: '❄️',
-    image: 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=480&h=270&fit=crop&auto=format&q=80',
-    imageAlt: 'Professzionális klímaszerelő technikus split klímarendszert telepít budapesti lakásban',
-  },
-  {
-    title: 'Klíma Javítás',
-    description: 'Gyors és megbízható klímajavítás Budapest egész területén. Minden márkát javítunk, eredeti alkatrészekkel, garanciával.',
-    href: '/szolgaltatasok/klima-javitas',
-    icon: '🔧',
-    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=480&h=270&fit=crop&auto=format&q=80',
-    imageAlt: 'Klímaszerelő szakember diagnosztikai eszközökkel klímaberendezést javít',
-  },
-  {
-    title: 'Klíma Tisztítás és Karbantartás',
-    description: 'Éves karbantartással meghosszabbítja klímája élettartamát, csökkenti energiafogyasztását és megelőzi a meghibásodásokat.',
-    href: '/szolgaltatasok/klima-tisztitas',
-    icon: '✨',
-    highlight: true,
-    image: 'https://images.unsplash.com/photo-1563453392212-326f5e854473?w=480&h=270&fit=crop&auto=format&q=80',
-    imageAlt: 'Klíma szűrő alapos professzionális tisztítása és karbantartása',
-  },
-  {
-    title: 'Fűtés Klímával',
-    description: 'Modern inverteres klíma hőszivattyúként is működik. Hatékonyabb és olcsóbb, mint a hagyományos villanyfűtés – akár -15°C-ig.',
-    href: '/szolgaltatasok/futes-klimaval',
-    icon: '🌡️',
-    image: 'https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=480&h=270&fit=crop&auto=format&q=80',
-    imageAlt: 'Meleg és kényelmes modern nappali télen klímával fűtve Budapesten',
-  },
-];
-
-const brands = [
-  { name: 'Fisher', desc: 'Megbízható, megfizethető', href: '/keszulekek/fisher-klima' },
-  { name: 'Fujitsu', desc: 'Japán minőség, csendes működés', href: '/keszulekek/fujitsu-klima' },
-  { name: 'Toshiba', desc: 'Prémium technológia', href: '/keszulekek/toshiba-klima' },
-  { name: 'Daikin', desc: 'Globális piacvezető', href: '/keszulekek/daikin-klima' },
-];
-
-const processSteps = [
-  { step: '1', title: 'Kapcsolatfelvétel', desc: 'Hívjon minket vagy töltse ki az online árajánlatkérőt.' },
-  { step: '2', title: 'Ingyenes Felmérés', desc: 'Szerelőink kiszállnak, felmérnek és pontos ajánlatot adnak.' },
-  { step: '3', title: 'Árajánlat', desc: 'Átlátható, tételes árajánlatot küldünk írásban.' },
-  { step: '4', title: 'Telepítés', desc: 'Precíz, tiszta munkavégzés a megbeszélt időpontban.' },
-  { step: '5', title: 'Átadás + Garancia', desc: 'Betanítás, dokumentáció, 2 év garancia.' },
-];
+const { faqs: homeFaqs, services, brands, processSteps } = homepageData;
 ---
 
 <BaseLayout
