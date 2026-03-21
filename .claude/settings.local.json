@@ -4,7 +4,14 @@
       "Bash(npm --version)",
       "Bash(npm create:*)",
       "Bash(npm install:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Read(//c/Users/uih02426/.claude/**)",
+      "Bash(wc -l /c/Users/uih02426/klima-first/src/content/tudastar/*.md)",
+      "Bash(npx tinacms:*)",
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d.get\\(''''version''''\\)\\); print\\(list\\(d.get\\(''''bin'''',{}\\).keys\\(\\)\\)\\)\")",
+      "Bash(node -e \"const p=require\\(''./node_modules/tinacms/package.json''\\); console.log\\(p.version, JSON.stringify\\(p.bin||{}\\)\\)\")",
+      "Bash(node -e \"const p=require\\(''tinacms/package.json''\\); console.log\\(p.version\\)\")",
+      "Bash(npx astro:*)"
     ]
   }
 }

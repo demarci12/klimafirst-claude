@@ -5,11 +5,12 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "tinacms build && astro build",
+    "build": "npm run build:tina && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "tina:build": "tinacms build",
-    "tina:dev": "tinacms dev -c \"astro dev\""
+    "tina:dev": "tinacms dev -c \"astro dev\"",
+    "build:tina": "tinacms build || echo 'Tina CMS build skipped (missing credentials)'"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",
