@@ -1,6 +1,4 @@
 {
-  "functions": {
-    "api/auth.js": { "runtime": "nodejs20.x" },
-    "api/auth/callback.js": { "runtime": "nodejs20.x" }
-  }
+  "buildCommand": "astro build",
+  "outputDirectory": "dist"
 }
