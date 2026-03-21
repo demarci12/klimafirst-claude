@@ -202,6 +202,75 @@ export default defineConfig({
         ],
       },
 
+      // ─── Rólunk oldal ─────────────────────────────────────────────
+      {
+        name: 'rolunk',
+        label: 'Rólunk Oldal',
+        path: 'src/data',
+        match: { include: 'rolunk' },
+        format: 'json',
+        ui: {
+          allowedActions: { create: false, delete: false },
+          global: true,
+        },
+        fields: [
+          { type: 'image', name: 'heroImageSrc', label: 'Hero kép (fejléc jobb oldal)' },
+          { type: 'string', name: 'heroImageAlt', label: 'Hero kép leírása' },
+          { type: 'image', name: 'profileImageSrc', label: 'Profilkártya kép' },
+          { type: 'string', name: 'profileImageAlt', label: 'Profilkártya kép leírása' },
+          {
+            type: 'object',
+            name: 'actionPhotos',
+            label: 'Munkafotók (filmszalag)',
+            list: true,
+            ui: { itemProps: (item) => ({ label: item?.alt || 'Fotó' }) },
+            fields: [
+              { type: 'image', name: 'src', label: 'Kép' },
+              { type: 'string', name: 'alt', label: 'Kép leírása (SEO)' },
+            ],
+          },
+        ],
+      },
+
+      // ─── Referenciák oldal ────────────────────────────────────────
+      {
+        name: 'referenciak',
+        label: 'Referenciák Oldal',
+        path: 'src/data',
+        match: { include: 'referenciak' },
+        format: 'json',
+        ui: {
+          allowedActions: { create: false, delete: false },
+          global: true,
+        },
+        fields: [
+          {
+            type: 'object',
+            name: 'testimonials',
+            label: 'Vásárlói vélemények',
+            list: true,
+            ui: { itemProps: (item) => ({ label: item?.name || 'Vélemény' }) },
+            fields: [
+              { type: 'string', name: 'name', label: 'Név' },
+              { type: 'string', name: 'location', label: 'Helyszín (pl. Budapest, XI. kerület)' },
+              { type: 'number', name: 'rating', label: 'Értékelés (1–5 csillag)' },
+              { type: 'string', name: 'text', label: 'Vélemény szövege', ui: { component: 'textarea' } },
+            ],
+          },
+          {
+            type: 'object',
+            name: 'photos',
+            label: 'Fotógaléria',
+            list: true,
+            ui: { itemProps: (item) => ({ label: item?.alt || 'Fotó' }) },
+            fields: [
+              { type: 'image', name: 'src', label: 'Kép' },
+              { type: 'string', name: 'alt', label: 'Kép leírása (SEO)' },
+            ],
+          },
+        ],
+      },
+
       // ─── Pricing data ─────────────────────────────────────────────
       {
         name: 'pricing',

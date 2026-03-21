@@ -196,6 +196,73 @@ var config_default = defineConfig({
           }
         ]
       },
+      // ─── Rólunk oldal ─────────────────────────────────────────────
+      {
+        name: "rolunk",
+        label: "R\xF3lunk Oldal",
+        path: "src/data",
+        match: { include: "rolunk" },
+        format: "json",
+        ui: {
+          allowedActions: { create: false, delete: false },
+          global: true
+        },
+        fields: [
+          { type: "image", name: "heroImageSrc", label: "Hero k\xE9p (fejl\xE9c jobb oldal)" },
+          { type: "string", name: "heroImageAlt", label: "Hero k\xE9p le\xEDr\xE1sa" },
+          { type: "image", name: "profileImageSrc", label: "Profilk\xE1rtya k\xE9p" },
+          { type: "string", name: "profileImageAlt", label: "Profilk\xE1rtya k\xE9p le\xEDr\xE1sa" },
+          {
+            type: "object",
+            name: "actionPhotos",
+            label: "Munkafot\xF3k (filmszalag)",
+            list: true,
+            ui: { itemProps: (item) => ({ label: item?.alt || "Fot\xF3" }) },
+            fields: [
+              { type: "image", name: "src", label: "K\xE9p" },
+              { type: "string", name: "alt", label: "K\xE9p le\xEDr\xE1sa (SEO)" }
+            ]
+          }
+        ]
+      },
+      // ─── Referenciák oldal ────────────────────────────────────────
+      {
+        name: "referenciak",
+        label: "Referenci\xE1k Oldal",
+        path: "src/data",
+        match: { include: "referenciak" },
+        format: "json",
+        ui: {
+          allowedActions: { create: false, delete: false },
+          global: true
+        },
+        fields: [
+          {
+            type: "object",
+            name: "testimonials",
+            label: "V\xE1s\xE1rl\xF3i v\xE9lem\xE9nyek",
+            list: true,
+            ui: { itemProps: (item) => ({ label: item?.name || "V\xE9lem\xE9ny" }) },
+            fields: [
+              { type: "string", name: "name", label: "N\xE9v" },
+              { type: "string", name: "location", label: "Helysz\xEDn (pl. Budapest, XI. ker\xFClet)" },
+              { type: "number", name: "rating", label: "\xC9rt\xE9kel\xE9s (1\u20135 csillag)" },
+              { type: "string", name: "text", label: "V\xE9lem\xE9ny sz\xF6vege", ui: { component: "textarea" } }
+            ]
+          },
+          {
+            type: "object",
+            name: "photos",
+            label: "Fot\xF3gal\xE9ria",
+            list: true,
+            ui: { itemProps: (item) => ({ label: item?.alt || "Fot\xF3" }) },
+            fields: [
+              { type: "image", name: "src", label: "K\xE9p" },
+              { type: "string", name: "alt", label: "K\xE9p le\xEDr\xE1sa (SEO)" }
+            ]
+          }
+        ]
+      },
       // ─── Pricing data ─────────────────────────────────────────────
       {
         name: "pricing",

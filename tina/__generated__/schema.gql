@@ -60,6 +60,10 @@ type Query {
   siteConfigConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: SiteConfigFilter): SiteConfigConnection!
   homepage(relativePath: String): Homepage!
   homepageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: HomepageFilter): HomepageConnection!
+  rolunk(relativePath: String): Rolunk!
+  rolunkConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: RolunkFilter): RolunkConnection!
+  referenciak(relativePath: String): Referenciak!
+  referenciakConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ReferenciakFilter): ReferenciakConnection!
   pricing(relativePath: String): Pricing!
   pricingConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PricingFilter): PricingConnection!
 }
@@ -68,6 +72,8 @@ input DocumentFilter {
   tudastar: TudastarFilter
   siteConfig: SiteConfigFilter
   homepage: HomepageFilter
+  rolunk: RolunkFilter
+  referenciak: ReferenciakFilter
   pricing: PricingFilter
 }
 
@@ -94,7 +100,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Tudastar | SiteConfig | Homepage | Pricing | Folder
+union DocumentNode = Tudastar | SiteConfig | Homepage | Rolunk | Referenciak | Pricing | Folder
 
 type Tudastar implements Node & Document {
   title: String!
@@ -323,6 +329,104 @@ type HomepageConnection implements Connection {
   edges: [HomepageConnectionEdges]
 }
 
+type RolunkActionPhotos {
+  src: String
+  alt: String
+}
+
+type Rolunk implements Node & Document {
+  heroImageSrc: String
+  heroImageAlt: String
+  profileImageSrc: String
+  profileImageAlt: String
+  actionPhotos: [RolunkActionPhotos]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input RolunkActionPhotosFilter {
+  src: ImageFilter
+  alt: StringFilter
+}
+
+input RolunkFilter {
+  heroImageSrc: ImageFilter
+  heroImageAlt: StringFilter
+  profileImageSrc: ImageFilter
+  profileImageAlt: StringFilter
+  actionPhotos: RolunkActionPhotosFilter
+}
+
+type RolunkConnectionEdges {
+  cursor: String!
+  node: Rolunk
+}
+
+type RolunkConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [RolunkConnectionEdges]
+}
+
+type ReferenciakTestimonials {
+  name: String
+  location: String
+  rating: Float
+  text: String
+}
+
+type ReferenciakPhotos {
+  src: String
+  alt: String
+}
+
+type Referenciak implements Node & Document {
+  testimonials: [ReferenciakTestimonials]
+  photos: [ReferenciakPhotos]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input NumberFilter {
+  lt: Float
+  lte: Float
+  gte: Float
+  gt: Float
+  eq: Float
+  exists: Boolean
+  in: [Float]
+}
+
+input ReferenciakTestimonialsFilter {
+  name: StringFilter
+  location: StringFilter
+  rating: NumberFilter
+  text: StringFilter
+}
+
+input ReferenciakPhotosFilter {
+  src: ImageFilter
+  alt: StringFilter
+}
+
+input ReferenciakFilter {
+  testimonials: ReferenciakTestimonialsFilter
+  photos: ReferenciakPhotosFilter
+}
+
+type ReferenciakConnectionEdges {
+  cursor: String!
+  node: Referenciak
+}
+
+type ReferenciakConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [ReferenciakConnectionEdges]
+}
+
 type PricingInstallPrices {
   service: String
   description: String
@@ -417,6 +521,10 @@ type Mutation {
   createSiteConfig(relativePath: String!, params: SiteConfigMutation!): SiteConfig!
   updateHomepage(relativePath: String!, params: HomepageMutation!): Homepage!
   createHomepage(relativePath: String!, params: HomepageMutation!): Homepage!
+  updateRolunk(relativePath: String!, params: RolunkMutation!): Rolunk!
+  createRolunk(relativePath: String!, params: RolunkMutation!): Rolunk!
+  updateReferenciak(relativePath: String!, params: ReferenciakMutation!): Referenciak!
+  createReferenciak(relativePath: String!, params: ReferenciakMutation!): Referenciak!
   updatePricing(relativePath: String!, params: PricingMutation!): Pricing!
   createPricing(relativePath: String!, params: PricingMutation!): Pricing!
 }
@@ -425,6 +533,8 @@ input DocumentUpdateMutation {
   tudastar: TudastarMutation
   siteConfig: SiteConfigMutation
   homepage: HomepageMutation
+  rolunk: RolunkMutation
+  referenciak: ReferenciakMutation
   pricing: PricingMutation
   relativePath: String
 }
@@ -433,6 +543,8 @@ input DocumentMutation {
   tudastar: TudastarMutation
   siteConfig: SiteConfigMutation
   homepage: HomepageMutation
+  rolunk: RolunkMutation
+  referenciak: ReferenciakMutation
   pricing: PricingMutation
 }
 
@@ -510,6 +622,36 @@ input HomepageMutation {
   processSteps: [HomepageProcessStepsMutation]
   brands: [HomepageBrandsMutation]
   faqs: [HomepageFaqsMutation]
+}
+
+input RolunkActionPhotosMutation {
+  src: String
+  alt: String
+}
+
+input RolunkMutation {
+  heroImageSrc: String
+  heroImageAlt: String
+  profileImageSrc: String
+  profileImageAlt: String
+  actionPhotos: [RolunkActionPhotosMutation]
+}
+
+input ReferenciakTestimonialsMutation {
+  name: String
+  location: String
+  rating: Float
+  text: String
+}
+
+input ReferenciakPhotosMutation {
+  src: String
+  alt: String
+}
+
+input ReferenciakMutation {
+  testimonials: [ReferenciakTestimonialsMutation]
+  photos: [ReferenciakPhotosMutation]
 }
 
 input PricingInstallPricesMutation {

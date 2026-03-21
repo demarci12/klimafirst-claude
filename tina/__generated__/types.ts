@@ -88,6 +88,10 @@ export type Query = {
   siteConfigConnection: SiteConfigConnection;
   homepage: Homepage;
   homepageConnection: HomepageConnection;
+  rolunk: Rolunk;
+  rolunkConnection: RolunkConnection;
+  referenciak: Referenciak;
+  referenciakConnection: ReferenciakConnection;
   pricing: Pricing;
   pricingConnection: PricingConnection;
 };
@@ -159,6 +163,36 @@ export type QueryHomepageConnectionArgs = {
 };
 
 
+export type QueryRolunkArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryRolunkConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<RolunkFilter>;
+};
+
+
+export type QueryReferenciakArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryReferenciakConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ReferenciakFilter>;
+};
+
+
 export type QueryPricingArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -177,6 +211,8 @@ export type DocumentFilter = {
   tudastar?: InputMaybe<TudastarFilter>;
   siteConfig?: InputMaybe<SiteConfigFilter>;
   homepage?: InputMaybe<HomepageFilter>;
+  rolunk?: InputMaybe<RolunkFilter>;
+  referenciak?: InputMaybe<ReferenciakFilter>;
   pricing?: InputMaybe<PricingFilter>;
 };
 
@@ -217,7 +253,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Tudastar | SiteConfig | Homepage | Pricing | Folder;
+export type DocumentNode = Tudastar | SiteConfig | Homepage | Rolunk | Referenciak | Pricing | Folder;
 
 export type Tudastar = Node & Document & {
   __typename?: 'Tudastar';
@@ -460,6 +496,113 @@ export type HomepageConnection = Connection & {
   edges?: Maybe<Array<Maybe<HomepageConnectionEdges>>>;
 };
 
+export type RolunkActionPhotos = {
+  __typename?: 'RolunkActionPhotos';
+  src?: Maybe<Scalars['String']['output']>;
+  alt?: Maybe<Scalars['String']['output']>;
+};
+
+export type Rolunk = Node & Document & {
+  __typename?: 'Rolunk';
+  heroImageSrc?: Maybe<Scalars['String']['output']>;
+  heroImageAlt?: Maybe<Scalars['String']['output']>;
+  profileImageSrc?: Maybe<Scalars['String']['output']>;
+  profileImageAlt?: Maybe<Scalars['String']['output']>;
+  actionPhotos?: Maybe<Array<Maybe<RolunkActionPhotos>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type RolunkActionPhotosFilter = {
+  src?: InputMaybe<ImageFilter>;
+  alt?: InputMaybe<StringFilter>;
+};
+
+export type RolunkFilter = {
+  heroImageSrc?: InputMaybe<ImageFilter>;
+  heroImageAlt?: InputMaybe<StringFilter>;
+  profileImageSrc?: InputMaybe<ImageFilter>;
+  profileImageAlt?: InputMaybe<StringFilter>;
+  actionPhotos?: InputMaybe<RolunkActionPhotosFilter>;
+};
+
+export type RolunkConnectionEdges = {
+  __typename?: 'RolunkConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Rolunk>;
+};
+
+export type RolunkConnection = Connection & {
+  __typename?: 'RolunkConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<RolunkConnectionEdges>>>;
+};
+
+export type ReferenciakTestimonials = {
+  __typename?: 'ReferenciakTestimonials';
+  name?: Maybe<Scalars['String']['output']>;
+  location?: Maybe<Scalars['String']['output']>;
+  rating?: Maybe<Scalars['Float']['output']>;
+  text?: Maybe<Scalars['String']['output']>;
+};
+
+export type ReferenciakPhotos = {
+  __typename?: 'ReferenciakPhotos';
+  src?: Maybe<Scalars['String']['output']>;
+  alt?: Maybe<Scalars['String']['output']>;
+};
+
+export type Referenciak = Node & Document & {
+  __typename?: 'Referenciak';
+  testimonials?: Maybe<Array<Maybe<ReferenciakTestimonials>>>;
+  photos?: Maybe<Array<Maybe<ReferenciakPhotos>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type NumberFilter = {
+  lt?: InputMaybe<Scalars['Float']['input']>;
+  lte?: InputMaybe<Scalars['Float']['input']>;
+  gte?: InputMaybe<Scalars['Float']['input']>;
+  gt?: InputMaybe<Scalars['Float']['input']>;
+  eq?: InputMaybe<Scalars['Float']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+};
+
+export type ReferenciakTestimonialsFilter = {
+  name?: InputMaybe<StringFilter>;
+  location?: InputMaybe<StringFilter>;
+  rating?: InputMaybe<NumberFilter>;
+  text?: InputMaybe<StringFilter>;
+};
+
+export type ReferenciakPhotosFilter = {
+  src?: InputMaybe<ImageFilter>;
+  alt?: InputMaybe<StringFilter>;
+};
+
+export type ReferenciakFilter = {
+  testimonials?: InputMaybe<ReferenciakTestimonialsFilter>;
+  photos?: InputMaybe<ReferenciakPhotosFilter>;
+};
+
+export type ReferenciakConnectionEdges = {
+  __typename?: 'ReferenciakConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Referenciak>;
+};
+
+export type ReferenciakConnection = Connection & {
+  __typename?: 'ReferenciakConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<ReferenciakConnectionEdges>>>;
+};
+
 export type PricingInstallPrices = {
   __typename?: 'PricingInstallPrices';
   service?: Maybe<Scalars['String']['output']>;
@@ -562,6 +705,10 @@ export type Mutation = {
   createSiteConfig: SiteConfig;
   updateHomepage: Homepage;
   createHomepage: Homepage;
+  updateRolunk: Rolunk;
+  createRolunk: Rolunk;
+  updateReferenciak: Referenciak;
+  createReferenciak: Referenciak;
   updatePricing: Pricing;
   createPricing: Pricing;
 };
@@ -636,6 +783,30 @@ export type MutationCreateHomepageArgs = {
 };
 
 
+export type MutationUpdateRolunkArgs = {
+  relativePath: Scalars['String']['input'];
+  params: RolunkMutation;
+};
+
+
+export type MutationCreateRolunkArgs = {
+  relativePath: Scalars['String']['input'];
+  params: RolunkMutation;
+};
+
+
+export type MutationUpdateReferenciakArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ReferenciakMutation;
+};
+
+
+export type MutationCreateReferenciakArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ReferenciakMutation;
+};
+
+
 export type MutationUpdatePricingArgs = {
   relativePath: Scalars['String']['input'];
   params: PricingMutation;
@@ -651,6 +822,8 @@ export type DocumentUpdateMutation = {
   tudastar?: InputMaybe<TudastarMutation>;
   siteConfig?: InputMaybe<SiteConfigMutation>;
   homepage?: InputMaybe<HomepageMutation>;
+  rolunk?: InputMaybe<RolunkMutation>;
+  referenciak?: InputMaybe<ReferenciakMutation>;
   pricing?: InputMaybe<PricingMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -659,6 +832,8 @@ export type DocumentMutation = {
   tudastar?: InputMaybe<TudastarMutation>;
   siteConfig?: InputMaybe<SiteConfigMutation>;
   homepage?: InputMaybe<HomepageMutation>;
+  rolunk?: InputMaybe<RolunkMutation>;
+  referenciak?: InputMaybe<ReferenciakMutation>;
   pricing?: InputMaybe<PricingMutation>;
 };
 
@@ -738,6 +913,36 @@ export type HomepageMutation = {
   faqs?: InputMaybe<Array<InputMaybe<HomepageFaqsMutation>>>;
 };
 
+export type RolunkActionPhotosMutation = {
+  src?: InputMaybe<Scalars['String']['input']>;
+  alt?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type RolunkMutation = {
+  heroImageSrc?: InputMaybe<Scalars['String']['input']>;
+  heroImageAlt?: InputMaybe<Scalars['String']['input']>;
+  profileImageSrc?: InputMaybe<Scalars['String']['input']>;
+  profileImageAlt?: InputMaybe<Scalars['String']['input']>;
+  actionPhotos?: InputMaybe<Array<InputMaybe<RolunkActionPhotosMutation>>>;
+};
+
+export type ReferenciakTestimonialsMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  location?: InputMaybe<Scalars['String']['input']>;
+  rating?: InputMaybe<Scalars['Float']['input']>;
+  text?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ReferenciakPhotosMutation = {
+  src?: InputMaybe<Scalars['String']['input']>;
+  alt?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ReferenciakMutation = {
+  testimonials?: InputMaybe<Array<InputMaybe<ReferenciakTestimonialsMutation>>>;
+  photos?: InputMaybe<Array<InputMaybe<ReferenciakPhotosMutation>>>;
+};
+
 export type PricingInstallPricesMutation = {
   service?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
@@ -777,6 +982,10 @@ export type TudastarPartsFragment = { __typename: 'Tudastar', title: string, des
 export type SiteConfigPartsFragment = { __typename: 'SiteConfig', name?: string | null, legalName?: string | null, tagline?: string | null, phone?: string | null, phoneTel?: string | null, email?: string | null, owner?: string | null, description?: string | null, facebookUrl?: string | null, stats?: { __typename: 'SiteConfigStats', references?: string | null, experience?: string | null, warranty?: string | null, districts?: string | null } | null };
 
 export type HomepagePartsFragment = { __typename: 'Homepage', heroTitle?: string | null, heroSubtitle?: string | null, heroBadgeText?: string | null, heroCtaPrimary?: string | null, heroCtaSecondary?: string | null, heroImageUrl?: string | null, heroImageAlt?: string | null, servicesSectionTitle?: string | null, servicesSectionSubtitle?: string | null, services?: Array<{ __typename: 'HomepageServices', title?: string | null, description?: string | null, href?: string | null, icon?: string | null, image?: string | null, imageAlt?: string | null, highlight?: boolean | null } | null> | null, processSteps?: Array<{ __typename: 'HomepageProcessSteps', step?: string | null, title?: string | null, desc?: string | null } | null> | null, brands?: Array<{ __typename: 'HomepageBrands', name?: string | null, desc?: string | null, href?: string | null } | null> | null, faqs?: Array<{ __typename: 'HomepageFaqs', question?: string | null, answer?: string | null } | null> | null };
+
+export type RolunkPartsFragment = { __typename: 'Rolunk', heroImageSrc?: string | null, heroImageAlt?: string | null, profileImageSrc?: string | null, profileImageAlt?: string | null, actionPhotos?: Array<{ __typename: 'RolunkActionPhotos', src?: string | null, alt?: string | null } | null> | null };
+
+export type ReferenciakPartsFragment = { __typename: 'Referenciak', testimonials?: Array<{ __typename: 'ReferenciakTestimonials', name?: string | null, location?: string | null, rating?: number | null, text?: string | null } | null> | null, photos?: Array<{ __typename: 'ReferenciakPhotos', src?: string | null, alt?: string | null } | null> | null };
 
 export type PricingPartsFragment = { __typename: 'Pricing', installPrices?: Array<{ __typename: 'PricingInstallPrices', service?: string | null, description?: string | null, price?: string | null, note?: string | null, highlight?: boolean | null } | null> | null, devicePrices?: Array<{ __typename: 'PricingDevicePrices', service?: string | null, description?: string | null, price?: string | null, highlight?: boolean | null } | null> | null, servicePrices?: Array<{ __typename: 'PricingServicePrices', service?: string | null, description?: string | null, price?: string | null, highlight?: boolean | null } | null> | null, faqs?: Array<{ __typename: 'PricingFaqs', question?: string | null, answer?: string | null } | null> | null };
 
@@ -836,6 +1045,44 @@ export type HomepageConnectionQueryVariables = Exact<{
 
 
 export type HomepageConnectionQuery = { __typename?: 'Query', homepageConnection: { __typename?: 'HomepageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomepageConnectionEdges', cursor: string, node?: { __typename: 'Homepage', id: string, heroTitle?: string | null, heroSubtitle?: string | null, heroBadgeText?: string | null, heroCtaPrimary?: string | null, heroCtaSecondary?: string | null, heroImageUrl?: string | null, heroImageAlt?: string | null, servicesSectionTitle?: string | null, servicesSectionSubtitle?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, services?: Array<{ __typename: 'HomepageServices', title?: string | null, description?: string | null, href?: string | null, icon?: string | null, image?: string | null, imageAlt?: string | null, highlight?: boolean | null } | null> | null, processSteps?: Array<{ __typename: 'HomepageProcessSteps', step?: string | null, title?: string | null, desc?: string | null } | null> | null, brands?: Array<{ __typename: 'HomepageBrands', name?: string | null, desc?: string | null, href?: string | null } | null> | null, faqs?: Array<{ __typename: 'HomepageFaqs', question?: string | null, answer?: string | null } | null> | null } | null } | null> | null } };
+
+export type RolunkQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type RolunkQuery = { __typename?: 'Query', rolunk: { __typename: 'Rolunk', id: string, heroImageSrc?: string | null, heroImageAlt?: string | null, profileImageSrc?: string | null, profileImageAlt?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, actionPhotos?: Array<{ __typename: 'RolunkActionPhotos', src?: string | null, alt?: string | null } | null> | null } };
+
+export type RolunkConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<RolunkFilter>;
+}>;
+
+
+export type RolunkConnectionQuery = { __typename?: 'Query', rolunkConnection: { __typename?: 'RolunkConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'RolunkConnectionEdges', cursor: string, node?: { __typename: 'Rolunk', id: string, heroImageSrc?: string | null, heroImageAlt?: string | null, profileImageSrc?: string | null, profileImageAlt?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, actionPhotos?: Array<{ __typename: 'RolunkActionPhotos', src?: string | null, alt?: string | null } | null> | null } | null } | null> | null } };
+
+export type ReferenciakQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type ReferenciakQuery = { __typename?: 'Query', referenciak: { __typename: 'Referenciak', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, testimonials?: Array<{ __typename: 'ReferenciakTestimonials', name?: string | null, location?: string | null, rating?: number | null, text?: string | null } | null> | null, photos?: Array<{ __typename: 'ReferenciakPhotos', src?: string | null, alt?: string | null } | null> | null } };
+
+export type ReferenciakConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ReferenciakFilter>;
+}>;
+
+
+export type ReferenciakConnectionQuery = { __typename?: 'Query', referenciakConnection: { __typename?: 'ReferenciakConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ReferenciakConnectionEdges', cursor: string, node?: { __typename: 'Referenciak', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, testimonials?: Array<{ __typename: 'ReferenciakTestimonials', name?: string | null, location?: string | null, rating?: number | null, text?: string | null } | null> | null, photos?: Array<{ __typename: 'ReferenciakPhotos', src?: string | null, alt?: string | null } | null> | null } | null } | null> | null } };
 
 export type PricingQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -930,6 +1177,37 @@ export const HomepagePartsFragmentDoc = gql`
     __typename
     question
     answer
+  }
+}
+    `;
+export const RolunkPartsFragmentDoc = gql`
+    fragment RolunkParts on Rolunk {
+  __typename
+  heroImageSrc
+  heroImageAlt
+  profileImageSrc
+  profileImageAlt
+  actionPhotos {
+    __typename
+    src
+    alt
+  }
+}
+    `;
+export const ReferenciakPartsFragmentDoc = gql`
+    fragment ReferenciakParts on Referenciak {
+  __typename
+  testimonials {
+    __typename
+    name
+    location
+    rating
+    text
+  }
+  photos {
+    __typename
+    src
+    alt
   }
 }
     `;
@@ -1136,6 +1414,120 @@ export const HomepageConnectionDocument = gql`
   }
 }
     ${HomepagePartsFragmentDoc}`;
+export const RolunkDocument = gql`
+    query rolunk($relativePath: String!) {
+  rolunk(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...RolunkParts
+  }
+}
+    ${RolunkPartsFragmentDoc}`;
+export const RolunkConnectionDocument = gql`
+    query rolunkConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: RolunkFilter) {
+  rolunkConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...RolunkParts
+      }
+    }
+  }
+}
+    ${RolunkPartsFragmentDoc}`;
+export const ReferenciakDocument = gql`
+    query referenciak($relativePath: String!) {
+  referenciak(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...ReferenciakParts
+  }
+}
+    ${ReferenciakPartsFragmentDoc}`;
+export const ReferenciakConnectionDocument = gql`
+    query referenciakConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ReferenciakFilter) {
+  referenciakConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...ReferenciakParts
+      }
+    }
+  }
+}
+    ${ReferenciakPartsFragmentDoc}`;
 export const PricingDocument = gql`
     query pricing($relativePath: String!) {
   pricing(relativePath: $relativePath) {
@@ -1213,6 +1605,18 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     homepageConnection(variables?: HomepageConnectionQueryVariables, options?: C): Promise<{data: HomepageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomepageConnectionQueryVariables, query: string}> {
         return requester<{data: HomepageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomepageConnectionQueryVariables, query: string}, HomepageConnectionQueryVariables>(HomepageConnectionDocument, variables, options);
+      },
+    rolunk(variables: RolunkQueryVariables, options?: C): Promise<{data: RolunkQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: RolunkQueryVariables, query: string}> {
+        return requester<{data: RolunkQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: RolunkQueryVariables, query: string}, RolunkQueryVariables>(RolunkDocument, variables, options);
+      },
+    rolunkConnection(variables?: RolunkConnectionQueryVariables, options?: C): Promise<{data: RolunkConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: RolunkConnectionQueryVariables, query: string}> {
+        return requester<{data: RolunkConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: RolunkConnectionQueryVariables, query: string}, RolunkConnectionQueryVariables>(RolunkConnectionDocument, variables, options);
+      },
+    referenciak(variables: ReferenciakQueryVariables, options?: C): Promise<{data: ReferenciakQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ReferenciakQueryVariables, query: string}> {
+        return requester<{data: ReferenciakQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ReferenciakQueryVariables, query: string}, ReferenciakQueryVariables>(ReferenciakDocument, variables, options);
+      },
+    referenciakConnection(variables?: ReferenciakConnectionQueryVariables, options?: C): Promise<{data: ReferenciakConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ReferenciakConnectionQueryVariables, query: string}> {
+        return requester<{data: ReferenciakConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ReferenciakConnectionQueryVariables, query: string}, ReferenciakConnectionQueryVariables>(ReferenciakConnectionDocument, variables, options);
       },
     pricing(variables: PricingQueryVariables, options?: C): Promise<{data: PricingQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PricingQueryVariables, query: string}> {
         return requester<{data: PricingQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PricingQueryVariables, query: string}, PricingQueryVariables>(PricingDocument, variables, options);

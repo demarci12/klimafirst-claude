@@ -72,6 +72,35 @@ fragment HomepageParts on Homepage {
   }
 }
 
+fragment RolunkParts on Rolunk {
+  __typename
+  heroImageSrc
+  heroImageAlt
+  profileImageSrc
+  profileImageAlt
+  actionPhotos {
+    __typename
+    src
+    alt
+  }
+}
+
+fragment ReferenciakParts on Referenciak {
+  __typename
+  testimonials {
+    __typename
+    name
+    location
+    rating
+    text
+  }
+  photos {
+    __typename
+    src
+    alt
+  }
+}
+
 fragment PricingParts on Pricing {
   __typename
   installPrices {
