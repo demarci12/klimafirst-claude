@@ -12,69 +12,80 @@ const testimonials = [
   { name: 'Varga Katalin', location: 'Budapest, I. kerület', rating: 5, text: 'Karbantartást kértem, alapos munkát végeztek. Elmagyarázták, mit és miért csináltak. Megbízható csapat!' },
 ];
 
-const refPhotos = [
-  'PXL_20241202_163524660.jpg',
-  'PXL_20241202_164403571.jpg',
-  'PXL_20241217_131014148.jpg',
-  'PXL_20250204_130020447.jpg',
-  'PXL_20250204_132429954.jpg',
-  'PXL_20250310_124603664.jpg',
-  'PXL_20250310_125338430.jpg',
-  'PXL_20250320_110851754.jpg',
-  'PXL_20250324_124012586.jpg',
-  'PXL_20250324_124032899.jpg',
-  'PXL_20250324_131518689.jpg',
-  'PXL_20250414_142232939.jpg',
-  'PXL_20250414_142519281.jpg',
-  'PXL_20250416_163810237.jpg',
-  'PXL_20250416_163818214.jpg',
-  'PXL_20250428_105104424.jpg',
-  'PXL_20250430_131133208.jpg',
-  'PXL_20250430_131205779.jpg',
-  'PXL_20250507_125335754.jpg',
-  'PXL_20250507_131319099.jpg',
-  'PXL_20250512_115153611.jpg',
-  'PXL_20250512_122150120.jpg',
-  'PXL_20250516_112703703.jpg',
-  'PXL_20250516_112719329.jpg',
-  'PXL_20250516_173054164.jpg',
-  'PXL_20250521_143532025.jpg',
-  'PXL_20250526_125117796.jpg',
-  'PXL_20250526_125128814.jpg',
-  'PXL_20250603_150212726.jpg',
-  'PXL_20250603_150322010.jpg',
-  'PXL_20250610_181638877.jpg',
-  'PXL_20250610_181654147.jpg',
-  'PXL_20250618_082351422.jpg',
-  'PXL_20250618_085935008.jpg',
-  'PXL_20250618_090715343.jpg',
-  'PXL_20250618_092933282.jpg',
-  'PXL_20250618_092934691.jpg',
-  'PXL_20250620_141404319.jpg',
-  'PXL_20250620_145155759.jpg',
-  'PXL_20250620_145200807.jpg',
-  'PXL_20250627_100511639.jpg',
-  'PXL_20250627_101928501.jpg',
-  'PXL_20250627_101930778.jpg',
-  'PXL_20250709_145544364.jpg',
-  'PXL_20250709_145645592.jpg',
-  'PXL_20250715_061908537.jpg',
-  'PXL_20250724_102303379.jpg',
-  'PXL_20250724_102311551.jpg',
-  'PXL_20250724_102337673.jpg',
-  'PXL_20250731_110846396.jpg',
-  'PXL_20250731_110846939.jpg',
-  'PXL_20250731_120824727.jpg',
-  'PXL_20250731_122333040.jpg',
-  'PXL_20250804_104924276.jpg',
-  'PXL_20250804_105139838.jpg',
-  'PXL_20250808_101535172.jpg',
-  'PXL_20250808_101557822.jpg',
-  'PXL_20250812_103632036.jpg',
-  'PXL_20250902_093211723.jpg',
-  'PXL_20250902_094046791.jpg',
-  'PXL_20250914_103618258.jpg',
-  'PXL_20260320_132828953.jpg',
+const allPhotos = [
+  { src: '/images/juhasz-balazs/jb-gree-beszereles-letran-1.jpeg', alt: 'Juhász Balázs Gree kültéri klíma beszerelése létráról – KlimaFirst Budapest' },
+  { src: '/images/referenciak/PXL_20250204_132429954.jpg', alt: 'Telepített kültéri klíma egység ház falán – KlimaFirst referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250324_124012586.jpg', alt: 'AUX kültéri klíma tetőn – KlimaFirst telepítési referencia Budapest' },
+  { src: '/images/juhasz-balazs/jb-vacuum-pumpa-bekoltes.jpeg', alt: 'Klíma hűtőkör bekötése vákuumszivattyúval – KlimaFirst' },
+  { src: '/images/referenciak/PXL_20250430_131133208.jpg', alt: 'Kültéri klíma egység téglaházon – KlimaFirst referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250731_110846396.jpg', alt: 'Juhász Balázs selfie tetőről Budapest panorámával – KlimaFirst' },
+  { src: '/images/juhasz-balazs/jb-manifold-letran-1.jpeg', alt: 'Manifold mérősorral hűtőközeg ellenőrzés – KlimaFirst szerviz' },
+  { src: '/images/referenciak/PXL_20250618_082351422.jpg', alt: 'Klíma telepítési referencia Budapest – KlimaFirst elvégzett munka' },
+  { src: '/images/juhasz-balazs/jb-teto-munka-heveder.jpeg', alt: 'Tetőn végzett klímaszerelés biztonsági hevederrel – KlimaFirst' },
+  { src: '/images/referenciak/PXL_20250627_101928501.jpg', alt: 'Klíma referencia Budapest – KlimaFirst elvégzett munka' },
+  { src: '/images/juhasz-balazs/jb-belso-egyseg-szerviz.jpeg', alt: 'Beltéri klíma szervizálása szűrőtisztítással – KlimaFirst Budapest' },
+  { src: '/images/referenciak/PXL_20250512_115153611.jpg', alt: 'Klíma telepítési referencia Budapest – KlimaFirst' },
+  { src: '/images/juhasz-balazs/jb-hikoki-furo-1.jpeg', alt: 'Falvésés HiKoki kalapáccsal klíma csővezetékhez – KlimaFirst' },
+  { src: '/images/referenciak/PXL_20250804_104924276.jpg', alt: 'KlimaFirst klíma telepítési referencia Budapest' },
+  { src: '/images/juhasz-balazs/jb-gree-egyseg-vallon-1.jpeg', alt: 'Juhász Balázs Gree kültéri egységgel – KlimaFirst Budapest' },
+  { src: '/images/referenciak/PXL_20250310_124603664.jpg', alt: 'Klíma referencia Budapest – KlimaFirst elvégzett munka' },
+  { src: '/images/referenciak/PXL_20250618_090715343.jpg', alt: 'KlimaFirst klíma telepítési referencia Budapest' },
+  { src: '/images/referenciak/PXL_20241202_163524660.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/juhasz-balazs/jb-manifold-gree-napsutes.jpeg', alt: 'Klíma nyomáspróba manifolddal napsütésben – KlimaFirst' },
+  { src: '/images/referenciak/PXL_20250324_131518689.jpg', alt: 'KlimaFirst elvégzett klíma telepítési munka Budapest' },
+  { src: '/images/referenciak/PXL_20250507_131319099.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/juhasz-balazs/jb-panelhaz-teto-tavol.jpeg', alt: 'KlimaFirst szerelő panelház tetőn klímaszerelés után' },
+  { src: '/images/referenciak/PXL_20250516_112719329.jpg', alt: 'KlimaFirst klíma telepítés referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250620_141404319.jpg', alt: 'Klíma referencia Budapest – KlimaFirst elvégzett munka' },
+  { src: '/images/juhasz-balazs/jb-belso-egyseg-telepites-mosoly.jpeg', alt: 'Juhász Balázs beltéri klíma felszerelése – KlimaFirst Budapest' },
+  { src: '/images/referenciak/PXL_20250627_101930778.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250709_145544364.jpg', alt: 'KlimaFirst klíma telepítési referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250724_102311551.jpg', alt: 'KlimaFirst elvégzett klíma munka referencia Budapest' },
+  { src: '/images/juhasz-balazs/jb-gree-pozicionalas-hatul.jpeg', alt: 'Gree kültéri egység pozicionálása konzolra – KlimaFirst' },
+  { src: '/images/referenciak/PXL_20250731_120824727.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250808_101557822.jpg', alt: 'KlimaFirst klíma telepítési referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250902_093211723.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250902_094046791.jpg', alt: 'KlimaFirst elvégzett klíma munka Budapest' },
+  { src: '/images/referenciak/PXL_20250914_103618258.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20260320_132828953.jpg', alt: 'KlimaFirst klíma telepítési referencia Budapest' },
+  { src: '/images/referenciak/PXL_20241202_164403571.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20241217_131014148.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250204_130020447.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250310_125338430.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250320_110851754.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250324_124032899.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250414_142232939.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250414_142519281.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250416_163810237.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250416_163818214.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250428_105104424.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250430_131205779.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250507_125335754.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250512_122150120.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250516_112703703.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250516_173054164.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250521_143532025.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250526_125117796.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250526_125128814.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250603_150212726.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250603_150322010.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250610_181638877.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250610_181654147.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250618_085935008.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250618_092933282.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250618_092934691.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250620_145155759.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250620_145200807.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250627_100511639.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250709_145645592.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250715_061908537.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250724_102303379.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250724_102337673.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250731_110846939.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250731_122333040.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250804_105139838.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250808_101535172.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
+  { src: '/images/referenciak/PXL_20250812_103632036.jpg', alt: 'KlimaFirst klíma referencia Budapest' },
 ];
 ---
 
@@ -108,7 +119,6 @@ const refPhotos = [
     <div class="container mx-auto px-4 max-w-5xl">
       <h2 class="text-2xl font-bold text-gray-900 text-center mb-2">Mit mondanak ügyfeleink?</h2>
       <p class="text-gray-500 text-center mb-10">Valódi vélemények valódi emberektől</p>
-
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {testimonials.map((t) => (
           <article class="bg-gray-50 rounded-2xl border border-gray-200 p-5 flex flex-col gap-3">
@@ -140,25 +150,24 @@ const refPhotos = [
     <div class="container mx-auto px-4 max-w-6xl">
       <div class="text-center mb-10">
         <h2 class="text-3xl font-extrabold text-white mb-2">Munkafotók</h2>
-        <p class="text-gray-400">Kattintson a képre a nagyításhoz</p>
+        <p class="text-gray-400 text-sm">Kattintson bármelyik képre a nagyításhoz</p>
       </div>
-
-      <!-- Masonry via CSS columns -->
       <div class="columns-2 sm:columns-3 lg:columns-4 gap-3 space-y-3">
-        {refPhotos.map((filename, i) => (
+        {allPhotos.map((photo) => (
           <figure
-            class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer group relative"
-            onclick={`openLightbox('/images/referenciak/${filename}')`}
+            class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer group relative gallery-item"
+            data-src={photo.src}
+            data-alt={photo.alt}
           >
             <img
-              src={`/images/referenciak/${filename}`}
-              alt={`KlimaFirst klíma telepítési referencia Budapest – elvégzett munka ${i + 1}`}
-              class="w-full block group-hover:scale-105 transition-transform duration-500 group-hover:brightness-90"
+              src={photo.src}
+              alt={photo.alt}
+              class="w-full block group-hover:scale-105 transition-transform duration-500 group-hover:brightness-75"
               loading="lazy"
               decoding="async"
             />
-            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <div class="bg-black/50 rounded-full p-3">
+            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+              <div class="bg-white/20 backdrop-blur-sm rounded-full p-3">
                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
                 </svg>
@@ -172,44 +181,87 @@ const refPhotos = [
 
   <!-- CTA -->
   <section class="py-14 bg-white text-center">
-    <p class="text-gray-600 mb-2 text-lg">Szeretne Ön is elégedett ügyfeleink közé tartozni?</p>
+    <p class="text-gray-900 font-bold text-xl mb-2">Szeretne Ön is elégedett ügyfeleink közé tartozni?</p>
     <p class="text-gray-400 text-sm mb-6">Ingyenes helyszíni felmérés, kiszállási díj nélkül</p>
     <a href="/ajanlatkeres" class="bg-orange-500 hover:bg-orange-600 text-white px-10 py-4 rounded-xl font-bold inline-block transition-colors shadow-lg text-lg">
       Ingyenes Árajánlat Kérése
     </a>
   </section>
 
-  <!-- Lightbox -->
-  <dialog id="lightbox" class="fixed inset-0 w-full h-full bg-black/90 flex items-center justify-center p-4 z-50 max-w-none max-h-none m-0">
-    <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white bg-white/10 hover:bg-white/20 rounded-full p-2 transition-colors" aria-label="Bezárás">
-      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+  <!-- Lightbox (using custom CSS, not Tailwind, to avoid display:flex override) -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Fotó nagyítva">
+    <button id="lightbox-close" aria-label="Bezárás">
+      <svg width="28" height="28" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
       </svg>
     </button>
-    <img id="lightbox-img" src="" alt="Referencia nagyítva" class="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl" />
-  </dialog>
+    <img id="lightbox-img" src="" alt="" />
+  </div>
 
   <script>
-    function openLightbox(src: string) {
-      const dialog = document.getElementById('lightbox') as HTMLDialogElement;
-      const img = document.getElementById('lightbox-img') as HTMLImageElement;
-      img.src = src;
-      dialog.showModal();
-    }
+    const lightbox = document.getElementById('lightbox')!;
+    const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    const closeBtn = document.getElementById('lightbox-close')!;
+
+    // Open on click of any gallery item
+    document.querySelectorAll('.gallery-item').forEach((el) => {
+      el.addEventListener('click', () => {
+        const src = (el as HTMLElement).dataset.src!;
+        const alt = (el as HTMLElement).dataset.alt!;
+        lightboxImg.src = src;
+        lightboxImg.alt = alt;
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    // Close
     function closeLightbox() {
-      const dialog = document.getElementById('lightbox') as HTMLDialogElement;
-      dialog.close();
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+      lightboxImg.src = '';
     }
-    document.getElementById('lightbox')?.addEventListener('click', (e) => {
-      if (e.target === e.currentTarget) closeLightbox();
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeLightbox();
-    });
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
   </script>
 
   <style>
-    dialog::backdrop { background: rgba(0,0,0,0.85); }
-    dialog[open] { display: flex; align-items: center; justify-content: center; }
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.92);
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    #lightbox.open {
+      display: flex;
+    }
+    #lightbox-img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+    }
+    #lightbox-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    #lightbox-close:hover { background: rgba(255,255,255,0.25); }
   </style>
 </BaseLayout>

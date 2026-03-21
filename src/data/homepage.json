@@ -14,8 +14,8 @@
       "description": "Fisher, Fujitsu, Toshiba és Daikin split klímarendszerek telepítése ingyenes helyszíni felméréssel. Kiszállási díj nélkül, Budapesten belül.",
       "href": "/szolgaltatasok/klima-telepites",
       "icon": "❄️",
-      "image": "https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=480&h=270&fit=crop&auto=format&q=80",
-      "imageAlt": "Professzionális klímaszerelő technikus split klímarendszert telepít budapesti lakásban",
+      "image": "/images/juhasz-balazs/jb-gree-beszereles-letran-1.jpeg",
+      "imageAlt": "Juhász Balázs Gree kültéri klíma egység beszerelése létráról – KlimaFirst Budapest klímaszerelő",
       "highlight": false
     },
     {
@@ -23,8 +23,8 @@
       "description": "Gyors és megbízható klímajavítás Budapest egész területén. Minden márkát javítunk, eredeti alkatrészekkel, garanciával.",
       "href": "/szolgaltatasok/klima-javitas",
       "icon": "🔧",
-      "image": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=480&h=270&fit=crop&auto=format&q=80",
-      "imageAlt": "Klímaszerelő szakember diagnosztikai eszközökkel klímaberendezést javít",
+      "image": "/images/juhasz-balazs/jb-manifold-letran-1.jpeg",
+      "imageAlt": "Juhász Balázs manifold mérősorral hűtőközeg ellenőrzés – KlimaFirst klíma javítás Budapest",
       "highlight": false
     },
     {
@@ -32,8 +32,8 @@
       "description": "Éves karbantartással meghosszabbítja klímája élettartamát, csökkenti energiafogyasztását és megelőzi a meghibásodásokat.",
       "href": "/szolgaltatasok/klima-tisztitas",
       "icon": "✨",
-      "image": "https://images.unsplash.com/photo-1563453392212-326f5e854473?w=480&h=270&fit=crop&auto=format&q=80",
-      "imageAlt": "Klíma szűrő alapos professzionális tisztítása és karbantartása",
+      "image": "/images/juhasz-balazs/jb-belso-egyseg-szerviz.jpeg",
+      "imageAlt": "Juhász Balázs beltéri klíma szervizálása szűrőtisztítással – KlimaFirst karbantartás Budapest",
       "highlight": true
     },
     {
@@ -41,8 +41,8 @@
       "description": "Modern inverteres klíma hőszivattyúként is működik. Hatékonyabb és olcsóbb, mint a hagyományos villanyfűtés – akár -15°C-ig.",
       "href": "/szolgaltatasok/futes-klimaval",
       "icon": "🌡️",
-      "image": "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=480&h=270&fit=crop&auto=format&q=80",
-      "imageAlt": "Meleg és kényelmes modern nappali télen klímával fűtve Budapesten",
+      "image": "/images/juhasz-balazs/jb-vacuum-pumpa-bekoltes.jpeg",
+      "imageAlt": "Juhász Balázs klíma hűtőkör bekötése vákuumszivattyúval – KlimaFirst fűtés klímával Budapest",
       "highlight": false
     }
   ],
