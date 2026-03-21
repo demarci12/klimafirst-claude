@@ -1,0 +1,138 @@
+backend:
+  name: github
+  repo: demarci12/klimafirst-claude
+  branch: main
+  base_url: https://klimafirst-claude.vercel.app
+  auth_endpoint: /api/auth
+
+media_folder: public/images
+public_folder: /images
+
+locale: hu
+
+collections:
+  # ─── Blog posts ──────────────────────────────────────────────────────────────
+  - name: tudastar
+    label: Tudástár (Blog)
+    folder: src/content/tudastar
+    create: true
+    slug: "{{slug}}"
+    format: frontmatter
+    fields:
+      - { label: Cím, name: title, widget: string, required: true }
+      - { label: Meta leírás (max 160 kar.), name: description, widget: text, required: true }
+      - { label: Megjelenés dátuma, name: pubDate, widget: datetime, required: true }
+      - { label: Frissítés dátuma, name: updatedDate, widget: datetime, required: false }
+      - { label: Szerző, name: author, widget: string, required: false }
+      - { label: Címkék, name: tags, widget: list, required: false }
+      - { label: Kiemelt kép URL, name: image, widget: string, required: false }
+      - { label: Kép szöveges leírása, name: imageAlt, widget: string, required: false }
+      - { label: SEO kulcsszavak, name: keywords, widget: list, required: false }
+      - { label: Tartalom, name: body, widget: markdown }
+
+  # ─── Settings (JSON files) ───────────────────────────────────────────────────
+  - name: settings
+    label: Beállítások
+    files:
+      - name: siteConfig
+        label: Weboldal Beállítások
+        file: src/data/site-config.json
+        fields:
+          - { label: Cégnév, name: name, widget: string }
+          - { label: Jogi cégnév, name: legalName, widget: string }
+          - { label: Szlogen, name: tagline, widget: string }
+          - { label: Telefonszám (megjelenített), name: phone, widget: string }
+          - { label: Telefonszám (tel link), name: phoneTel, widget: string }
+          - { label: Email cím, name: email, widget: string }
+          - { label: Tulajdonos neve, name: owner, widget: string }
+          - { label: Weboldal leírása (SEO), name: description, widget: text }
+          - { label: Facebook URL, name: facebookUrl, widget: string, required: false }
+          - label: Statisztikák
+            name: stats
+            widget: object
+            fields:
+              - { label: Referenciák száma, name: references, widget: string }
+              - { label: Tapasztalat évei, name: experience, widget: string }
+              - { label: Garancia, name: warranty, widget: string }
+              - { label: Kiszolgált kerületek, name: districts, widget: string }
+
+      - name: homepage
+        label: Főoldal Tartalom
+        file: src/data/homepage.json
+        fields:
+          - { label: Hero cím, name: heroTitle, widget: text }
+          - { label: Hero alcím, name: heroSubtitle, widget: text }
+          - { label: Hero jelvény szövege, name: heroBadgeText, widget: string }
+          - { label: Elsődleges gomb szövege, name: heroCtaPrimary, widget: string }
+          - { label: Másodlagos gomb szövege, name: heroCtaSecondary, widget: string }
+          - { label: Hero kép URL, name: heroImageUrl, widget: string }
+          - { label: Hero kép leírása, name: heroImageAlt, widget: string }
+          - { label: Szolgáltatások szekció cím, name: servicesSectionTitle, widget: string }
+          - { label: Szolgáltatások szekció alcím, name: servicesSectionSubtitle, widget: text }
+          - label: Szolgáltatás kártyák
+            name: services
+            widget: list
+            fields:
+              - { label: Cím, name: title, widget: string }
+              - { label: Leírás, name: description, widget: text }
+              - { label: Link, name: href, widget: string }
+              - { label: Ikon (emoji), name: icon, widget: string }
+              - { label: Kép URL, name: image, widget: string }
+              - { label: Kép leírása, name: imageAlt, widget: string }
+              - { label: Kiemelt kártya, name: highlight, widget: boolean, default: false }
+          - label: Folyamat lépések
+            name: processSteps
+            widget: list
+            fields:
+              - { label: Sorszám, name: step, widget: string }
+              - { label: Cím, name: title, widget: string }
+              - { label: Leírás, name: desc, widget: text }
+          - label: Márkák
+            name: brands
+            widget: list
+            fields:
+              - { label: Márka neve, name: name, widget: string }
+              - { label: Rövid leírás, name: desc, widget: string }
+              - { label: Link, name: href, widget: string }
+          - label: GYIK (Főoldal)
+            name: faqs
+            widget: list
+            fields:
+              - { label: Kérdés, name: question, widget: string }
+              - { label: Válasz, name: answer, widget: text }
+
+      - name: pricing
+        label: Árlista
+        file: src/data/pricing.json
+        fields:
+          - label: Telepítési munkadíjak
+            name: installPrices
+            widget: list
+            fields:
+              - { label: Megnevezés, name: service, widget: string }
+              - { label: Leírás, name: description, widget: string }
+              - { label: Ár (Ft), name: price, widget: string }
+              - { label: Megjegyzés, name: note, widget: string, required: false }
+              - { label: Kiemelt sor, name: highlight, widget: boolean, default: false }
+          - label: Készülék árak
+            name: devicePrices
+            widget: list
+            fields:
+              - { label: Megnevezés, name: service, widget: string }
+              - { label: Leírás, name: description, widget: string }
+              - { label: Ár (Ft), name: price, widget: string }
+              - { label: Kiemelt sor, name: highlight, widget: boolean, default: false }
+          - label: Szerviz és karbantartás árak
+            name: servicePrices
+            widget: list
+            fields:
+              - { label: Megnevezés, name: service, widget: string }
+              - { label: Leírás, name: description, widget: string }
+              - { label: Ár (Ft), name: price, widget: string }
+              - { label: Kiemelt sor, name: highlight, widget: boolean, default: false }
+          - label: GYIK (Ároldal)
+            name: faqs
+            widget: list
+            fields:
+              - { label: Kérdés, name: question, widget: string }
+              - { label: Válasz, name: answer, widget: text }
