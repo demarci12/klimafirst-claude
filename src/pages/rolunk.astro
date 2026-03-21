@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import TrustBar from '../components/TrustBar.astro';
-import { SITE } from '../data/site';
 ---
 
 <BaseLayout
@@ -27,6 +26,79 @@ import { SITE } from '../data/site';
   </section>
 
   <TrustBar />
+
+  <!-- Action photo strip -->
+  <section class="py-10 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-5xl">
+      <h2 class="text-xl font-bold text-gray-900 text-center mb-6">Juhász Balázs munkában</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+        <figure class="overflow-hidden rounded-xl aspect-[3/4]">
+          <img
+            src="/images/juhasz-balazs/jb-gree-beszereles-letran-1.jpeg"
+            alt="Juhász Balázs Gree kültéri klíma egység beszerelése létráról – KlimaFirst Budapest klímaszerelő"
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+            width="300" height="400" loading="lazy"
+          />
+        </figure>
+        <figure class="overflow-hidden rounded-xl aspect-[3/4]">
+          <img
+            src="/images/juhasz-balazs/jb-vacuum-pumpa-bekoltes.jpeg"
+            alt="Klíma hűtőkör bekötése vákuumszivattyúval és tömlőkkel – KlimaFirst professzionális klímaszerelés Budapest"
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+            width="300" height="400" loading="lazy"
+          />
+        </figure>
+        <figure class="overflow-hidden rounded-xl aspect-[3/4]">
+          <img
+            src="/images/juhasz-balazs/jb-hikoki-furo-1.jpeg"
+            alt="Juhász Balázs HiKoki bontókalapáccsal falvésést végez klíma csővezetékhez – KlimaFirst Budapest"
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+            width="300" height="400" loading="lazy"
+          />
+        </figure>
+        <figure class="overflow-hidden rounded-xl aspect-[3/4]">
+          <img
+            src="/images/juhasz-balazs/jb-teto-munka-heveder.jpeg"
+            alt="KlimaFirst szerelő tetőn munkavédelmi biztonsági hevederrel – magasban végzett klímaszerelés Budapest"
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+            width="300" height="400" loading="lazy"
+          />
+        </figure>
+        <figure class="overflow-hidden rounded-xl aspect-[3/4]">
+          <img
+            src="/images/juhasz-balazs/jb-manifold-letran-1.jpeg"
+            alt="Hűtőközeg nyomásellenőrzés manifold mérősorral Gree kültéri egységen – KlimaFirst szerviz Budapest"
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+            width="300" height="400" loading="lazy"
+          />
+        </figure>
+        <figure class="overflow-hidden rounded-xl aspect-[3/4]">
+          <img
+            src="/images/juhasz-balazs/jb-belso-egyseg-szerviz.jpeg"
+            alt="Beltéri split klíma egység szervizálása és szűrő tisztítás – KlimaFirst karbantartás Budapest"
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+            width="300" height="400" loading="lazy"
+          />
+        </figure>
+        <figure class="overflow-hidden rounded-xl aspect-[3/4]">
+          <img
+            src="/images/juhasz-balazs/jb-gree-egyseg-vallon-1.jpeg"
+            alt="Juhász Balázs telepített Gree kültéri klíma egységgel a befejezett munka után – KlimaFirst Budapest"
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+            width="300" height="400" loading="lazy"
+          />
+        </figure>
+        <figure class="overflow-hidden rounded-xl aspect-[3/4]">
+          <img
+            src="/images/juhasz-balazs/jb-peugeot-furgon.jpeg"
+            alt="KlimaFirst szerelő furgonnal úton a következő klímaszerelési helyszínre Budapesten"
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+            width="300" height="400" loading="lazy"
+          />
+        </figure>
+      </div>
+    </div>
+  </section>
 
   <section class="py-12 bg-white">
     <div class="container mx-auto px-4 max-w-4xl">
@@ -64,9 +136,14 @@ import { SITE } from '../data/site';
           <!-- Owner card -->
           <div class="bg-blue-50 border border-blue-200 rounded-2xl p-6">
             <div class="flex items-center gap-4 mb-4">
-              <div class="w-16 h-16 bg-blue-900 rounded-full flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
-                JB
-              </div>
+              <img
+                src="/images/juhasz-balazs/jb-belso-egyseg-telepites-mosoly.jpeg"
+                alt="Juhász Balázs KlimaFirst tulajdonos és főszerelő – beltéri klíma egység telepítése közben"
+                class="w-20 h-20 rounded-full object-cover object-top flex-shrink-0 shadow"
+                width="80"
+                height="80"
+                loading="eager"
+              />
               <div>
                 <div class="font-bold text-gray-900 text-lg">Juhász Balázs</div>
                 <div class="text-blue-700 text-sm">Tulajdonos, Főszerelő</div>
