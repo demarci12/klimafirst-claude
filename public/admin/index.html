@@ -7,7 +7,22 @@
     <title>KlimaFirst Admin</title>
   </head>
   <body>
-    <script>window.CMS_MANUAL_INIT = true;</script>
+    <script>
+      // If redirected back from OAuth (popup was blocked), replay the postMessage
+      (function () {
+        if (window.location.hash === '#cms_auth') {
+          var msg = sessionStorage.getItem('cms_auth');
+          if (msg) {
+            sessionStorage.removeItem('cms_auth');
+            window.addEventListener('load', function () {
+              setTimeout(function () { window.postMessage(msg, '*'); }, 500);
+            });
+          }
+          history.replaceState(null, '', '/admin/');
+        }
+      })();
+      window.CMS_MANUAL_INIT = true;
+    </script>
     <script src="https://unpkg.com/netlify-cms@^2.10.192/dist/netlify-cms.js"></script>
     <script>
       CMS.init({

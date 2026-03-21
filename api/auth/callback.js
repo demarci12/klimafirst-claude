@@ -42,8 +42,14 @@ function postMessagePage(status, content) {
 (function () {
   var msg = ${JSON.stringify(message)};
   function send() {
-    window.opener.postMessage(msg, '*');
-    setTimeout(function () { window.close(); }, 500);
+    if (window.opener) {
+      window.opener.postMessage(msg, '*');
+      setTimeout(function () { window.close(); }, 500);
+    } else {
+      // Popup was blocked — store token and redirect to admin
+      try { sessionStorage.setItem('cms_auth', msg); } catch(e) {}
+      window.location.href = '/admin/#cms_auth';
+    }
   }
   if (document.readyState === 'complete') {
     send();
