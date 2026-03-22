@@ -13,7 +13,7 @@
       "title": "Klíma Telepítés és Értékesítés",
       "description": "Fisher, Fujitsu, Toshiba és Daikin split klímarendszerek telepítése ingyenes helyszíni felméréssel. Kiszállási díj nélkül, Budapesten belül.",
       "href": "/szolgaltatasok/klima-telepites",
-      "icon": "❄️",
+      "icon": "heroicons:bolt",
       "image": "/images/juhasz-balazs/jb-gree-beszereles-letran-1.jpeg",
       "imageAlt": "Juhász Balázs Gree kültéri klíma egység beszerelése létráról – KlimaFirst Budapest klímaszerelő",
       "highlight": false
@@ -22,7 +22,7 @@
       "title": "Klíma Javítás",
       "description": "Gyors és megbízható klímajavítás Budapest egész területén. Minden márkát javítunk, eredeti alkatrészekkel, garanciával.",
       "href": "/szolgaltatasok/klima-javitas",
-      "icon": "🔧",
+      "icon": "heroicons:wrench",
       "image": "/images/juhasz-balazs/jb-manifold-letran-1.jpeg",
       "imageAlt": "Juhász Balázs manifold mérősorral hűtőközeg ellenőrzés – KlimaFirst klíma javítás Budapest",
       "highlight": false
@@ -31,7 +31,7 @@
       "title": "Klíma Tisztítás és Karbantartás",
       "description": "Éves karbantartással meghosszabbítja klímája élettartamát, csökkenti energiafogyasztását és megelőzi a meghibásodásokat.",
       "href": "/szolgaltatasok/klima-tisztitas",
-      "icon": "✨",
+      "icon": "heroicons:sparkles",
       "image": "/images/juhasz-balazs/jb-belso-egyseg-szerviz.jpeg",
       "imageAlt": "Juhász Balázs beltéri klíma szervizálása szűrőtisztítással – KlimaFirst karbantartás Budapest",
       "highlight": true
@@ -40,7 +40,7 @@
       "title": "Fűtés Klímával",
       "description": "Modern inverteres klíma hőszivattyúként is működik. Hatékonyabb és olcsóbb, mint a hagyományos villanyfűtés – akár -15°C-ig.",
       "href": "/szolgaltatasok/futes-klimaval",
-      "icon": "🌡️",
+      "icon": "heroicons:fire",
       "image": "/images/juhasz-balazs/jb-vacuum-pumpa-bekoltes.jpeg",
       "imageAlt": "Juhász Balázs klíma hűtőkör bekötése vákuumszivattyúval – KlimaFirst fűtés klímával Budapest",
       "highlight": false
