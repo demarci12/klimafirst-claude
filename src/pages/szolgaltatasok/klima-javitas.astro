@@ -5,8 +5,10 @@ import FAQ from '../../components/FAQ.astro';
 import PriceTable from '../../components/PriceTable.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import { SITE } from '../../data/site';
+import { getServicePage } from '../../lib/queries';
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const serviceData = await getServicePage('klima-javitas');
 
 const serviceSchema = {
   '@context': 'https://schema.org',
@@ -18,7 +20,7 @@ const serviceSchema = {
   aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '74', bestRating: '5' },
 };
 
-const priceItems = [
+const priceItems = serviceData?.priceItems ?? [
   { service: 'Helyszíni diagnosztika', description: 'Hiba azonosítása, hibakód kiolvasás', price: '8.000', note: 'Munkadíj' },
   { service: 'Hűtőközeg utántöltés (R32)', description: '250g töltőgáz és munkadíj', price: '15.000', note: 'anyag+munka' },
   { service: 'Hűtőközeg utántöltés (R410A)', description: '250g töltőgáz és munkadíj', price: '14.000', note: 'anyag+munka' },
@@ -27,7 +29,7 @@ const priceItems = [
   { service: 'Ventilátor motor csere', description: 'Beltéri vagy kültéri ventilátormotor', price: '15.000', note: 'Munkadíj (+alkatrész)', highlight: true },
 ];
 
-const faqs = [
+const faqs = serviceData?.faqs ?? [
   {
     question: 'Miért nem hűt a klímám?',
     answer: 'A leggyakoribb okok: alacsony hűtőközeg szint (szivárgás), eltömött szűrő, hibás kompresszor, vagy problémás vezérlő. Helyszíni diagnosztikával gyorsan azonosítjuk a hibát.',

@@ -3,8 +3,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import FAQ from '../../components/FAQ.astro';
 import ContactForm from '../../components/ContactForm.astro';
+import { getBrandPage } from '../../lib/queries';
 
-const faqs = [
+const brandData = await getBrandPage('toshiba-klima');
+const faqs = brandData?.faqs ?? [
   { question: 'Van Wi-Fi vezérlés Toshiba klímáknál?', answer: 'Igen, a Toshiba Shorai Edge és Haori sorozatok beépített Wi-Fi modullal rendelkeznek, így az Intesishome app segítségével bárhonnan vezérelhető.' },
   { question: 'Mi az a Toshiba Plasma ionizátor?', answer: 'A Toshiba Plasma ionizátor technológiája ionokat juttat a levegőbe, amelyek megsemmisítik a baktériumokat, vírusokat és allergéneket, egészségesebb beltéri levegőt biztosítva.' },
   { question: 'Mennyibe kerül a Toshiba klíma telepítéssel?', answer: 'A Toshiba 2.5 kW-os klíma telepítéssel együtt kb. 220.000–245.000 Ft. Pontos ár az ingyenes helyszíni felmérésen alapul.' },

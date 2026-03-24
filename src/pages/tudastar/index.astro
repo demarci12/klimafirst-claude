@@ -2,11 +2,26 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
+import { getBlogPosts } from '../../lib/queries';
 
-const posts = await getCollection('tudastar');
-const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+// Merge Sanity posts + MD fallback posts
+const sanityPosts = (await getBlogPosts()) ?? [];
+const mdPosts = await getCollection('tudastar');
 
-const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
+// Normalize to common shape
+const normalizedSanity = sanityPosts.map((p: any) => ({
+  slug: p.slug.current,
+  data: { title: p.title, description: p.description, pubDate: new Date(p.pubDate), tags: p.tags ?? [], author: p.author ?? 'Juhász Balázs' },
+  _source: 'sanity',
+}));
+const sanitySlugSet = new Set(normalizedSanity.map((p: any) => p.slug));
+const normalizedMd = mdPosts
+  .filter((p) => !sanitySlugSet.has(p.slug))
+  .map((p) => ({ ...p, _source: 'md' }));
+
+const allPosts = [...normalizedSanity, ...normalizedMd];
+const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const allTags = [...new Set(allPosts.flatMap((p) => p.data.tags))].sort();
 ---
 
 <BaseLayout

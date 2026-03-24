@@ -4,8 +4,10 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
 import FAQ from '../../components/FAQ.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import { SITE } from '../../data/site';
+import { getBrandPage } from '../../lib/queries';
 
-const faqs = [
+const brandData = await getBrandPage('fisher-klima');
+const faqs = brandData?.faqs ?? [
   { question: 'Milyen garancia jár a Fisher klímára?', answer: 'A Fisher klímaberendezések általában 2 év gyártói garanciával érkeznek. A KlimaFirst által elvégzett telepítési munkára külön 2 év munkadíj garanciát vállalunk.' },
   { question: 'Mennyibe kerül egy Fisher klíma telepítéssel együtt?', answer: 'Egy Fisher 2.5 kW-os klíma telepítéssel együtt kb. 165.000–185.000 Ft közé esik. Pontos ár ingyenes helyszíni felméréssel állapítható meg.' },
   { question: 'Tud-e a Fisher klíma fűteni is?', answer: 'Igen, a Fisher inverteres klímaberendezések hőszivattyúként is működnek, és -15°C-ig hatékonyan fűtenek.' },

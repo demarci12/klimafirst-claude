@@ -3,3 +3,7 @@ export { homepage } from './homepage';
 export { rolunk } from './rolunk';
 export { referenciak } from './referenciak';
 export { pricing } from './pricing';
+export { blockContent } from './blockContent';
+export { blogPost } from './blogPost';
+export { servicePage } from './servicePage';
+export { brandPage } from './brandPage';

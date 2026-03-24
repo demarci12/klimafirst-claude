@@ -5,8 +5,10 @@ import FAQ from '../../components/FAQ.astro';
 import PriceTable from '../../components/PriceTable.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import { SITE } from '../../data/site';
+import { getServicePage } from '../../lib/queries';
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const serviceData = await getServicePage('klima-tisztitas');
 
 const serviceSchema = {
   '@context': 'https://schema.org',
@@ -18,7 +20,7 @@ const serviceSchema = {
   aggregateRating: { '@type': 'AggregateRating', ratingValue: '5.0', reviewCount: '55', bestRating: '5' },
 };
 
-const priceItems = [
+const priceItems = serviceData?.priceItems ?? [
   { service: 'Split klíma karbantartás', description: 'Szűrő tisztítás, hőcserélő mosás, rendszer ellenőrzés', price: '15.000', note: 'Beltéri egység' },
   { service: 'Split klíma + kültéri karbantartás', description: 'Teljes körű karbantartás, mindkét egység', price: '25.000', note: 'Teljes rendszer', highlight: true },
   { service: 'Mélytisztítás + fertőtlenítés', description: 'Professzionális tisztítás baktérium- és gombamentesítéssel', price: '30.000', note: 'Teljes rendszer' },
@@ -26,7 +28,7 @@ const priceItems = [
   { service: 'Kondenzvíz elvezető tisztítás', description: 'Csővezeték átmosás, lerakódás eltávolítása', price: '5.000', note: 'Munkadíj' },
 ];
 
-const faqs = [
+const faqs = serviceData?.faqs ?? [
   {
     question: 'Milyen gyakran kell klímát karbantartani?',
     answer: 'Évenként egyszer ajánlott, lehetőleg a hűtési szezon előtt (tavasszal) vagy után. Ha a klíma fűtésre is használják, akkor kétévente elvégzett karbantartás is elegendő lehet, de az éves karbantartás a legjobb.',

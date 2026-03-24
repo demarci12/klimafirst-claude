@@ -2,8 +2,11 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import { SITE } from '../../data/site';
+import { getBrandPages } from '../../lib/queries';
 
-const brands = [
+const sanityBrands = await getBrandPages();
+
+const hardcodedBrands = [
   {
     name: 'Fisher',
     slug: 'fisher-klima',
@@ -37,6 +40,17 @@ const brands = [
     icon: '🟡',
   },
 ];
+
+const brands = (sanityBrands && sanityBrands.length > 0)
+  ? sanityBrands.map((b: any) => ({
+      name: b.name,
+      slug: b.slug?.current ?? '#',
+      description: b.description ?? '',
+      pros: b.pros ?? [],
+      range: b.priceRange ?? '',
+      icon: b.icon ?? '⚡',
+    }))
+  : hardcodedBrands;
 ---
 
 <BaseLayout

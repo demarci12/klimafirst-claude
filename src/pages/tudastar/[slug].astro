@@ -4,58 +4,104 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import RelatedPosts from '../../components/RelatedPosts.astro';
 import ContactForm from '../../components/ContactForm.astro';
+import { getBlogPosts, getBlogPostBySlug } from '../../lib/queries';
+import { toHTML } from '@portabletext/to-html';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('tudastar');
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: { post },
-  }));
+  const mdPosts = await getCollection('tudastar');
+  const sanityPosts = (await getBlogPosts()) ?? [];
+  const sanitySlugSet = new Set(sanityPosts.map((p: any) => p.slug.current));
+
+  return [
+    ...mdPosts
+      .filter((p) => !sanitySlugSet.has(p.slug))
+      .map((post) => ({ params: { slug: post.slug }, props: { mdPost: post, source: 'md' as const } })),
+    ...sanityPosts.map((p: any) => ({
+      params: { slug: p.slug.current },
+      props: { mdPost: null, source: 'sanity' as const, sanitySlug: p.slug.current },
+    })),
+  ];
 }
 
 interface Props {
-  post: CollectionEntry<'tudastar'>;
+  mdPost: CollectionEntry<'tudastar'> | null;
+  source: 'md' | 'sanity';
+  sanitySlug?: string;
 }
 
-const { post } = Astro.props;
-const { Content } = await post.render();
+const { mdPost, source, sanitySlug } = Astro.props;
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+
+let title = '';
+let description = '';
+let pubDate: Date = new Date();
+let updatedDate: Date | undefined;
+let author = 'Juhász Balázs';
+let tags: string[] = [];
+let image: string | undefined;
+let imageAlt: string | undefined;
+let keywords: string[] = [];
+let slug = '';
+let bodyHtml = '';
+let MdContent: any = null;
+
+if (source === 'sanity' && sanitySlug) {
+  const sp = await getBlogPostBySlug(sanitySlug);
+  title = sp.title;
+  description = sp.description;
+  pubDate = new Date(sp.pubDate);
+  updatedDate = sp.updatedDate ? new Date(sp.updatedDate) : undefined;
+  author = sp.author ?? 'Juhász Balázs';
+  tags = sp.tags ?? [];
+  image = sp.image;
+  imageAlt = sp.imageAlt;
+  keywords = sp.keywords ?? [];
+  slug = sp.slug.current;
+  bodyHtml = sp.body ? toHTML(sp.body) : '';
+} else if (mdPost) {
+  const rendered = await mdPost.render();
+  MdContent = rendered.Content;
+  title = mdPost.data.title;
+  description = mdPost.data.description;
+  pubDate = mdPost.data.pubDate;
+  updatedDate = mdPost.data.updatedDate;
+  author = mdPost.data.author;
+  tags = mdPost.data.tags;
+  image = mdPost.data.image;
+  imageAlt = mdPost.data.imageAlt;
+  keywords = mdPost.data.keywords;
+  slug = mdPost.slug;
+}
 
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: post.data.title,
-  description: post.data.description,
-  author: {
-    '@type': 'Person',
-    name: post.data.author,
-  },
+  headline: title,
+  description,
+  author: { '@type': 'Person', name: author },
   publisher: {
     '@type': 'Organization',
     name: 'KlimaFirst',
     logo: { '@type': 'ImageObject', url: `${siteUrl}/images/logo.png` },
   },
-  datePublished: post.data.pubDate.toISOString(),
-  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
-  mainEntityOfPage: {
-    '@type': 'WebPage',
-    '@id': `${siteUrl}/tudastar/${post.slug}`,
-  },
-  image: post.data.image ? `${siteUrl}${post.data.image}` : `${siteUrl}/images/og-default.jpg`,
-  keywords: post.data.keywords.join(', '),
+  datePublished: pubDate.toISOString(),
+  dateModified: (updatedDate ?? pubDate).toISOString(),
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/tudastar/${slug}` },
+  image: image ? `${siteUrl}${image}` : `${siteUrl}/images/og-default.jpg`,
+  keywords: keywords.join(', '),
 };
 ---
 
 <BaseLayout
-  title={post.data.title}
-  description={post.data.description}
-  canonical={`/tudastar/${post.slug}`}
+  title={title}
+  description={description}
+  canonical={`/tudastar/${slug}`}
   ogType="article"
-  ogImage={post.data.image ?? '/images/og-default.jpg'}
+  ogImage={image ?? '/images/og-default.jpg'}
   schema={articleSchema}
   breadcrumbs={[
     { name: 'Tudástár', url: '/tudastar' },
-    { name: post.data.title, url: `/tudastar/${post.slug}` },
+    { name: title, url: `/tudastar/${slug}` },
   ]}
 >
   <div class="bg-gray-50 border-b border-gray-200">
@@ -63,7 +109,7 @@ const articleSchema = {
       <Breadcrumb
         items={[
           { name: 'Tudástár', href: '/tudastar' },
-          { name: post.data.title, href: `/tudastar/${post.slug}` },
+          { name: title, href: `/tudastar/${slug}` },
         ]}
       />
     </div>
@@ -74,40 +120,40 @@ const articleSchema = {
       <!-- Header -->
       <header class="mb-8">
         <div class="flex flex-wrap gap-2 mb-4">
-          {post.data.tags.map((tag: string) => (
+          {tags.map((tag: string) => (
             <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">{tag}</span>
           ))}
         </div>
 
         <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 leading-tight">
-          {post.data.title}
+          {title}
         </h1>
 
-        <p class="text-lg text-gray-600 leading-relaxed mb-6">{post.data.description}</p>
+        <p class="text-lg text-gray-600 leading-relaxed mb-6">{description}</p>
 
         <div class="flex items-center gap-4 text-sm text-gray-500 border-t border-b border-gray-100 py-3">
           <div class="flex items-center gap-1.5">
             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
               <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
             </svg>
-            <span>{post.data.author}</span>
+            <span>{author}</span>
           </div>
           <div class="flex items-center gap-1.5">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
-            <time datetime={post.data.pubDate.toISOString()}>
-              {post.data.pubDate.toLocaleDateString('hu-HU', { year: 'numeric', month: 'long', day: 'numeric' })}
+            <time datetime={pubDate.toISOString()}>
+              {pubDate.toLocaleDateString('hu-HU', { year: 'numeric', month: 'long', day: 'numeric' })}
             </time>
           </div>
-          {post.data.updatedDate && (
+          {updatedDate && (
             <div class="flex items-center gap-1.5 text-blue-600">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
               <span>
-                Frissítve: <time datetime={post.data.updatedDate.toISOString()}>
-                  {post.data.updatedDate.toLocaleDateString('hu-HU', { year: 'numeric', month: 'long', day: 'numeric' })}
+                Frissítve: <time datetime={updatedDate!.toISOString()}>
+                  {updatedDate!.toLocaleDateString('hu-HU', { year: 'numeric', month: 'long', day: 'numeric' })}
                 </time>
               </span>
             </div>
@@ -117,7 +163,11 @@ const articleSchema = {
 
       <!-- Content -->
       <div class="prose-klima max-w-none">
-        <Content />
+        {source === 'sanity' ? (
+          <Fragment set:html={bodyHtml} />
+        ) : (
+          MdContent && <MdContent />
+        )}
       </div>
 
       <!-- CTA box -->
@@ -135,7 +185,7 @@ const articleSchema = {
       </div>
 
       <!-- Related posts -->
-      <RelatedPosts currentSlug={post.slug} tags={post.data.tags} />
+      <RelatedPosts currentSlug={slug} tags={tags} />
     </div>
   </article>
 </BaseLayout>

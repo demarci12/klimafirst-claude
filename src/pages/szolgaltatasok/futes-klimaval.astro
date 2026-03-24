@@ -4,8 +4,10 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
 import FAQ from '../../components/FAQ.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import { SITE } from '../../data/site';
+import { getServicePage } from '../../lib/queries';
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const serviceData = await getServicePage('futes-klimaval');
 
 const serviceSchema = {
   '@context': 'https://schema.org',
@@ -16,7 +18,7 @@ const serviceSchema = {
   areaServed: { '@type': 'City', name: 'Budapest' },
 };
 
-const faqs = [
+const faqs = serviceData?.faqs ?? [
   {
     question: 'Mennyire hatékony a klíma fűtési módban?',
     answer: 'A modern inverteres klíma COP (hatékonysági) értéke 3.0–4.5, ami azt jelenti, hogy 1 kWh elektromos energiából 3–4.5 kWh hőt állít elő. Összehasonlításképpen: az elektromos fűtőtest 1:1 arányú. A klíma 3–4-szer hatékonyabb.',

@@ -6,8 +6,10 @@ import PriceTable from '../../components/PriceTable.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import TrustBar from '../../components/TrustBar.astro';
 import { SITE } from '../../data/site';
+import { getServicePage } from '../../lib/queries';
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const serviceData = await getServicePage('klima-telepites');
 
 const serviceSchema = {
   '@context': 'https://schema.org',
@@ -40,7 +42,7 @@ const serviceSchema = {
   },
 };
 
-const priceItems = [
+const priceItems = serviceData?.priceItems ?? [
   { service: 'Split klíma telepítés (2.5 kW)', description: 'Beltéri + kültéri egység, szokásos falvastagság', price: '35.000', note: 'Munkadíj' },
   { service: 'Split klíma telepítés (3.5 kW)', description: 'Beltéri + kültéri egység, szokásos falvastagság', price: '38.000', note: 'Munkadíj' },
   { service: 'Split klíma telepítés (5.0 kW+)', description: 'Nagy teljesítményű egységek, irodai felhasználás', price: '45.000', note: 'Munkadíj' },
@@ -50,7 +52,7 @@ const priceItems = [
   { service: 'Klíma készülék ár (2.5–3.5 kW)', description: 'Fisher, Fujitsu vagy Toshiba split klíma', price: '130.000', highlight: true, note: 'Készülékár' },
 ];
 
-const faqs = [
+const faqs = serviceData?.faqs ?? [
   {
     question: 'Mennyi idő alatt szerelik fel a klímát?',
     answer: 'Egy split klíma telepítése általában 3–6 óra alatt elvégezhető. Multi-split rendszereknél ez 1–2 napot vehet igénybe, a beltéri egységek számától függően.',

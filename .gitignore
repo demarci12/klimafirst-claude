@@ -26,5 +26,5 @@ pnpm-debug.log*
 .astro/
 src/env.d.ts
 
-# TinaCMS - generated files must be committed for TinaCloud indexing
-# tina/__generated__/
+# Sanity runtime (auto-generated)
+.sanity/

@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { getBlogPosts } from '../lib/queries';
 
 export interface Props {
   currentSlug: string;
@@ -9,13 +10,22 @@ export interface Props {
 
 const { currentSlug, tags, limit = 3 } = Astro.props;
 
-const allPosts = await getCollection('tudastar');
+const sanityPosts = (await getBlogPosts()) ?? [];
+const mdPosts = await getCollection('tudastar');
+const sanitySlugSet = new Set(sanityPosts.map((p: any) => p.slug.current));
+
+const allPosts = [
+  ...sanityPosts.map((p: any) => ({
+    slug: p.slug.current,
+    data: { title: p.title, description: p.description, tags: p.tags ?? [] },
+  })),
+  ...mdPosts
+    .filter((p) => !sanitySlugSet.has(p.slug))
+    .map((p) => ({ slug: p.slug, data: { title: p.data.title, description: p.data.description, tags: p.data.tags } })),
+];
+
 const related = allPosts
-  .filter(
-    (post) =>
-      post.slug !== currentSlug &&
-      post.data.tags.some((tag: string) => tags.includes(tag))
-  )
+  .filter((post) => post.slug !== currentSlug && post.data.tags.some((tag) => tags.includes(tag)))
   .slice(0, limit);
 ---
 

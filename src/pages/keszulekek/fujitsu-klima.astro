@@ -3,8 +3,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import FAQ from '../../components/FAQ.astro';
 import ContactForm from '../../components/ContactForm.astro';
+import { getBrandPage } from '../../lib/queries';
 
-const faqs = [
+const brandData = await getBrandPage('fujitsu-klima');
+const faqs = brandData?.faqs ?? [
   { question: 'Miben jobb a Fujitsu más márkáknál?', answer: 'A Fujitsu kiemelkedő a csendes működésben (19–21 dB), az extrém hideg időben való fűtési teljesítményben (-25°C-ig), és az A++++ energiaosztályban. Japán precizitás a kivitelezésben.' },
   { question: 'Mennyibe kerül a Fujitsu klíma telepítéssel?', answer: 'Egy Fujitsu 2.5 kW-os klíma telepítéssel kb. 215.000–235.000 Ft közé esik. Pontos árajánlatot ingyenes helyszíni felméréssel adunk.' },
   { question: 'Elérhető-e Fujitsu multi-split rendszer?', answer: 'Igen, a Fujitsu kínálata tartalmaz multi-split rendszereket is. Kérjen árajánlatot a konkrét konfigurációra.' },
