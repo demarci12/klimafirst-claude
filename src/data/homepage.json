@@ -15,7 +15,7 @@
       "href": "/szolgaltatasok/klima-telepites",
       "icon": "heroicons:bolt",
       "image": "/images/juhasz-balazs/jb-gree-beszereles-letran-1.jpeg",
-      "imageAlt": "Juhász Balázs Gree kültéri klíma egység beszerelése létráról – KlimaFirst Budapest klímaszerelő",
+      "imageAlt": "Juhász Balázs Gree kültéri klíma egység beszerelése létráról – Klímaépítő.hu Budapest klímaszerelő",
       "highlight": false
     },
     {
@@ -24,7 +24,7 @@
       "href": "/szolgaltatasok/klima-javitas",
       "icon": "heroicons:wrench",
       "image": "/images/juhasz-balazs/jb-manifold-letran-1.jpeg",
-      "imageAlt": "Juhász Balázs manifold mérősorral hűtőközeg ellenőrzés – KlimaFirst klíma javítás Budapest",
+      "imageAlt": "Juhász Balázs manifold mérősorral hűtőközeg ellenőrzés – Klímaépítő.hu klíma javítás Budapest",
       "highlight": false
     },
     {
@@ -33,7 +33,7 @@
       "href": "/szolgaltatasok/klima-tisztitas",
       "icon": "heroicons:sparkles",
       "image": "/images/juhasz-balazs/jb-belso-egyseg-szerviz.jpeg",
-      "imageAlt": "Juhász Balázs beltéri klíma szervizálása szűrőtisztítással – KlimaFirst karbantartás Budapest",
+      "imageAlt": "Juhász Balázs beltéri klíma szervizálása szűrőtisztítással – Klímaépítő.hu karbantartás Budapest",
       "highlight": true
     },
     {
@@ -42,7 +42,7 @@
       "href": "/szolgaltatasok/futes-klimaval",
       "icon": "heroicons:fire",
       "image": "/images/juhasz-balazs/jb-vacuum-pumpa-bekoltes.jpeg",
-      "imageAlt": "Juhász Balázs klíma hűtőkör bekötése vákuumszivattyúval – KlimaFirst fűtés klímával Budapest",
+      "imageAlt": "Juhász Balázs klíma hűtőkör bekötése vákuumszivattyúval – Klímaépítő.hu fűtés klímával Budapest",
       "highlight": false
     }
   ],

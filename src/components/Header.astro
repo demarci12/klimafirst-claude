@@ -6,10 +6,10 @@ const navLinks = [
     label: 'Szolgáltatások',
     href: '/szolgaltatasok/klima-telepites',
     children: [
-      { label: 'Klíma Telepítés', href: '/szolgaltatasok/klima-telepites' },
-      { label: 'Klíma Javítás', href: '/szolgaltatasok/klima-javitas' },
-      { label: 'Klíma Tisztítás', href: '/szolgaltatasok/klima-tisztitas' },
-      { label: 'Fűtés Klímával', href: '/szolgaltatasok/futes-klimaval' },
+      { label: 'Klíma Telepítés', href: '/szolgaltatasok/klima-telepites', icon: '🔧' },
+      { label: 'Klíma Javítás', href: '/szolgaltatasok/klima-javitas', icon: '⚙️' },
+      { label: 'Klíma Tisztítás', href: '/szolgaltatasok/klima-tisztitas', icon: '✨' },
+      { label: 'Fűtés Klímával', href: '/szolgaltatasok/futes-klimaval', icon: '🔥' },
     ],
   },
   { label: 'Árak', href: '/arak' },
@@ -17,10 +17,10 @@ const navLinks = [
     label: 'Készülékek',
     href: '/keszulekek',
     children: [
-      { label: 'Összes márka', href: '/keszulekek' },
-      { label: 'Fisher Klíma', href: '/keszulekek/fisher-klima' },
-      { label: 'Fujitsu Klíma', href: '/keszulekek/fujitsu-klima' },
-      { label: 'Toshiba Klíma', href: '/keszulekek/toshiba-klima' },
+      { label: 'Összes márka', href: '/keszulekek', icon: '📋' },
+      { label: 'Fisher Klíma', href: '/keszulekek/fisher-klima', icon: '❄️' },
+      { label: 'Fujitsu Klíma', href: '/keszulekek/fujitsu-klima', icon: '❄️' },
+      { label: 'Toshiba Klíma', href: '/keszulekek/toshiba-klima', icon: '❄️' },
     ],
   },
   { label: 'Referenciák', href: '/referenciak' },
@@ -31,17 +31,31 @@ const navLinks = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="w-full bg-white shadow-sm sticky top-0 z-50" id="site-header">
+<header class="w-full bg-white sticky top-0 z-50 border-b border-slate-100" id="site-header">
   <!-- Top bar -->
-  <div class="bg-blue-900 text-white text-sm py-1.5">
+  <div class="bg-slate-900 text-white text-xs py-2">
     <div class="container mx-auto px-4 flex justify-between items-center">
-      <span class="hidden sm:block text-blue-200">Budapest mind a 23 kerületében – kiszállási díj nélkül</span>
+      <div class="hidden sm:flex items-center gap-4 text-slate-400">
+        <span class="flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-orange-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+          </svg>
+          Budapest – mind a 23 kerületben
+        </span>
+        <span class="text-slate-700">|</span>
+        <span class="flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          H–P 8:00–18:00 · Szo 9:00–14:00
+        </span>
+      </div>
       <a
         href={`tel:${SITE.phoneTel}`}
-        class="font-bold text-orange-400 hover:text-orange-300 transition-colors flex items-center gap-1"
+        class="font-bold text-orange-400 hover:text-orange-300 transition-colors flex items-center gap-1.5 ml-auto sm:ml-0"
         aria-label={`Hívjon minket: ${SITE.phone}`}
       >
-        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
           <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
         </svg>
         {SITE.phone}
@@ -50,67 +64,71 @@ const currentPath = Astro.url.pathname;
   </div>
 
   <!-- Main nav -->
-  <nav class="container mx-auto px-4 py-3 flex items-center justify-between" aria-label="Főnavigáció">
+  <nav class="container mx-auto px-4 h-16 flex items-center justify-between" aria-label="Főnavigáció">
     <!-- Logo -->
-    <a href="/" class="flex items-center gap-2 group" aria-label="KlimaFirst – Főoldal">
-      <div class="w-10 h-10 bg-blue-900 rounded-xl flex items-center justify-center shadow-md group-hover:bg-blue-800 transition-colors">
-        <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-        </svg>
+    <a href="/" class="flex items-center gap-3 group flex-shrink-0" aria-label="Klímaépítő.hu – Főoldal">
+      <div class="relative w-10 h-10 flex-shrink-0">
+        <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-600 to-blue-800 shadow-md group-hover:from-blue-500 group-hover:to-blue-700 transition-all duration-300"></div>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+          </svg>
+        </div>
+        <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-orange-500 rounded-full border-2 border-white"></span>
       </div>
-      <div>
-        <span class="text-xl font-bold text-blue-900 leading-none">KlimaFirst</span>
-        <span class="text-xs text-gray-500 block leading-none">{SITE.tagline}</span>
+      <div class="leading-tight">
+        <div class="text-[17px] font-extrabold text-slate-900 tracking-tight leading-none">Klímaépítő<span class="text-orange-500">.hu</span></div>
+        <div class="text-[10px] text-slate-400 font-medium uppercase tracking-widest leading-none mt-0.5">{SITE.tagline}</div>
       </div>
     </a>
 
     <!-- Desktop nav -->
-    <ul class="hidden lg:flex items-center gap-1" role="list">
+    <ul class="hidden lg:flex items-center gap-0.5" role="list">
       {navLinks.map((link) => (
         <li class="relative group" role="listitem">
           {link.children ? (
             <>
               <button
-                class={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1 ${
+                class={`px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-1 ${
                   currentPath.startsWith(link.href)
-                    ? 'text-blue-900 bg-blue-50'
-                    : 'text-gray-700 hover:text-blue-900 hover:bg-gray-50'
+                    ? 'text-blue-700 bg-blue-50'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                 }`}
                 aria-expanded="false"
                 aria-haspopup="true"
               >
                 {link.label}
-                <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                <svg class="w-3.5 h-3.5 text-slate-400 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
-              <ul
-                class="absolute top-full left-0 mt-1 w-52 bg-white rounded-xl shadow-lg border border-gray-100 py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
-                role="menu"
-              >
-                {link.children.map((child) => (
-                  <li role="menuitem">
-                    <a
-                      href={child.href}
-                      class={`block px-4 py-2.5 text-sm transition-colors ${
-                        currentPath === child.href
-                          ? 'text-blue-900 bg-blue-50 font-medium'
-                          : 'text-gray-700 hover:text-blue-900 hover:bg-gray-50'
-                      }`}
-                    >
-                      {child.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              <div class="absolute top-full left-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 pointer-events-none group-hover:pointer-events-auto">
+                <ul role="menu">
+                  {link.children.map((child) => (
+                    <li role="menuitem">
+                      <a
+                        href={child.href}
+                        class={`flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
+                          currentPath === child.href
+                            ? 'text-blue-700 bg-blue-50 font-medium'
+                            : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                        }`}
+                      >
+                        <span class="text-base" aria-hidden="true">{child.icon}</span>
+                        {child.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </>
           ) : (
             <a
               href={link.href}
-              class={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+              class={`px-3.5 py-2 rounded-lg text-sm font-medium transition-all ${
                 currentPath === link.href
-                  ? 'text-blue-900 bg-blue-50'
-                  : 'text-gray-700 hover:text-blue-900 hover:bg-gray-50'
+                  ? 'text-blue-700 bg-blue-50'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
               {link.label}
@@ -120,20 +138,26 @@ const currentPath = Astro.url.pathname;
       ))}
     </ul>
 
-    <!-- CTA Buttons -->
-    <div class="hidden lg:flex items-center gap-2">
+    <!-- CTA -->
+    <div class="hidden lg:flex items-center gap-2 flex-shrink-0">
+      <a href={`tel:${SITE.phoneTel}`} class="flex items-center gap-1.5 text-sm font-semibold text-slate-700 hover:text-blue-700 transition-colors px-3 py-2">
+        <svg class="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+          <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+        </svg>
+        {SITE.phone}
+      </a>
       <a
         href="/ajanlatkeres"
-        class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 shadow-md hover:shadow-lg"
+        class="bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-all duration-200 shadow-sm hover:shadow-md hover:shadow-orange-100 whitespace-nowrap"
       >
-        Ingyenes Árajánlat
+        Ingyenes felmérés
       </a>
     </div>
 
     <!-- Mobile hamburger -->
     <button
       id="mobile-menu-btn"
-      class="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+      class="lg:hidden p-2 rounded-xl text-slate-600 hover:bg-slate-100 transition-colors"
       aria-label="Menü megnyitása"
       aria-expanded="false"
       aria-controls="mobile-menu"
@@ -147,31 +171,35 @@ const currentPath = Astro.url.pathname;
     </button>
   </nav>
 
+  <!-- Scroll progress indicator -->
+  <div class="h-[2px] bg-gradient-to-r from-blue-600 via-blue-500 to-orange-500 scale-x-0 origin-left transition-transform duration-100" id="scroll-progress"></div>
+
   <!-- Mobile menu -->
   <div
     id="mobile-menu"
-    class="lg:hidden hidden border-t border-gray-100 bg-white"
+    class="lg:hidden hidden border-t border-slate-100 bg-white"
     role="navigation"
     aria-label="Mobil navigáció"
   >
-    <ul class="container mx-auto px-4 py-3 space-y-1" role="list">
+    <ul class="container mx-auto px-4 py-4 space-y-1" role="list">
       {navLinks.map((link) => (
         <li role="listitem">
           {link.children ? (
             <details class="group">
-              <summary class="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer list-none">
+              <summary class="flex items-center justify-between px-3 py-3 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-50 cursor-pointer list-none">
                 {link.label}
-                <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <svg class="w-4 h-4 text-slate-400 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
               </summary>
-              <ul class="mt-1 ml-3 space-y-1" role="list">
+              <ul class="mt-1 ml-3 space-y-0.5 pb-2" role="list">
                 {link.children.map((child) => (
                   <li role="menuitem">
                     <a
                       href={child.href}
-                      class="block px-3 py-2 rounded-lg text-sm text-gray-600 hover:text-blue-900 hover:bg-blue-50 transition-colors"
+                      class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:text-blue-700 hover:bg-blue-50 transition-colors"
                     >
+                      <span aria-hidden="true">{child.icon}</span>
                       {child.label}
                     </a>
                   </li>
@@ -181,10 +209,10 @@ const currentPath = Astro.url.pathname;
           ) : (
             <a
               href={link.href}
-              class={`block px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+              class={`block px-3 py-3 rounded-xl text-sm font-semibold transition-colors ${
                 currentPath === link.href
-                  ? 'text-blue-900 bg-blue-50'
-                  : 'text-gray-700 hover:text-blue-900 hover:bg-gray-50'
+                  ? 'text-blue-700 bg-blue-50'
+                  : 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
               {link.label}
@@ -192,20 +220,21 @@ const currentPath = Astro.url.pathname;
           )}
         </li>
       ))}
-      <li class="pt-2 border-t border-gray-100">
+      <li class="pt-3 border-t border-slate-100 space-y-2">
         <a
           href="/ajanlatkeres"
-          class="block w-full bg-orange-500 hover:bg-orange-600 text-white px-4 py-3 rounded-xl text-sm font-semibold text-center transition-colors"
+          class="block w-full bg-orange-500 hover:bg-orange-600 text-white px-4 py-3.5 rounded-xl text-sm font-bold text-center transition-colors shadow-sm"
         >
-          Ingyenes Árajánlat kérése
+          Ingyenes felmérés kérése
         </a>
-      </li>
-      <li>
         <a
           href={`tel:${SITE.phoneTel}`}
-          class="block w-full border border-blue-900 text-blue-900 px-4 py-3 rounded-xl text-sm font-semibold text-center transition-colors hover:bg-blue-50"
+          class="flex items-center justify-center gap-2 w-full border-2 border-slate-200 text-slate-700 px-4 py-3 rounded-xl text-sm font-bold text-center transition-colors hover:border-blue-300 hover:text-blue-700"
         >
-          📞 {SITE.phone}
+          <svg class="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+          </svg>
+          {SITE.phone}
         </a>
       </li>
     </ul>
@@ -217,6 +246,16 @@ const currentPath = Astro.url.pathname;
   const menu = document.getElementById('mobile-menu');
   const hamburger = document.getElementById('hamburger-icon');
   const closeIcon = document.getElementById('close-icon');
+  const progressBar = document.getElementById('scroll-progress');
+
+  // Scroll progress bar
+  window.addEventListener('scroll', () => {
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = total > 0 ? window.scrollY / total : 0;
+    if (progressBar) {
+      (progressBar as HTMLElement).style.transform = `scaleX(${progress})`;
+    }
+  });
 
   btn?.addEventListener('click', () => {
     const isOpen = !menu?.classList.contains('hidden');
@@ -226,7 +265,6 @@ const currentPath = Astro.url.pathname;
     btn?.setAttribute('aria-expanded', String(!isOpen));
   });
 
-  // Close menu on outside click
   document.addEventListener('click', (e) => {
     if (!btn?.contains(e.target as Node) && !menu?.contains(e.target as Node)) {
       menu?.classList.add('hidden');

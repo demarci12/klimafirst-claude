@@ -15,7 +15,7 @@ const serviceSchema = {
   '@type': 'Service',
   name: 'Klíma Tisztítás és Karbantartás Budapest',
   description: 'Professzionális klíma tisztítás, fertőtlenítés és éves karbantartás Budapesten. Meghosszabbítja a készülék élettartamát és csökkenti energiafogyasztását.',
-  provider: { '@type': 'HVACBusiness', name: 'KlimaFirst', telephone: SITE.phoneTel, url: `${siteUrl}/` },
+  provider: { '@type': 'HVACBusiness', name: 'Klímaépítő.hu', telephone: SITE.phoneTel, url: `${siteUrl}/` },
   areaServed: { '@type': 'City', name: 'Budapest' },
   aggregateRating: { '@type': 'AggregateRating', ratingValue: '5.0', reviewCount: '55', bestRating: '5' },
 };
@@ -49,7 +49,7 @@ const faqs = serviceData?.faqs ?? [
 ---
 
 <BaseLayout
-  title="Klíma Tisztítás és Karbantartás Budapest | KlimaFirst"
+  title="Klíma Tisztítás és Karbantartás Budapest | Klímaépítő.hu"
   description="Professzionális klíma tisztítás, fertőtlenítés és éves karbantartás Budapesten. Megelőzze a meghibásodást, csökkentse az energiaszámlát. ☎ +36 20 339 4164"
   canonical="/szolgaltatasok/klima-tisztitas"
   schema={serviceSchema}
@@ -85,10 +85,10 @@ const faqs = serviceData?.faqs ?? [
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         <div class="grid grid-cols-2 gap-3">
           <div class="overflow-hidden rounded-2xl aspect-[3/4]">
-            <img src="/images/juhasz-balazs/jb-belso-egyseg-szerviz.jpeg" alt="Juhász Balázs beltéri klíma szűrő tisztítása – KlimaFirst karbantartás Budapest" class="w-full h-full object-cover" loading="eager" />
+            <img src="/images/juhasz-balazs/jb-belso-egyseg-szerviz.jpeg" alt="Juhász Balázs beltéri klíma szűrő tisztítása – Klímaépítő.hu karbantartás Budapest" class="w-full h-full object-cover" loading="eager" />
           </div>
           <div class="overflow-hidden rounded-2xl aspect-[3/4] mt-6">
-            <img src="/images/juhasz-balazs/jb-belso-egyseg-telepites-mosoly.jpeg" alt="Juhász Balázs beltéri klíma egység szerelése – KlimaFirst Budapest" class="w-full h-full object-cover object-top" loading="eager" />
+            <img src="/images/juhasz-balazs/jb-belso-egyseg-telepites-mosoly.jpeg" alt="Juhász Balázs beltéri klíma egység szerelése – Klímaépítő.hu Budapest" class="w-full h-full object-cover object-top" loading="eager" />
           </div>
         </div>
         <div>

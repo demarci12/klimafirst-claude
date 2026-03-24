@@ -15,7 +15,7 @@ const serviceSchema = {
   '@type': 'Service',
   name: 'Klíma Javítás Budapest',
   description: 'Gyors és megbízható klímajavítás Budapesten. Minden márka, eredeti alkatrészek, garanciával. Kiszállási díj nélkül.',
-  provider: { '@type': 'HVACBusiness', name: 'KlimaFirst', telephone: SITE.phoneTel, url: `${siteUrl}/` },
+  provider: { '@type': 'HVACBusiness', name: 'Klímaépítő.hu', telephone: SITE.phoneTel, url: `${siteUrl}/` },
   areaServed: { '@type': 'City', name: 'Budapest' },
   aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '74', bestRating: '5' },
 };
@@ -50,7 +50,7 @@ const faqs = serviceData?.faqs ?? [
 ---
 
 <BaseLayout
-  title="Klíma Javítás Budapest – Gyors Szerviz Minden Márkára | KlimaFirst"
+  title="Klíma Javítás Budapest – Gyors Szerviz Minden Márkára | Klímaépítő.hu"
   description="Professzionális klímajavítás Budapesten. Minden márka szervize, eredeti alkatrészekkel, 6 hónap garanciával. Kiszállási díj nélkül. ☎ +36 20 339 4164"
   canonical="/szolgaltatasok/klima-javitas"
   schema={serviceSchema}
@@ -94,10 +94,10 @@ const faqs = serviceData?.faqs ?? [
         </div>
         <div class="grid grid-cols-2 gap-3">
           <div class="overflow-hidden rounded-2xl aspect-[3/4]">
-            <img src="/images/juhasz-balazs/jb-manifold-letran-1.jpeg" alt="Juhász Balázs manifold mérősorral hűtőközeg ellenőrzés – KlimaFirst klíma javítás Budapest" class="w-full h-full object-cover" loading="eager" />
+            <img src="/images/juhasz-balazs/jb-manifold-letran-1.jpeg" alt="Juhász Balázs manifold mérősorral hűtőközeg ellenőrzés – Klímaépítő.hu klíma javítás Budapest" class="w-full h-full object-cover" loading="eager" />
           </div>
           <div class="overflow-hidden rounded-2xl aspect-[3/4] mt-6">
-            <img src="/images/juhasz-balazs/jb-manifold-gree-napsutes.jpeg" alt="Klíma hűtőközeg töltés manifolddal – KlimaFirst szerviz Budapest" class="w-full h-full object-cover" loading="eager" />
+            <img src="/images/juhasz-balazs/jb-manifold-gree-napsutes.jpeg" alt="Klíma hűtőközeg töltés manifolddal – Klímaépítő.hu szerviz Budapest" class="w-full h-full object-cover" loading="eager" />
           </div>
         </div>
       </div>

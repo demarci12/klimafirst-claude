@@ -25,7 +25,7 @@ const {
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
 const canonicalUrl = canonical ? `${siteUrl}${canonical}` : `${siteUrl}${Astro.url.pathname}`;
-const fullTitle = title.includes('KlimaFirst') ? title : `${title} | KlimaFirst Budapest`;
+const fullTitle = title.includes('Klímaépítő') ? title : `${title} | Klímaépítő.hu Budapest`;
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 
 // Build schema array
@@ -92,7 +92,7 @@ if (breadcrumbs && breadcrumbs.length > 0) {
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:locale" content="hu_HU" />
-<meta property="og:site_name" content="KlimaFirst" />
+<meta property="og:site_name" content="Klímaépítő.hu" />
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />

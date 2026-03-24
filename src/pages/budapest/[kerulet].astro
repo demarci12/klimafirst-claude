@@ -23,7 +23,7 @@ const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
 const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'HVACBusiness',
-  name: `KlimaFirst – Klímaszerelés Budapest ${district.name}`,
+  name: `Klímaépítő.hu – Klímaszerelés Budapest ${district.name}`,
   description: `Professzionális klímaszerelés, javítás és karbantartás Budapest ${district.name}ában. Ingyenes helyszíni felmérés, kiszállási díj nélkül.`,
   url: `${siteUrl}/budapest/${district.slug}`,
   telephone: SITE.phoneTel,
@@ -77,7 +77,7 @@ const otherDistricts = districts
 ---
 
 <BaseLayout
-  title={`Klímaszerelés Budapest ${district.name} – Telepítés, Javítás | KlimaFirst`}
+  title={`Klímaszerelés Budapest ${district.name} – Telepítés, Javítás | Klímaépítő.hu`}
   description={`Professzionális klímaszerelés Budapest ${district.name}ában – telepítés, javítás, karbantartás. Kiszállási díj nélkül, ingyenes helyszíni felmérés. ☎ +36 20 339 4164`}
   canonical={`/budapest/${district.slug}`}
   schema={localBusinessSchema}
@@ -131,7 +131,7 @@ const otherDistricts = districts
           <div class="prose-klima">
             <h2>Klímaszerelés Budapest {district.name} – Teljes Körű Szolgáltatás</h2>
             <p>
-              A KlimaFirst csapata rendszeresen végez klímaszerelési, javítási és karbantartási munkákat Budapest {district.name}ában.
+              A Klímaépítő.hu csapata rendszeresen végez klímaszerelési, javítási és karbantartási munkákat Budapest {district.name}ában.
               {district.description} Professzionális munkavégzés, ingyenes helyszíni felmérés, 2 év garancia.
             </p>
 
@@ -170,7 +170,7 @@ const otherDistricts = districts
               </li>
             </ul>
 
-            <h2>Miért Válassza a KlimaFirst-et {district.name}ban?</h2>
+            <h2>Miért Válassza a Klímaépítő.hu-et {district.name}ban?</h2>
             <ul>
               <li>✅ Kiszállási díj nélkül a {district.name}ba</li>
               <li>✅ Ingyenes helyszíni felmérés, kötelezettség nélkül</li>
