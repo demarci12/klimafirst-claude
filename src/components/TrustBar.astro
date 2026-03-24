@@ -40,16 +40,16 @@ const colorMap: Record<string, string> = {
 };
 ---
 
-<section class="bg-slate-900 text-white py-10 border-t-[3px] border-orange-500" aria-label="Miért válasszon minket?">
+<section class="bg-gradient-to-br from-blue-900 to-blue-800 text-white py-10 border-t-4 border-orange-400" aria-label="Miért válasszon minket?">
   <div class="container mx-auto px-4">
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 rounded-2xl overflow-hidden">
-      {stats.map((stat, i) => (
-        <div class={`bg-slate-900 hover:bg-slate-800 transition-colors duration-300 px-6 py-7 flex flex-col items-center text-center gap-3 ${i < stats.length - 1 ? '' : ''}`}>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden">
+      {stats.map((stat) => (
+        <div class="bg-blue-900/60 hover:bg-blue-800/60 transition-colors duration-300 px-6 py-7 flex flex-col items-center text-center gap-3">
           <div class={`w-14 h-14 rounded-2xl flex items-center justify-center ${colorMap[stat.color]}`} set:html={stat.icon} />
           <div>
-            <div class="text-3xl font-extrabold text-white tabular-nums leading-none">{stat.value}</div>
-            <div class="text-sm font-semibold text-slate-300 mt-1 leading-tight">{stat.label}</div>
-            <div class="text-xs text-slate-500 mt-0.5">{stat.sublabel}</div>
+            <div class="text-3xl font-extrabold text-orange-400 tabular-nums leading-none">{stat.value}</div>
+            <div class="text-sm font-semibold text-white mt-1 leading-tight">{stat.label}</div>
+            <div class="text-xs text-blue-300 mt-0.5">{stat.sublabel}</div>
           </div>
         </div>
       ))}
