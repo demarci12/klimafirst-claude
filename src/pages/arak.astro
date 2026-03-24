@@ -5,7 +5,10 @@ import PriceTable from '../components/PriceTable.astro';
 import FAQ from '../components/FAQ.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { SITE } from '../data/site';
-import pricingData from '../data/pricing.json';
+import pricingJson from '../data/pricing.json';
+import { getPricing } from '../lib/queries';
+
+const pricingData = (await getPricing()) ?? pricingJson;
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
 

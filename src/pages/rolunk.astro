@@ -2,8 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import TrustBar from '../components/TrustBar.astro';
-import pageData from '../data/rolunk.json';
+import rolunkJson from '../data/rolunk.json';
+import { getRolunk } from '../lib/queries';
 
+const pageData = (await getRolunk()) ?? rolunkJson;
 const { heroImageSrc, heroImageAlt, profileImageSrc, profileImageAlt, actionPhotos } = pageData;
 ---
 

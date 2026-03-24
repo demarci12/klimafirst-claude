@@ -8,7 +8,10 @@ import ContactForm from '../components/ContactForm.astro';
 import { Image } from 'astro:assets';
 import { SITE } from '../data/site';
 import { getCollection } from 'astro:content';
-import homepageData from '../data/homepage.json';
+import homepageJson from '../data/homepage.json';
+import { getHomepage } from '../lib/queries';
+
+const homepageData = (await getHomepage()) ?? homepageJson;
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
 
