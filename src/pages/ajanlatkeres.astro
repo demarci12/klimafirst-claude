@@ -1,171 +1,272 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Breadcrumb from '../components/Breadcrumb.astro';
 import { getSite } from '../lib/getSite';
 const SITE = await getSite();
 ---
 
 <BaseLayout
   title="Ingyenes Klíma Árajánlat Kérése Online | Klímaépítő.hu Budapest"
-  description="Kérjen ingyenes klímaszerelési árajánlatot online! Töltse ki az részletes űrlapot és 24 órán belül visszahívjuk. Kiszállási díj nélkül Budapest egész területén."
+  description="Kérjen ingyenes klímaszerelési árajánlatot online! Töltse ki a gyors kérdőívet és 24 órán belül visszahívjuk. Kiszállási díj nélkül Budapest egész területén."
   canonical="/ajanlatkeres"
   breadcrumbs={[{ name: 'Árajánlat Kérés', url: '/ajanlatkeres' }]}
 >
-  <div class="bg-gray-50 border-b border-gray-200">
-    <div class="container mx-auto px-4">
-      <Breadcrumb items={[{ name: 'Ingyenes Árajánlat Kérése', href: '/ajanlatkeres' }]} />
-    </div>
-  </div>
 
-  <section class="bg-gradient-to-br from-blue-900 to-blue-800 text-white py-12">
-    <div class="container mx-auto px-4 max-w-4xl text-center">
-      <h1 class="text-3xl md:text-4xl font-extrabold mb-3">Ingyenes Klíma Árajánlat Kérése</h1>
-      <p class="text-blue-100 text-lg max-w-2xl mx-auto">
-        Töltse ki a részletes árajánlatkérő űrlapot – 24 órán belül visszahívjuk személyre szabott ajánlattal. Kiszállási díj nélkül.
-      </p>
-    </div>
-  </section>
+  <section class="min-h-screen bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 flex items-center justify-center px-4 py-12">
+    <div class="w-full max-w-lg">
 
-  <section class="py-10 bg-gray-50">
-    <div class="container mx-auto px-4 max-w-2xl">
-      <div class="bg-white rounded-2xl shadow-card border border-gray-100 p-8">
-        <h2 class="text-xl font-bold text-gray-900 mb-6">Részletes Árajánlatkérő Űrlap</h2>
-
-        <form id="quote-form" novalidate class="space-y-5">
-          <!-- Honeypot -->
-          <div class="absolute opacity-0 pointer-events-none" aria-hidden="true">
-            <input type="text" name="website" tabindex="-1" autocomplete="off" />
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label for="q-name" class="block text-sm font-medium text-gray-700 mb-1">Neve *</label>
-              <input type="text" id="q-name" name="name" required placeholder="Kovács János" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors" />
-            </div>
-            <div>
-              <label for="q-phone" class="block text-sm font-medium text-gray-700 mb-1">Telefonszám *</label>
-              <input type="tel" id="q-phone" name="phone" required placeholder="+36 20 123 4567" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors" />
-            </div>
-          </div>
-
-          <div>
-            <label for="q-email" class="block text-sm font-medium text-gray-700 mb-1">E-mail cím</label>
-            <input type="email" id="q-email" name="email" placeholder="pelda@email.hu" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors" />
-          </div>
-
-          <div>
-            <label for="q-service" class="block text-sm font-medium text-gray-700 mb-1">Milyen szolgáltatásra van szüksége? *</label>
-            <select id="q-service" name="service" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white transition-colors">
-              <option value="">-- Válasszon --</option>
-              <option value="telepites">Klíma Telepítés (új klíma)</option>
-              <option value="javitas">Klíma Javítás</option>
-              <option value="tisztitas">Klíma Tisztítás / Karbantartás</option>
-              <option value="futes">Fűtés Klímával (hőszivattyú)</option>
-              <option value="egyeb">Egyéb / Nem tudom még</option>
-            </select>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label for="q-district" class="block text-sm font-medium text-gray-700 mb-1">Budapest – kerület</label>
-              <select id="q-district" name="district" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white transition-colors">
-                <option value="">-- Kerület --</option>
-                {Array.from({ length: 23 }, (_, i) => i + 1).map((n) => (
-                  <option value={`${n}. kerület`}>Budapest {n}. kerület</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label for="q-area" class="block text-sm font-medium text-gray-700 mb-1">Helyiség mérete (m²)</label>
-              <input type="number" id="q-area" name="area" min="5" max="500" placeholder="Pl. 35" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors" />
-            </div>
-          </div>
-
-          <div>
-            <label for="q-rooms" class="block text-sm font-medium text-gray-700 mb-1">Hány helyiségbe kerülne a klíma?</label>
-            <select id="q-rooms" name="rooms" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white transition-colors">
-              <option value="1">1 helyiség</option>
-              <option value="2">2 helyiség</option>
-              <option value="3">3 helyiség</option>
-              <option value="4+">4 vagy több helyiség</option>
-            </select>
-          </div>
-
-          <div>
-            <label for="q-brand" class="block text-sm font-medium text-gray-700 mb-1">Van már konkrét márkaelképzelése?</label>
-            <select id="q-brand" name="brand" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white transition-colors">
-              <option value="">Nem, szakértői javaslatot kérek</option>
-              <option value="fisher">Fisher klíma</option>
-              <option value="fujitsu">Fujitsu klíma</option>
-              <option value="toshiba">Toshiba klíma</option>
-              <option value="daikin">Daikin klíma</option>
-              <option value="egyeb">Egyéb márka</option>
-            </select>
-          </div>
-
-          <div>
-            <label for="q-timing" class="block text-sm font-medium text-gray-700 mb-1">Mikor lenne szükséges a munkavégzés?</label>
-            <select id="q-timing" name="timing" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white transition-colors">
-              <option value="asap">Minél előbb (sürgős)</option>
-              <option value="1het">1 héten belül</option>
-              <option value="1ho">1 hónapon belül</option>
-              <option value="hamarosan">2–3 hónap múlva</option>
-              <option value="kesobb">Csak tájékozódnék</option>
-            </select>
-          </div>
-
-          <div>
-            <label for="q-message" class="block text-sm font-medium text-gray-700 mb-1">Egyéb megjegyzés, kérdés</label>
-            <textarea id="q-message" name="message" rows="4" placeholder="Pl. 3. emeleti erkélyen kellene elhelyezni a külső egységet, az épület 1980-as téglaépítés..." class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors resize-none"></textarea>
-          </div>
-
-          <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg">
-            Árajánlatot Kérek (Ingyenes, Kötelezettségmentes)
-          </button>
-
-          <p class="text-xs text-gray-400 text-center">🔒 Adatait bizalmasan kezeljük, kizárólag kapcsolatfelvételre használjuk.</p>
-        </form>
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <div class="inline-flex items-center gap-2 bg-orange-500/20 text-orange-300 text-xs font-semibold px-3 py-1.5 rounded-full mb-4 uppercase tracking-widest">
+          Ingyenes · Kötelezettségmentes
+        </div>
+        <h1 class="text-2xl md:text-3xl font-extrabold text-white mb-2">Klíma Árajánlat Kérése</h1>
+        <p class="text-blue-300 text-sm">3 gyors kérdés + elérhetőség → visszahívjuk 24 órán belül</p>
       </div>
 
-      <!-- Contact alternatives -->
-      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <a href="tel:+36203394164" class="flex items-center gap-3 bg-blue-900 text-white rounded-2xl p-4 hover:bg-blue-800 transition-colors">
-          <svg class="w-8 h-8 text-orange-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+      <!-- Quiz card -->
+      <div class="bg-white rounded-3xl shadow-2xl overflow-hidden">
+
+        <!-- Progress bar -->
+        <div class="h-1.5 bg-gray-100">
+          <div id="progress-bar" class="h-full bg-orange-500 transition-all duration-500 rounded-full" style="width: 25%"></div>
+        </div>
+
+        <div class="p-7">
+
+          <!-- Step indicator -->
+          <div class="flex items-center justify-between mb-6">
+            <span id="step-label" class="text-xs font-semibold text-gray-400 uppercase tracking-widest">1. lépés / 4</span>
+            <div class="flex gap-1.5">
+              {[1,2,3,4].map(n => (
+                <div class="step-dot w-2 h-2 rounded-full bg-gray-200 transition-colors duration-300" data-step={n}></div>
+              ))}
+            </div>
+          </div>
+
+          <!-- STEP 1: Service type -->
+          <div id="step-1" class="quiz-step">
+            <h2 class="text-lg font-bold text-gray-900 mb-4">Milyen szolgáltatásra van szüksége?</h2>
+            <div class="grid grid-cols-2 gap-3">
+              {[
+                { val: 'telepites', icon: '🔧', label: 'Klíma telepítés' },
+                { val: 'javitas', icon: '⚙️', label: 'Klíma javítás' },
+                { val: 'tisztitas', icon: '✨', label: 'Klíma tisztítás' },
+                { val: 'futes', icon: '🔥', label: 'Fűtés klímával' },
+              ].map(opt => (
+                <button
+                  type="button"
+                  class="quiz-option flex flex-col items-center gap-2 p-4 rounded-2xl border-2 border-gray-200 hover:border-orange-400 hover:bg-orange-50 transition-all text-center group"
+                  data-step="1"
+                  data-value={opt.val}
+                >
+                  <span class="text-2xl">{opt.icon}</span>
+                  <span class="text-sm font-semibold text-gray-700 group-hover:text-orange-700 leading-tight">{opt.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <!-- STEP 2: Rooms -->
+          <div id="step-2" class="quiz-step hidden">
+            <h2 class="text-lg font-bold text-gray-900 mb-4">Hány helyiségbe kerülne a klíma?</h2>
+            <div class="grid grid-cols-2 gap-3">
+              {[
+                { val: '1', icon: '🏠', label: '1 helyiség' },
+                { val: '2', icon: '🏡', label: '2 helyiség' },
+                { val: '3', icon: '🏘️', label: '3 helyiség' },
+                { val: '4+', icon: '🏢', label: '4 vagy több' },
+              ].map(opt => (
+                <button
+                  type="button"
+                  class="quiz-option flex flex-col items-center gap-2 p-4 rounded-2xl border-2 border-gray-200 hover:border-orange-400 hover:bg-orange-50 transition-all text-center group"
+                  data-step="2"
+                  data-value={opt.val}
+                >
+                  <span class="text-2xl">{opt.icon}</span>
+                  <span class="text-sm font-semibold text-gray-700 group-hover:text-orange-700">{opt.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <!-- STEP 3: Timing -->
+          <div id="step-3" class="quiz-step hidden">
+            <h2 class="text-lg font-bold text-gray-900 mb-4">Mikor lenne szükséges?</h2>
+            <div class="grid grid-cols-2 gap-3">
+              {[
+                { val: 'asap', icon: '⚡', label: 'Minél előbb' },
+                { val: '1het', icon: '📅', label: '1 héten belül' },
+                { val: '1ho', icon: '🗓️', label: '1 hónapon belül' },
+                { val: 'kesobb', icon: '💭', label: 'Csak tájékozódnék' },
+              ].map(opt => (
+                <button
+                  type="button"
+                  class="quiz-option flex flex-col items-center gap-2 p-4 rounded-2xl border-2 border-gray-200 hover:border-orange-400 hover:bg-orange-50 transition-all text-center group"
+                  data-step="3"
+                  data-value={opt.val}
+                >
+                  <span class="text-2xl">{opt.icon}</span>
+                  <span class="text-sm font-semibold text-gray-700 group-hover:text-orange-700">{opt.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <!-- STEP 4: Contact -->
+          <div id="step-4" class="quiz-step hidden">
+            <h2 class="text-lg font-bold text-gray-900 mb-4">Hova hívjuk vissza?</h2>
+            <div class="space-y-3">
+              <div class="absolute opacity-0 pointer-events-none" aria-hidden="true">
+                <input type="text" name="website" tabindex="-1" autocomplete="off" />
+              </div>
+              <div>
+                <input type="text" id="q-name" name="name" required placeholder="Neve *" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 text-sm focus:outline-none focus:border-orange-400 transition-colors" />
+              </div>
+              <div>
+                <input type="tel" id="q-phone" name="phone" required placeholder="Telefonszám * (+36 20 ...)" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 text-sm focus:outline-none focus:border-orange-400 transition-colors" />
+              </div>
+              <div>
+                <input type="email" id="q-email" name="email" placeholder="E-mail (opcionális)" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 text-sm focus:outline-none focus:border-orange-400 transition-colors" />
+              </div>
+              <div>
+                <select id="q-district" name="district" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 text-sm focus:outline-none focus:border-orange-400 bg-white transition-colors text-gray-500">
+                  <option value="">Budapest – kerület (opcionális)</option>
+                  {Array.from({ length: 23 }, (_, i) => i + 1).map((n) => (
+                    <option value={`${n}. kerület`}>Budapest {n}. kerület</option>
+                  ))}
+                </select>
+              </div>
+              <button id="submit-btn" type="button" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg mt-1">
+                Árajánlatot Kérek →
+              </button>
+              <p class="text-xs text-gray-400 text-center">🔒 Adatait bizalmasan kezeljük</p>
+            </div>
+          </div>
+
+          <!-- SUCCESS -->
+          <div id="step-success" class="quiz-step hidden text-center py-4">
+            <div class="text-5xl mb-4">✅</div>
+            <h2 class="text-xl font-bold text-gray-900 mb-2">Köszönjük!</h2>
+            <p class="text-gray-600 text-sm mb-6">Árajánlatkérését megkaptuk. <strong>24 órán belül visszahívjuk</strong> a megadott telefonszámon.</p>
+            <a href="/" class="inline-block bg-blue-900 text-white px-6 py-3 rounded-xl text-sm font-bold hover:bg-blue-800 transition-colors">← Vissza a főoldalra</a>
+          </div>
+
+          <!-- Back button -->
+          <button id="back-btn" type="button" class="hidden mt-4 text-xs text-gray-400 hover:text-gray-600 flex items-center gap-1 transition-colors">
+            ← Vissza
+          </button>
+
+        </div>
+      </div>
+
+      <!-- Direct contact alternatives -->
+      <div class="mt-5 grid grid-cols-2 gap-3">
+        <a href={`tel:${SITE.phoneTel}`} class="flex items-center gap-3 bg-white/10 text-white rounded-2xl p-3.5 hover:bg-white/20 transition-colors">
+          <svg class="w-5 h-5 text-orange-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
           </svg>
           <div>
-            <div class="text-xs text-blue-300">Hívjon közvetlenül</div>
-            <div class="font-bold">{SITE.phone}</div>
+            <div class="text-[10px] text-blue-300">Hívjon most</div>
+            <div class="font-bold text-sm">{SITE.phone}</div>
           </div>
         </a>
-        <a href={`mailto:${SITE.email}`} class="flex items-center gap-3 bg-white border border-gray-200 text-gray-900 rounded-2xl p-4 hover:border-blue-300 transition-colors">
-          <svg class="w-8 h-8 text-blue-800 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        <a href={`mailto:${SITE.email}`} class="flex items-center gap-3 bg-white/10 text-white rounded-2xl p-3.5 hover:bg-white/20 transition-colors">
+          <svg class="w-5 h-5 text-blue-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
           </svg>
           <div>
-            <div class="text-xs text-gray-500">E-mail küldése</div>
+            <div class="text-[10px] text-blue-300">E-mail</div>
             <div class="font-bold text-sm">{SITE.email}</div>
           </div>
         </a>
       </div>
+
     </div>
   </section>
 
   <script>
-    const form = document.getElementById('quote-form') as HTMLFormElement;
-    form?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const answers: Record<string, string> = {};
+    let currentStep = 1;
+    const totalSteps = 4;
+
+    const progressBar = document.getElementById('progress-bar') as HTMLElement;
+    const stepLabel = document.getElementById('step-label') as HTMLElement;
+    const backBtn = document.getElementById('back-btn') as HTMLButtonElement;
+    const dots = document.querySelectorAll('.step-dot') as NodeListOf<HTMLElement>;
+
+    function showStep(n: number) {
+      document.querySelectorAll('.quiz-step').forEach(s => s.classList.add('hidden'));
+      const target = document.getElementById(n <= totalSteps ? `step-${n}` : 'step-success');
+      target?.classList.remove('hidden');
+
+      currentStep = n;
+      const pct = Math.min((n / (totalSteps + 1)) * 100, 100);
+      progressBar.style.width = `${pct}%`;
+      stepLabel.textContent = n <= totalSteps ? `${n}. lépés / ${totalSteps}` : 'Kész!';
+
+      dots.forEach((dot, i) => {
+        dot.style.backgroundColor = i < n ? '#f97316' : '#e5e7eb';
+      });
+
+      backBtn?.classList.toggle('hidden', n <= 1 || n > totalSteps);
+    }
+
+    // Quiz option clicks
+    document.querySelectorAll('.quiz-option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const step = (btn as HTMLElement).dataset.step!;
+        const value = (btn as HTMLElement).dataset.value!;
+        answers[`step${step}`] = value;
+
+        // Highlight selected
+        document.querySelectorAll(`.quiz-option[data-step="${step}"]`).forEach(b => {
+          b.classList.remove('border-orange-400', 'bg-orange-50');
+          b.classList.add('border-gray-200');
+        });
+        btn.classList.add('border-orange-400', 'bg-orange-50');
+        btn.classList.remove('border-gray-200');
+
+        setTimeout(() => showStep(parseInt(step) + 1), 300);
+      });
+    });
+
+    // Back button
+    backBtn?.addEventListener('click', () => showStep(currentStep - 1));
+
+    // Submit
+    document.getElementById('submit-btn')?.addEventListener('click', async () => {
+      const name = (document.getElementById('q-name') as HTMLInputElement).value.trim();
+      const phone = (document.getElementById('q-phone') as HTMLInputElement).value.trim();
+
+      if (!name || !phone) {
+        alert('Kérem adja meg nevét és telefonszámát!');
+        return;
+      }
+
+      const btn = document.getElementById('submit-btn') as HTMLButtonElement;
       btn.textContent = 'Küldés...';
       btn.disabled = true;
-      await new Promise((r) => setTimeout(r, 800));
 
-      const success = document.createElement('div');
-      success.className = 'mt-4 p-4 bg-green-50 border border-green-200 rounded-xl text-sm text-green-800';
-      success.textContent = '✅ Köszönjük! Árajánlatkérését megkaptuk, 24 órán belül visszahívjuk.';
-      form.appendChild(success);
+      const payload = {
+        ...answers,
+        name,
+        phone,
+        email: (document.getElementById('q-email') as HTMLInputElement).value,
+        district: (document.getElementById('q-district') as HTMLSelectElement).value,
+      };
 
-      btn.textContent = 'Elküldve ✓';
+      try {
+        await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+      } catch {}
+
+      showStep(5);
     });
+
+    showStep(1);
   </script>
+
 </BaseLayout>
