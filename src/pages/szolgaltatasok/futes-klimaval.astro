@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import FAQ from '../../components/FAQ.astro';
-import ContactForm from '../../components/ContactForm.astro';
+import QuizForm from '../../components/QuizForm.astro';
 import { getSite } from '../../lib/getSite';
 const SITE = await getSite();
 import { getServicePage } from '../../lib/queries';
@@ -123,7 +123,7 @@ const faqs = serviceData?.faqs ?? [
 
   <section class="py-12 bg-gray-50">
     <div class="container mx-auto px-4 max-w-xl">
-      <ContactForm title="Fűtési Klíma Árajánlat Kérése" />
+      <QuizForm title="Fűtési Klíma Árajánlat Kérése" />
     </div>
   </section>
 </BaseLayout>

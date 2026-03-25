@@ -1,0 +1,203 @@
+---
+export interface Props {
+  title?: string;
+  preselect?: 'telepites' | 'javitas' | 'tisztitas' | 'futes';
+}
+
+const { title = 'Ingyenes Árajánlat Kérése', preselect } = Astro.props;
+
+// unique id per component instance
+const uid = Math.random().toString(36).slice(2, 8);
+---
+
+<div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden" data-quiz-uid={uid}>
+  <!-- Progress bar -->
+  <div class="h-1.5 bg-gray-100">
+    <div class="quiz-progress h-full bg-orange-500 transition-all duration-500 rounded-full" style="width:25%"></div>
+  </div>
+
+  <div class="p-6">
+    <h3 class="text-lg font-bold text-gray-900 mb-1">{title}</h3>
+    <p class="text-xs text-gray-400 mb-5">3 gyors kérdés → visszahívjuk 24 órán belül</p>
+
+    <!-- Step indicator -->
+    <div class="flex items-center justify-between mb-4">
+      <span class="quiz-step-label text-xs font-semibold text-gray-400 uppercase tracking-widest">1. lépés / 4</span>
+      <div class="flex gap-1.5">
+        {[1,2,3,4].map(n => (
+          <div class="quiz-dot w-2 h-2 rounded-full bg-gray-200 transition-colors duration-300" data-n={n}></div>
+        ))}
+      </div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="quiz-step" data-step="1">
+      <p class="text-sm font-semibold text-gray-700 mb-3">Milyen szolgáltatásra van szüksége?</p>
+      <div class="grid grid-cols-2 gap-2">
+        {[
+          { val: 'telepites', icon: '🔧', label: 'Klíma telepítés' },
+          { val: 'javitas',   icon: '⚙️', label: 'Klíma javítás' },
+          { val: 'tisztitas', icon: '✨', label: 'Klíma tisztítás' },
+          { val: 'futes',     icon: '🔥', label: 'Fűtés klímával' },
+        ].map(opt => (
+          <button
+            type="button"
+            class={`quiz-opt flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 transition-all text-center hover:border-orange-400 hover:bg-orange-50 ${preselect === opt.val ? 'border-orange-400 bg-orange-50' : 'border-gray-200'}`}
+            data-qstep="1"
+            data-val={opt.val}
+          >
+            <span class="text-xl">{opt.icon}</span>
+            <span class="text-xs font-semibold text-gray-700 leading-tight">{opt.label}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="quiz-step hidden" data-step="2">
+      <p class="text-sm font-semibold text-gray-700 mb-3">Hány helyiségbe kerülne a klíma?</p>
+      <div class="grid grid-cols-2 gap-2">
+        {[
+          { val: '1',  icon: '🏠', label: '1 helyiség' },
+          { val: '2',  icon: '🏡', label: '2 helyiség' },
+          { val: '3',  icon: '🏘️', label: '3 helyiség' },
+          { val: '4+', icon: '🏢', label: '4 vagy több' },
+        ].map(opt => (
+          <button type="button" class="quiz-opt flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 border-gray-200 transition-all text-center hover:border-orange-400 hover:bg-orange-50" data-qstep="2" data-val={opt.val}>
+            <span class="text-xl">{opt.icon}</span>
+            <span class="text-xs font-semibold text-gray-700">{opt.label}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="quiz-step hidden" data-step="3">
+      <p class="text-sm font-semibold text-gray-700 mb-3">Mikor lenne szükséges?</p>
+      <div class="grid grid-cols-2 gap-2">
+        {[
+          { val: 'asap',  icon: '⚡', label: 'Minél előbb' },
+          { val: '1het',  icon: '📅', label: '1 héten belül' },
+          { val: '1ho',   icon: '🗓️', label: '1 hónapon belül' },
+          { val: 'info',  icon: '💭', label: 'Csak érdeklődöm' },
+        ].map(opt => (
+          <button type="button" class="quiz-opt flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 border-gray-200 transition-all text-center hover:border-orange-400 hover:bg-orange-50" data-qstep="3" data-val={opt.val}>
+            <span class="text-xl">{opt.icon}</span>
+            <span class="text-xs font-semibold text-gray-700">{opt.label}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- STEP 4: contact -->
+    <div class="quiz-step hidden" data-step="4">
+      <p class="text-sm font-semibold text-gray-700 mb-3">Hova hívjuk vissza?</p>
+      <div class="space-y-2.5">
+        <input type="text" class="quiz-name w-full px-4 py-2.5 rounded-xl border-2 border-gray-200 text-sm focus:outline-none focus:border-orange-400 transition-colors" placeholder="Neve *" autocomplete="name" />
+        <input type="tel" class="quiz-phone w-full px-4 py-2.5 rounded-xl border-2 border-gray-200 text-sm focus:outline-none focus:border-orange-400 transition-colors" placeholder="Telefonszám * (+36 20...)" autocomplete="tel" />
+        <input type="email" class="quiz-email w-full px-4 py-2.5 rounded-xl border-2 border-gray-200 text-sm focus:outline-none focus:border-orange-400 transition-colors" placeholder="E-mail (opcionális)" autocomplete="email" />
+        <button type="button" class="quiz-submit w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-xl transition-all duration-200 shadow-md text-sm">
+          Árajánlatot Kérek →
+        </button>
+        <p class="text-xs text-gray-400 text-center">🔒 Adatait bizalmasan kezeljük</p>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="quiz-step hidden text-center py-3" data-step="success">
+      <div class="text-4xl mb-3">✅</div>
+      <p class="font-bold text-gray-900 mb-1">Köszönjük!</p>
+      <p class="text-sm text-gray-500">24 órán belül visszahívjuk a megadott telefonszámon.</p>
+    </div>
+
+    <!-- Back -->
+    <button type="button" class="quiz-back hidden mt-3 text-xs text-gray-400 hover:text-gray-600 transition-colors">← Vissza</button>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('[data-quiz-uid]').forEach((card) => {
+    const answers: Record<string, string> = {};
+    let current = 1;
+
+    const progress = card.querySelector('.quiz-progress') as HTMLElement;
+    const stepLabel = card.querySelector('.quiz-step-label') as HTMLElement;
+    const backBtn = card.querySelector('.quiz-back') as HTMLButtonElement;
+    const dots = card.querySelectorAll('.quiz-dot') as NodeListOf<HTMLElement>;
+
+    function show(n: number | 'success') {
+      card.querySelectorAll('.quiz-step').forEach(s => s.classList.add('hidden'));
+      const target = card.querySelector(n === 'success' ? '[data-step="success"]' : `[data-step="${n}"]`);
+      target?.classList.remove('hidden');
+
+      const stepNum = n === 'success' ? 5 : (n as number);
+      current = stepNum;
+      progress.style.width = `${Math.min((stepNum / 5) * 100, 100)}%`;
+      stepLabel.textContent = n === 'success' ? 'Kész!' : `${n}. lépés / 4`;
+
+      dots.forEach((dot, i) => {
+        dot.style.backgroundColor = i < stepNum - 1 ? '#f97316' : '#e5e7eb';
+      });
+
+      backBtn.classList.toggle('hidden', stepNum <= 1 || n === 'success');
+    }
+
+    // Option clicks
+    card.querySelectorAll('.quiz-opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const step = (btn as HTMLElement).dataset.qstep!;
+        const val = (btn as HTMLElement).dataset.val!;
+        answers[`step${step}`] = val;
+
+        card.querySelectorAll(`.quiz-opt[data-qstep="${step}"]`).forEach(b => {
+          b.classList.remove('border-orange-400', 'bg-orange-50');
+          b.classList.add('border-gray-200');
+        });
+        btn.classList.add('border-orange-400', 'bg-orange-50');
+        btn.classList.remove('border-gray-200');
+
+        setTimeout(() => show(parseInt(step) + 1), 280);
+      });
+    });
+
+    // Back
+    backBtn.addEventListener('click', () => show(Math.max(1, current - 1)));
+
+    // Submit
+    card.querySelector('.quiz-submit')?.addEventListener('click', async () => {
+      const name = (card.querySelector('.quiz-name') as HTMLInputElement).value.trim();
+      const phone = (card.querySelector('.quiz-phone') as HTMLInputElement).value.trim();
+      if (!name || !phone) {
+        alert('Kérem adja meg nevét és telefonszámát!');
+        return;
+      }
+      const submitBtn = card.querySelector('.quiz-submit') as HTMLButtonElement;
+      submitBtn.textContent = 'Küldés...';
+      submitBtn.disabled = true;
+
+      try {
+        await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            ...answers,
+            name,
+            phone,
+            email: (card.querySelector('.quiz-email') as HTMLInputElement).value,
+          }),
+        });
+      } catch {}
+
+      show('success');
+    });
+
+    // preselect if set
+    const preselected = card.querySelector('.quiz-opt.border-orange-400') as HTMLElement | null;
+    if (preselected) {
+      setTimeout(() => {
+        answers['step1'] = preselected.dataset.val!;
+        setTimeout(() => show(2), 400);
+      }, 300);
+    }
+  });
+</script>

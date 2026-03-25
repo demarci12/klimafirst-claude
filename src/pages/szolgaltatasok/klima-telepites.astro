@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import FAQ from '../../components/FAQ.astro';
 import PriceTable from '../../components/PriceTable.astro';
-import ContactForm from '../../components/ContactForm.astro';
+import QuizForm from '../../components/QuizForm.astro';
 import TrustBar from '../../components/TrustBar.astro';
 import { getSite } from '../../lib/getSite';
 const SITE = await getSite();
@@ -156,7 +156,7 @@ const faqs = serviceData?.faqs ?? [
 
   <section class="py-12 bg-gray-50">
     <div class="container mx-auto px-4 max-w-xl">
-      <ContactForm title="Klíma Telepítés Árajánlat Kérése" />
+      <QuizForm title="Klíma Telepítés Árajánlat Kérése" />
     </div>
   </section>
 </BaseLayout>

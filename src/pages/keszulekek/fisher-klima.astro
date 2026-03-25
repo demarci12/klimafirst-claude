@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import FAQ from '../../components/FAQ.astro';
-import ContactForm from '../../components/ContactForm.astro';
+import QuizForm from '../../components/QuizForm.astro';
 import { SITE } from '../../data/site';
 import { getBrandPage } from '../../lib/queries';
 
@@ -71,7 +71,7 @@ const faqs = brandData?.faqs ?? [
 
   <section class="py-12 bg-gray-50">
     <div class="container mx-auto px-4 max-w-xl">
-      <ContactForm title="Fisher Klíma Árajánlat Kérése" />
+      <QuizForm title="Fisher Klíma Árajánlat Kérése" />
     </div>
   </section>
 </BaseLayout>

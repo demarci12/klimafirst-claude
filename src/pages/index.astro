@@ -4,7 +4,7 @@ import TrustBar from '../components/TrustBar.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import FAQ from '../components/FAQ.astro';
 import DistrictGrid from '../components/DistrictGrid.astro';
-import ContactForm from '../components/ContactForm.astro';
+import QuizForm from '../components/QuizForm.astro';
 import { getSite } from '../lib/getSite';
 const SITE = await getSite();
 import { getCollection } from 'astro:content';
@@ -187,7 +187,7 @@ const jbPhotos: JbPhoto[] = homepageData.jbPhotos ?? [
 
         <!-- Contact form widget -->
         <div class="lg:max-w-md w-full">
-          <ContactForm title="Kérjen Ingyenes Árajánlatot" compact={true} />
+          <QuizForm title="Kérjen Ingyenes Árajánlatot" />
         </div>
       </div>
     </div>

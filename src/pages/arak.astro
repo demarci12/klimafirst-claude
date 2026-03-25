@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import PriceTable from '../components/PriceTable.astro';
 import FAQ from '../components/FAQ.astro';
-import ContactForm from '../components/ContactForm.astro';
+import QuizForm from '../components/QuizForm.astro';
 import { getSite } from '../lib/getSite';
 const SITE = await getSite();
 import pricingJson from '../data/pricing.json';
@@ -81,7 +81,7 @@ const { installPrices, devicePrices, servicePrices, faqs } = pricingData;
 
   <section class="py-12 bg-gray-50">
     <div class="container mx-auto px-4 max-w-xl">
-      <ContactForm title="Pontos Árajánlat Kérése" />
+      <QuizForm title="Pontos Árajánlat Kérése" />
     </div>
   </section>
 </BaseLayout>
