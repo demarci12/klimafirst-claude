@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
 
 export default defineConfig({
-  site: 'http://localhost:4321',
+  site: 'https://klimafirst-claude.vercel.app',
   output: 'static',
   integrations: [
     tailwind(),
