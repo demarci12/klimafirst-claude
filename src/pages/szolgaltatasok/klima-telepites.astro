@@ -5,7 +5,8 @@ import FAQ from '../../components/FAQ.astro';
 import PriceTable from '../../components/PriceTable.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import TrustBar from '../../components/TrustBar.astro';
-import { SITE } from '../../data/site';
+import { getSite } from '../../lib/getSite';
+const SITE = await getSite();
 import { getServicePage } from '../../lib/queries';
 import { toHTML } from '@portabletext/to-html';
 

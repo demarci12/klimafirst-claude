@@ -3,7 +3,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import FAQ from '../../components/FAQ.astro';
 import ContactForm from '../../components/ContactForm.astro';
-import { SITE } from '../../data/site';
+import { getSite } from '../../lib/getSite';
+const SITE = await getSite();
 import { getServicePage } from '../../lib/queries';
 import { toHTML } from '@portabletext/to-html';
 

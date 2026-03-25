@@ -2,7 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import TrustBar from '../components/TrustBar.astro';
-import { SITE } from '../data/site';
+import { getSite } from '../lib/getSite';
+const SITE = await getSite();
 import rolunkJson from '../data/rolunk.json';
 import { getRolunk } from '../lib/queries';
 import { toHTML } from '@portabletext/to-html';
