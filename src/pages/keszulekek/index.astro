@@ -1,43 +1,118 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
-import { SITE } from '../../data/site';
 import { getBrandPages } from '../../lib/queries';
 
 const sanityBrands = await getBrandPages();
 
 const hardcodedBrands = [
   {
-    name: 'Fisher',
-    slug: 'fisher-klima',
-    description: 'A Fisher klíma kiváló ár-érték arányt kínál. Megbízható minőség, modern funkciók, hosszú élettartam – ideális választás azoknak, akik megfizethető áron szeretnének minőségi klímát.',
-    pros: ['Kiváló ár-érték arány', 'Megbízható alkatrészek', 'Hatékony inverteres motor', 'Könnyű kezelhetőség'],
-    range: '130.000 Ft-tól',
-    icon: '🔵',
+    name: 'Gree',
+    slug: 'gree-klima',
+    description: 'Kategóriák: Lakossági modellek, Prestige széria, Kereskedelmi klímák. Széles választék minden igényre.',
+    pros: ['Lakossági modellek', 'Prestige széria', 'Kereskedelmi klímák', 'Kiváló ár-érték arány'],
+    range: 'Már 250 000 Ft-tól',
+    icon: '🟣',
+    logoUrl: 'https://logo.clearbit.com/gree.com',
   },
   {
-    name: 'Fujitsu',
-    slug: 'fujitsu-klima',
-    description: 'A Fujitsu japán precizitással gyártott klímái a csendes működés és a magas energiahatékonyság terén kiemelkedők. Kiváló választás, ha a minőség és a tartósság az elsődleges szempont.',
-    pros: ['Japán minőség', 'Rendkívül csendes működés', 'A+++ energiaosztály', 'Hosszú élettartam'],
-    range: '180.000 Ft-tól',
-    icon: '🟢',
+    name: 'Midea',
+    slug: 'midea-klima',
+    description: 'Lakossági klímák és Multisplit rendszerek – egyetlen kültéri egységgel akár 5 beltéri is csatlakoztatható.',
+    pros: ['Lakossági klímák', 'Multisplit rendszer', 'Akár 5 beltéri egy kültérihez', 'Megfizethető árak'],
+    range: 'Már 220 000 Ft-tól',
+    icon: '🔵',
+    logoUrl: 'https://logo.clearbit.com/midea.com',
+  },
+  {
+    name: 'Daikin',
+    slug: 'daikin-klima',
+    description: 'Korszerű és energiahatékony megoldások otthonra. A világ klímapiaci vezető márkája, páratlan megbízhatósággal.',
+    pros: ['Világ piacvezető', 'Kiemelkedő megbízhatóság', '-25°C fűtési teljesítmény', 'A++++ energiaosztály'],
+    range: 'Már 320 000 Ft-tól',
+    icon: '🟡',
+    logoUrl: 'https://logo.clearbit.com/daikin.com',
+  },
+  {
+    name: 'Syen',
+    slug: 'syen-klima',
+    description: 'Teljes lakossági termékpaletta. Megbízható és megfizethető klímák minden otthonba.',
+    pros: ['Teljes lakossági paletta', 'Megfizethető árak', 'Megbízható minőség', 'Kiváló ár-érték arány'],
+    range: 'Már 230 000 Ft-tól',
+    icon: '🟤',
+    logoUrl: 'https://logo.clearbit.com/syen.hu',
+  },
+  {
+    name: 'Fisher',
+    slug: 'fisher-klima',
+    description: 'Lakossági légkondicionálók, innovatív és extra funkciókkal rendelkező modellek széles választékban.',
+    pros: ['Kiváló ár-érték arány', 'Innovatív funkciók', 'Megbízható alkatrészek', 'Könnyű kezelhetőség'],
+    range: 'Már 260 000 Ft-tól',
+    icon: '🔵',
+    logoUrl: 'https://logo.clearbit.com/fisherklima.hu',
   },
   {
     name: 'Toshiba',
     slug: 'toshiba-klima',
-    description: 'A Toshiba klímák innovatív technológiával, beépített Wi-Fi vezérléssel és öntisztító funkcióval rendelkeznek. Prémium kategória azoknak, akik a legmodernebb funkciókra vágynak.',
-    pros: ['Beépített Wi-Fi', 'Öntisztító funkció', 'Intelligens hőmérséklet-szabályozás', 'Prémium kategória'],
-    range: '185.000 Ft-tól',
+    description: 'Japán minőség és megbízhatóság, prémium és magas energiahatékonyságú lakossági modellek.',
+    pros: ['Japán minőség', 'Prémium energiahatékonyság', 'Megbízható tartósság', 'Beépített Wi-Fi'],
+    range: 'Már 300 000 Ft-tól',
     icon: '🔴',
+    logoUrl: 'https://logo.clearbit.com/toshiba-climate.com',
   },
   {
-    name: 'Daikin',
-    slug: '#',
-    description: 'A Daikin a világ klímapiaci vezető márkája. Páratlan megbízhatóság, kiemelkedő hatékonyság és a legjobb fűtési teljesítmény -25°C-ig. A profi választás.',
-    pros: ['Világ piacvezető', 'Kiemelkedő megbízhatóság', '-25°C fűtési teljesítmény', 'A++++ energiaosztály'],
-    range: '200.000 Ft-tól',
-    icon: '🟡',
+    name: 'Fujitsu',
+    slug: 'fujitsu-klima',
+    description: 'Kiemelkedően halk működés, japán technológia és megbízható lakossági hűtési és fűtési megoldások.',
+    pros: ['Rendkívül csendes működés', 'Japán technológia', 'A+++ energiaosztály', 'Hosszú élettartam'],
+    range: 'Már 290 000 Ft-tól',
+    icon: '🟢',
+    logoUrl: 'https://logo.clearbit.com/fujitsu.com',
+  },
+  {
+    name: 'LG',
+    slug: 'lg-klima',
+    description: 'Letisztult dizájn, fejlett okosotthon funkciók és csendes, Dual Inverter technológia.',
+    pros: ['Dual Inverter technológia', 'Okosotthon integráció', 'Csendes működés', 'Letisztult dizájn'],
+    range: 'Már 280 000 Ft-tól',
+    icon: '🔴',
+    logoUrl: 'https://logo.clearbit.com/lg.com',
+  },
+  {
+    name: 'Samsung',
+    slug: 'samsung-klima',
+    description: 'Innovatív WindFree™ technológia a huzatmentes hűtésért és kiemelkedő okos vezérlés.',
+    pros: ['WindFree™ technológia', 'Huzatmentes hűtés', 'Okos vezérlés', 'Energiahatékony'],
+    range: 'Már 270 000 Ft-tól',
+    icon: '🔵',
+    logoUrl: 'https://logo.clearbit.com/samsung.com',
+  },
+  {
+    name: 'Panasonic',
+    slug: 'panasonic-klima',
+    description: 'Fejlett nanoe™ X légtisztító rendszer és maximális energiahatékonyság egészségesebb légkörért.',
+    pros: ['nanoe™ X légtisztítás', 'Maximális energiahatékonyság', 'Japán megbízhatóság', 'Egészséges levegő'],
+    range: 'Már 300 000 Ft-tól',
+    icon: '🔵',
+    logoUrl: 'https://logo.clearbit.com/panasonic.com',
+  },
+  {
+    name: 'Mitsubishi Electric',
+    slug: 'mitsubishi-electric-klima',
+    description: 'Csúcskategóriás japán prémium minőség, extrém tartósság és rendkívül csendes üzem.',
+    pros: ['Csúcskategóriás minőség', 'Extrém tartósság', 'Rendkívül csendes üzem', 'Japán prémium'],
+    range: 'Már 330 000 Ft-tól',
+    icon: '🔴',
+    logoUrl: 'https://logo.clearbit.com/mitsubishielectric.com',
+  },
+  {
+    name: 'Polar',
+    slug: 'polar-klima',
+    description: 'Pénztárcabarát, megbízható hűtési és fűtési megoldások, kiváló ár-érték aránnyal.',
+    pros: ['Legjobb ár-érték', 'Pénztárcabarát', 'Megbízható minőség', 'Ideális belépő klíma'],
+    range: 'Már 210 000 Ft-tól',
+    icon: '⚪',
+    logoUrl: 'https://logo.clearbit.com/polarklima.hu',
   },
 ];
 
@@ -49,13 +124,14 @@ const brands = (sanityBrands && sanityBrands.length > 0)
       pros: b.pros ?? [],
       range: b.priceRange ?? '',
       icon: b.icon ?? '⚡',
+      logoUrl: b.logoUrl ?? null,
     }))
   : hardcodedBrands;
 ---
 
 <BaseLayout
-  title="Klímakészülékek – Fisher, Fujitsu, Toshiba, Daikin Budapest | Klímaépítő.hu"
-  description="Fisher, Fujitsu, Toshiba és Daikin klímakészülékek Budapesten. Összehasonlítás, árak, telepítés egyben. Szakértői tanácsadás ingyenesen. ☎ +36 20 339 4164"
+  title="Klímakészülékek – Gree, Midea, Daikin, Fisher, Fujitsu, LG, Samsung és még több | Klímaépítő.hu"
+  description="12 klímamárka egy helyen: Gree, Midea, Daikin, Syen, Fisher, Toshiba, Fujitsu, LG, Samsung, Panasonic, Mitsubishi Electric, Polar. Összehasonlítás, árak, telepítés. ☎ +36 20 339 4164"
   canonical="/keszulekek"
   breadcrumbs={[{ name: 'Klímakészülékek', url: '/keszulekek' }]}
 >
@@ -67,23 +143,39 @@ const brands = (sanityBrands && sanityBrands.length > 0)
 
   <section class="bg-gradient-to-br from-blue-900 to-blue-800 text-white py-14">
     <div class="container mx-auto px-4 max-w-4xl text-center">
-      <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Klímakészülékek Budapesten</h1>
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Forgalmazott Klímamárkák</h1>
       <p class="text-lg text-blue-100 max-w-2xl mx-auto">
-        Forgalmazott márkák összehasonlítása – segítünk megtalálni az Önnek legjobb klímát. Telepítéssel, garanciával.
+        12 vezető márka – segítünk megtalálni az Önnek legjobb klímát. Telepítéssel, garanciával, szakértői tanácsadással.
       </p>
     </div>
   </section>
 
   <section class="py-12 bg-white">
-    <div class="container mx-auto px-4 max-w-5xl">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="container mx-auto px-4 max-w-6xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {brands.map((brand) => (
-          <article class="bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow p-6">
-            <div class="flex items-center gap-3 mb-4">
-              <span class="text-3xl" aria-hidden="true">{brand.icon}</span>
-              <h2 class="text-2xl font-extrabold text-gray-900">{brand.name} Klíma</h2>
+          <article class="bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow p-6 flex flex-col">
+            <div class="flex flex-col items-center mb-4">
+              {brand.logoUrl ? (
+                <img
+                  src={brand.logoUrl}
+                  alt={`${brand.name} logó`}
+                  width="120"
+                  height="60"
+                  class="h-14 w-auto object-contain mb-3"
+                  loading="lazy"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+                />
+              ) : null}
+              <div
+                class={`items-center gap-2 ${brand.logoUrl ? 'hidden' : 'flex'}`}
+                aria-hidden={brand.logoUrl ? 'true' : 'false'}
+              >
+                <span class="text-3xl">{brand.icon}</span>
+              </div>
+              <h2 class="text-xl font-extrabold text-gray-900 text-center">{brand.name} klíma</h2>
             </div>
-            <p class="text-gray-600 text-sm mb-4">{brand.description}</p>
+            <p class="text-gray-600 text-sm mb-4 flex-grow">{brand.description}</p>
             <ul class="space-y-1 mb-5">
               {brand.pros.map((pro) => (
                 <li class="flex items-center gap-2 text-sm text-gray-700">
@@ -94,17 +186,14 @@ const brands = (sanityBrands && sanityBrands.length > 0)
                 </li>
               ))}
             </ul>
-            <div class="flex items-center justify-between">
-              <span class="text-blue-900 font-bold">{brand.range}</span>
-              {brand.slug !== '#' ? (
-                <a href={`/keszulekek/${brand.slug}`} class="bg-blue-900 hover:bg-blue-800 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors">
-                  Részletek →
-                </a>
-              ) : (
-                <a href="/ajanlatkeres" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors">
-                  Árajánlat →
-                </a>
-              )}
+            <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
+              <span class="text-blue-900 font-bold text-sm">{brand.range}</span>
+              <a
+                href={brand.slug !== '#' ? `/keszulekek/${brand.slug}` : '/ajanlatkeres'}
+                class="bg-blue-900 hover:bg-blue-800 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors"
+              >
+                {brand.slug !== '#' ? 'Részletek →' : 'Árajánlat →'}
+              </a>
             </div>
           </article>
         ))}

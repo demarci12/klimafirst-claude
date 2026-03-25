@@ -7,39 +7,36 @@ import ContactForm from '../../components/ContactForm.astro';
 import TrustBar from '../../components/TrustBar.astro';
 import { SITE } from '../../data/site';
 import { getServicePage } from '../../lib/queries';
+import { toHTML } from '@portabletext/to-html';
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
 const serviceData = await getServicePage('klima-telepites');
 
+const heroTitle = serviceData?.title ?? 'Klíma Telepítés és Értékesítés Budapest';
+const heroSubtitle = serviceData?.subtitle ?? 'Fisher, Fujitsu, Toshiba és Daikin split és multi-split klímarendszerek professzionális telepítése. Ingyenes helyszíni felmérés, kiszállási díj nélkül mind a 23 kerületben.';
+const heroIcon = serviceData?.heroIcon ?? '❄️';
+const photo1Src = serviceData?.photo1?.src ?? '/images/juhasz-balazs/jb-gree-beszereles-letran-1.jpeg';
+const photo1Alt = serviceData?.photo1?.alt ?? 'Juhász Balázs Gree kültéri klíma beszerelése létráról – Klímaépítő.hu Budapest klímaszerelő';
+const photo2Src = serviceData?.photo2?.src ?? '/images/juhasz-balazs/jb-gree-egyseg-vallon-1.jpeg';
+const photo2Alt = serviceData?.photo2?.alt ?? 'Juhász Balázs telepített Gree kültéri klíma egységgel – Klímaépítő.hu Budapest';
+const photoLabel = serviceData?.photoSectionLabel ?? 'Tulajdonos-szerelő';
+const photoTitle = serviceData?.photoSectionTitle ?? 'Juhász Balázs személyesen végzi a telepítést';
+const photoText = serviceData?.photoSectionText ?? '10+ év tapasztalat, 5000+ elvégzett klíma telepítés Budapesten. Minden munkára 2 év garanciát vállalunk.';
+const bodyHtml = serviceData?.body ? toHTML(serviceData.body) : null;
+
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  name: 'Klíma Telepítés és Értékesítés Budapest',
-  description: 'Professzionális split és multi-split klímarendszerek telepítése Budapesten. Fisher, Fujitsu, Toshiba, Daikin márkák. Ingyenes helyszíni felmérés.',
-  provider: {
-    '@type': 'HVACBusiness',
-    name: 'Klímaépítő.hu',
-    telephone: SITE.phoneTel,
-    url: `${siteUrl}/`,
-  },
+  name: heroTitle,
+  description: heroSubtitle,
+  provider: { '@type': 'HVACBusiness', name: 'Klímaépítő.hu', telephone: SITE.phoneTel, url: `${siteUrl}/` },
   areaServed: { '@type': 'City', name: 'Budapest' },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'Klíma Telepítés Árak',
-    itemListElement: [
-      {
-        '@type': 'Offer',
-        name: 'Split klíma telepítés (2.5 kW)',
-        priceSpecification: { '@type': 'PriceSpecification', minPrice: 35000, priceCurrency: 'HUF' },
-      },
-    ],
+    itemListElement: [{ '@type': 'Offer', name: 'Split klíma telepítés (2.5 kW)', priceSpecification: { '@type': 'PriceSpecification', minPrice: 35000, priceCurrency: 'HUF' } }],
   },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.9',
-    reviewCount: '98',
-    bestRating: '5',
-  },
+  aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '98', bestRating: '5' },
 };
 
 const priceItems = serviceData?.priceItems ?? [
@@ -53,26 +50,11 @@ const priceItems = serviceData?.priceItems ?? [
 ];
 
 const faqs = serviceData?.faqs ?? [
-  {
-    question: 'Mennyi idő alatt szerelik fel a klímát?',
-    answer: 'Egy split klíma telepítése általában 3–6 óra alatt elvégezhető. Multi-split rendszereknél ez 1–2 napot vehet igénybe, a beltéri egységek számától függően.',
-  },
-  {
-    question: 'Hol helyezik el a kültéri egységet?',
-    answer: 'A kültéri egységet általában az erkélyen, homlokzaton, tetőn vagy az épület oldalán helyezzük el. Minden esetben figyelünk a szabályos elhelyezésre, a megfelelő áramlásra és a zaj minimalizálására.',
-  },
-  {
-    question: 'Kell-e engedély a klíma telepítéséhez?',
-    answer: 'Önálló lakóháznál általában nem kell engedély. Társasházi lakásoknál a kültéri egység elhelyezéséhez esetenként a közös képviselő vagy az önkormányzat engedélye szükséges – erről a helyszíni felmérésnél tájékoztatjuk.',
-  },
-  {
-    question: 'Milyen típusú klímákat szerelnek?',
-    answer: 'Split, multi-split és kazettás klímarendszereket szerelünk. Forgalmazott márkák: Fisher, Fujitsu, Toshiba, Daikin. Más márkák szervizét is elvégezzük.',
-  },
-  {
-    question: 'Mi az ingyenes helyszíni felmérés menete?',
-    answer: 'Szerelőink kiszállnak (kiszállási díj nélkül), felmérjük a helyiséget és az épületet, meghatározzuk a szükséges teljesítményt, javaslatot teszünk a telepítési helyre, majd írásos, tételes árajánlatot küldünk.',
-  },
+  { question: 'Mennyi idő alatt szerelik fel a klímát?', answer: 'Egy split klíma telepítése általában 3–6 óra alatt elvégezhető. Multi-split rendszereknél ez 1–2 napot vehet igénybe, a beltéri egységek számától függően.' },
+  { question: 'Hol helyezik el a kültéri egységet?', answer: 'A kültéri egységet általában az erkélyen, homlokzaton, tetőn vagy az épület oldalán helyezzük el. Minden esetben figyelünk a szabályos elhelyezésre, a megfelelő áramlásra és a zaj minimalizálására.' },
+  { question: 'Kell-e engedély a klíma telepítéséhez?', answer: 'Önálló lakóháznál általában nem kell engedély. Társasházi lakásoknál a kültéri egység elhelyezéséhez esetenként a közös képviselő vagy az önkormányzat engedélye szükséges – erről a helyszíni felmérésnél tájékoztatjuk.' },
+  { question: 'Milyen típusú klímákat szerelnek?', answer: 'Split, multi-split és kazettás klímarendszereket szerelünk. Forgalmazott márkák: Fisher, Fujitsu, Toshiba, Daikin. Más márkák szervizét is elvégezzük.' },
+  { question: 'Mi az ingyenes helyszíni felmérés menete?', answer: 'Szerelőink kiszállnak (kiszállási díj nélkül), felmérjük a helyiséget és az épületet, meghatározzuk a szükséges teljesítményt, javaslatot teszünk a telepítési helyre, majd írásos, tételes árajánlatot küldünk.' },
 ];
 ---
 
@@ -83,114 +65,94 @@ const faqs = serviceData?.faqs ?? [
   schema={serviceSchema}
   breadcrumbs={[{ name: 'Klíma Telepítés', url: '/szolgaltatasok/klima-telepites' }]}
 >
-  <!-- Breadcrumb -->
   <div class="bg-gray-50 border-b border-gray-200">
     <div class="container mx-auto px-4">
       <Breadcrumb items={[{ name: 'Klíma Telepítés', href: '/szolgaltatasok/klima-telepites' }]} />
     </div>
   </div>
 
-  <!-- Hero -->
   <section class="bg-gradient-to-br from-blue-900 to-blue-800 text-white py-14">
     <div class="container mx-auto px-4 max-w-4xl text-center">
-      <div class="text-5xl mb-4" aria-hidden="true">❄️</div>
-      <h1 class="text-3xl md:text-4xl font-extrabold mb-4">
-        Klíma Telepítés és Értékesítés Budapest
-      </h1>
-      <p class="text-lg text-blue-100 mb-6 max-w-2xl mx-auto">
-        Fisher, Fujitsu, Toshiba és Daikin split és multi-split klímarendszerek professzionális telepítése. Ingyenes helyszíni felmérés, kiszállási díj nélkül mind a 23 kerületben.
-      </p>
+      <div class="text-5xl mb-4" aria-hidden="true">{heroIcon}</div>
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-4">{heroTitle}</h1>
+      <p class="text-lg text-blue-100 mb-6 max-w-2xl mx-auto">{heroSubtitle}</p>
       <div class="flex flex-col sm:flex-row gap-3 justify-center">
-        <a href="/ajanlatkeres" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-bold transition-colors">
-          Ingyenes Árajánlat
-        </a>
-        <a href="tel:+36203394164" class="border-2 border-white/40 hover:border-white text-white px-6 py-3 rounded-xl font-bold hover:bg-white/10 transition-colors">
-          ☎ +36 20 339 4164
-        </a>
+        <a href="/ajanlatkeres" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-bold transition-colors">Ingyenes Árajánlat</a>
+        <a href="tel:+36203394164" class="border-2 border-white/40 hover:border-white text-white px-6 py-3 rounded-xl font-bold hover:bg-white/10 transition-colors">☎ +36 20 339 4164</a>
       </div>
     </div>
   </section>
 
   <TrustBar />
 
-  <!-- JB photo -->
   <section class="bg-gray-950 py-10">
     <div class="container mx-auto px-4 max-w-5xl">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         <div class="grid grid-cols-2 gap-3">
           <div class="overflow-hidden rounded-2xl aspect-[3/4]">
-            <img src="/images/juhasz-balazs/jb-gree-beszereles-letran-1.jpeg" alt="Juhász Balázs Gree kültéri klíma beszerelése létráról – Klímaépítő.hu Budapest klímaszerelő" class="w-full h-full object-cover" loading="eager" />
+            <img src={photo1Src} alt={photo1Alt} class="w-full h-full object-cover" loading="eager" />
           </div>
           <div class="overflow-hidden rounded-2xl aspect-[3/4] mt-6">
-            <img src="/images/juhasz-balazs/jb-gree-egyseg-vallon-1.jpeg" alt="Juhász Balázs telepített Gree kültéri klíma egységgel – Klímaépítő.hu Budapest" class="w-full h-full object-cover" loading="eager" />
+            <img src={photo2Src} alt={photo2Alt} class="w-full h-full object-cover" loading="eager" />
           </div>
         </div>
         <div>
-          <p class="text-orange-400 font-semibold text-xs uppercase tracking-widest mb-2">Tulajdonos-szerelő</p>
-          <h2 class="text-2xl font-extrabold text-white mb-3">Juhász Balázs személyesen végzi a telepítést</h2>
-          <p class="text-gray-400 leading-relaxed mb-4">10+ év tapasztalat, 5000+ elvégzett klíma telepítés Budapesten. Minden munkára 2 év garanciát vállalunk.</p>
-          <a href="/rolunk" class="inline-flex items-center gap-2 text-orange-400 hover:text-orange-300 font-semibold transition-colors text-sm">
-            Ismerje meg a csapatot →
-          </a>
+          <p class="text-orange-400 font-semibold text-xs uppercase tracking-widest mb-2">{photoLabel}</p>
+          <h2 class="text-2xl font-extrabold text-white mb-3">{photoTitle}</h2>
+          <p class="text-gray-400 leading-relaxed mb-4">{photoText}</p>
+          <a href="/rolunk" class="inline-flex items-center gap-2 text-orange-400 hover:text-orange-300 font-semibold transition-colors text-sm">Ismerje meg a csapatot →</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Content -->
   <section class="py-12 bg-white">
     <div class="container mx-auto px-4 max-w-4xl">
-      <div class="prose-klima">
-        <h2>Miért Válassza a Klímaépítő.hu Klíma Telepítési Szolgáltatását?</h2>
-        <p>
-          A Klímaépítő.hu csapata 10+ év tapasztalattal rendelkezik Budapesten. Minden telepítési munkát precízen, magas minőségű eszközökkel végzünk el, és <strong>2 év garanciát</strong> vállalunk az elvégzett munkára. Kiszállási díjat nem számítunk fel Budapest területén.
-        </p>
-
-        <h2>Milyen Klímarendszereket Szerelünk?</h2>
-        <ul>
-          <li><strong>Split klíma:</strong> 1 kültéri + 1 beltéri egység – ideális egy szobához vagy kisebb helyiséghez</li>
-          <li><strong>Multi-split klíma:</strong> 1 kültéri + 2–5 beltéri egység – több helyiség egyidejű klimatizálása</li>
-          <li><strong>Kazettás klíma:</strong> Mennyezetbe süllyesztett, irodai alkalmazáshoz</li>
-          <li><strong>Inverteres klíma:</strong> Energiatakarékos, 30–50%-kal alacsonyabb villanyszámla</li>
-        </ul>
-
-        <h2>A Telepítés Menete – 5 Lépés</h2>
-        <ol>
-          <li><strong>Ingyenes helyszíni felmérés:</strong> Kiszállunk, felmérjük a helyiséget és meghatározzuk az optimális teljesítményt</li>
-          <li><strong>Árajánlat:</strong> Írásban, tételes bontásban küldjük az ajánlatot</li>
-          <li><strong>Időpontegyeztetés:</strong> Rugalmasan alkalmazkodunk az Ön időbeosztásához</li>
-          <li><strong>Telepítés:</strong> Precíz munkavégzés, tisztán hagyott munkaterület</li>
-          <li><strong>Átadás + Betanítás:</strong> Megmutatjuk a kezelési funkciókat, átadjuk a dokumentációt</li>
-        </ol>
-
-        <h2>Forgalmazott Márkák</h2>
-        <p>Kizárólag elismert, megbízható gyártók termékeit értékesítjük:</p>
-        <ul>
-          <li><a href="/keszulekek/fisher-klima"><strong>Fisher klíma</strong></a> – Kiváló ár-érték arány, megbízható minőség</li>
-          <li><a href="/keszulekek/fujitsu-klima"><strong>Fujitsu klíma</strong></a> – Japán precizitás, csendes működés, magas hatékonyság</li>
-          <li><a href="/keszulekek/toshiba-klima"><strong>Toshiba klíma</strong></a> – Innovatív technológia, prémium kategória</li>
-          <li><strong>Daikin klíma</strong> – A világ piacvezetője, kiemelkedő megbízhatóság</li>
-        </ul>
-      </div>
+      {bodyHtml ? (
+        <div class="prose-klima" set:html={bodyHtml} />
+      ) : (
+        <div class="prose-klima">
+          <h2>Miért Válassza a Klímaépítő.hu Klíma Telepítési Szolgáltatását?</h2>
+          <p>A Klímaépítő.hu csapata 10+ év tapasztalattal rendelkezik Budapesten. Minden telepítési munkát precízen, magas minőségű eszközökkel végzünk el, és <strong>2 év garanciát</strong> vállalunk az elvégzett munkára. Kiszállási díjat nem számítunk fel Budapest területén.</p>
+          <h2>Milyen Klímarendszereket Szerelünk?</h2>
+          <ul>
+            <li><strong>Split klíma:</strong> 1 kültéri + 1 beltéri egység – ideális egy szobához vagy kisebb helyiséghez</li>
+            <li><strong>Multi-split klíma:</strong> 1 kültéri + 2–5 beltéri egység – több helyiség egyidejű klimatizálása</li>
+            <li><strong>Kazettás klíma:</strong> Mennyezetbe süllyesztett, irodai alkalmazáshoz</li>
+            <li><strong>Inverteres klíma:</strong> Energiatakarékos, 30–50%-kal alacsonyabb villanyszámla</li>
+          </ul>
+          <h2>A Telepítés Menete – 5 Lépés</h2>
+          <ol>
+            <li><strong>Ingyenes helyszíni felmérés:</strong> Kiszállunk, felmérjük a helyiséget és meghatározzuk az optimális teljesítményt</li>
+            <li><strong>Árajánlat:</strong> Írásban, tételes bontásban küldjük az ajánlatot</li>
+            <li><strong>Időpontegyeztetés:</strong> Rugalmasan alkalmazkodunk az Ön időbeosztásához</li>
+            <li><strong>Telepítés:</strong> Precíz munkavégzés, tisztán hagyott munkaterület</li>
+            <li><strong>Átadás + Betanítás:</strong> Megmutatjuk a kezelési funkciókat, átadjuk a dokumentációt</li>
+          </ol>
+          <h2>Forgalmazott Márkák</h2>
+          <p>Kizárólag elismert, megbízható gyártók termékeit értékesítjük:</p>
+          <ul>
+            <li><a href="/keszulekek/fisher-klima"><strong>Fisher klíma</strong></a> – Kiváló ár-érték arány, megbízható minőség</li>
+            <li><a href="/keszulekek/fujitsu-klima"><strong>Fujitsu klíma</strong></a> – Japán precizitás, csendes működés, magas hatékonyság</li>
+            <li><a href="/keszulekek/toshiba-klima"><strong>Toshiba klíma</strong></a> – Innovatív technológia, prémium kategória</li>
+            <li><strong>Daikin klíma</strong> – A világ piacvezetője, kiemelkedő megbízhatóság</li>
+          </ul>
+        </div>
+      )}
     </div>
   </section>
 
-  <!-- Price table -->
   <section class="py-8 bg-gray-50">
     <div class="container mx-auto px-4 max-w-4xl">
       <PriceTable items={priceItems} title="Klíma Telepítés Árak 2025" />
       <div class="text-center mt-6">
-        <a href="/arak" class="text-blue-800 font-semibold hover:text-blue-600 transition-colors">
-          Teljes árlistát megtekintése →
-        </a>
+        <a href="/arak" class="text-blue-800 font-semibold hover:text-blue-600 transition-colors">Teljes árlistát megtekintése →</a>
       </div>
     </div>
   </section>
 
-  <!-- FAQ -->
   <FAQ items={faqs} title="Klíma Telepítés – Leggyakoribb Kérdések" />
 
-  <!-- CTA + Form -->
   <section class="py-12 bg-gray-50">
     <div class="container mx-auto px-4 max-w-xl">
       <ContactForm title="Klíma Telepítés Árajánlat Kérése" />

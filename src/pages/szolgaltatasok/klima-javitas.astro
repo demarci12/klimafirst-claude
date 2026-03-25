@@ -6,15 +6,28 @@ import PriceTable from '../../components/PriceTable.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import { SITE } from '../../data/site';
 import { getServicePage } from '../../lib/queries';
+import { toHTML } from '@portabletext/to-html';
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
 const serviceData = await getServicePage('klima-javitas');
 
+const heroTitle = serviceData?.title ?? 'Klíma Javítás Budapest';
+const heroSubtitle = serviceData?.subtitle ?? 'Gyors, megbízható klímajavítás minden márkára. Helyszíni diagnosztika, eredeti alkatrészek, 6 hónap garancia. Kiszállási díj nélkül Budapest egész területén.';
+const heroIcon = serviceData?.heroIcon ?? '🔧';
+const photo1Src = serviceData?.photo1?.src ?? '/images/juhasz-balazs/jb-manifold-letran-1.jpeg';
+const photo1Alt = serviceData?.photo1?.alt ?? 'Juhász Balázs manifold mérősorral hűtőközeg ellenőrzés – Klímaépítő.hu klíma javítás Budapest';
+const photo2Src = serviceData?.photo2?.src ?? '/images/juhasz-balazs/jb-manifold-gree-napsutes.jpeg';
+const photo2Alt = serviceData?.photo2?.alt ?? 'Klíma hűtőközeg töltés manifolddal – Klímaépítő.hu szerviz Budapest';
+const photoLabel = serviceData?.photoSectionLabel ?? 'Diagnosztika helyszínen';
+const photoTitle = serviceData?.photoSectionTitle ?? 'Profi szerviz eszközökkel, gyorsan';
+const photoText = serviceData?.photoSectionText ?? 'Manifold mérősor, vákuumszivattyú, diagnosztikai eszközök – minden szükséges felszerelés nálunk van. Nincs felesleges visszajárás.';
+const bodyHtml = serviceData?.body ? toHTML(serviceData.body) : null;
+
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  name: 'Klíma Javítás Budapest',
-  description: 'Gyors és megbízható klímajavítás Budapesten. Minden márka, eredeti alkatrészek, garanciával. Kiszállási díj nélkül.',
+  name: heroTitle,
+  description: heroSubtitle,
   provider: { '@type': 'HVACBusiness', name: 'Klímaépítő.hu', telephone: SITE.phoneTel, url: `${siteUrl}/` },
   areaServed: { '@type': 'City', name: 'Budapest' },
   aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '74', bestRating: '5' },
@@ -30,22 +43,10 @@ const priceItems = serviceData?.priceItems ?? [
 ];
 
 const faqs = serviceData?.faqs ?? [
-  {
-    question: 'Miért nem hűt a klímám?',
-    answer: 'A leggyakoribb okok: alacsony hűtőközeg szint (szivárgás), eltömött szűrő, hibás kompresszor, vagy problémás vezérlő. Helyszíni diagnosztikával gyorsan azonosítjuk a hibát.',
-  },
-  {
-    question: 'Meddig tart egy klímajavítás?',
-    answer: 'Egyszerűbb hibák (pl. hűtőközeg utántöltés, szűrő csere) 1–2 óra alatt elvégezhetők. Komplex javítások (pl. kompresszor csere) 3–8 óra munkaidőt igényelnek, de ez alkatrész rendelhetőségtől is függ.',
-  },
-  {
-    question: 'Van garancia a javításra?',
-    answer: 'Igen, minden elvégzett javítási munkára 6 hónap garanciát vállalunk. Beépített alkatrészekre az alkatrész gyártói garanciája érvényes.',
-  },
-  {
-    question: 'Minden klíma márkát javítanak?',
-    answer: 'Igen, szervizeljük az összes elterjedt klíma márkát: Samsung, LG, Mitsubishi, Panasonic, Gree, Midea, Fisher, Fujitsu, Toshiba, Daikin és más márkákat is.',
-  },
+  { question: 'Miért nem hűt a klímám?', answer: 'A leggyakoribb okok: alacsony hűtőközeg szint (szivárgás), eltömött szűrő, hibás kompresszor, vagy problémás vezérlő. Helyszíni diagnosztikával gyorsan azonosítjuk a hibát.' },
+  { question: 'Meddig tart egy klímajavítás?', answer: 'Egyszerűbb hibák (pl. hűtőközeg utántöltés, szűrő csere) 1–2 óra alatt elvégezhetők. Komplex javítások (pl. kompresszor csere) 3–8 óra munkaidőt igényelnek, de ez alkatrész rendelhetőségtől is függ.' },
+  { question: 'Van garancia a javításra?', answer: 'Igen, minden elvégzett javítási munkára 6 hónap garanciát vállalunk. Beépített alkatrészekre az alkatrész gyártói garanciája érvényes.' },
+  { question: 'Minden klíma márkát javítanak?', answer: 'Igen, szervizeljük az összes elterjedt klíma márkát: Samsung, LG, Mitsubishi, Panasonic, Gree, Midea, Fisher, Fujitsu, Toshiba, Daikin és más márkákat is.' },
 ];
 ---
 
@@ -64,40 +65,31 @@ const faqs = serviceData?.faqs ?? [
 
   <section class="bg-gradient-to-br from-blue-900 to-blue-800 text-white py-14">
     <div class="container mx-auto px-4 max-w-4xl text-center">
-      <div class="text-5xl mb-4" aria-hidden="true">🔧</div>
-      <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Klíma Javítás Budapest</h1>
-      <p class="text-lg text-blue-100 mb-6 max-w-2xl mx-auto">
-        Gyors, megbízható klímajavítás minden márkára. Helyszíni diagnosztika, eredeti alkatrészek, 6 hónap garancia. Kiszállási díj nélkül Budapest egész területén.
-      </p>
+      <div class="text-5xl mb-4" aria-hidden="true">{heroIcon}</div>
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-4">{heroTitle}</h1>
+      <p class="text-lg text-blue-100 mb-6 max-w-2xl mx-auto">{heroSubtitle}</p>
       <div class="flex flex-col sm:flex-row gap-3 justify-center">
-        <a href="/ajanlatkeres" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-bold transition-colors">
-          Javítás Kérése
-        </a>
-        <a href="tel:+36203394164" class="border-2 border-white/40 hover:border-white text-white px-6 py-3 rounded-xl font-bold hover:bg-white/10 transition-colors">
-          ☎ +36 20 339 4164
-        </a>
+        <a href="/ajanlatkeres" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-bold transition-colors">Javítás Kérése</a>
+        <a href="tel:+36203394164" class="border-2 border-white/40 hover:border-white text-white px-6 py-3 rounded-xl font-bold hover:bg-white/10 transition-colors">☎ +36 20 339 4164</a>
       </div>
     </div>
   </section>
 
-  <!-- JB photo -->
   <section class="bg-gray-950 py-10">
     <div class="container mx-auto px-4 max-w-5xl">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         <div>
-          <p class="text-orange-400 font-semibold text-xs uppercase tracking-widest mb-2">Diagnosztika helyszínen</p>
-          <h2 class="text-2xl font-extrabold text-white mb-3">Profi szerviz eszközökkel, gyorsan</h2>
-          <p class="text-gray-400 leading-relaxed mb-4">Manifold mérősor, vákuumszivattyú, diagnosztikai eszközök – minden szükséges felszerelés nálunk van. Nincs felesleges visszajárás.</p>
-          <a href="/rolunk" class="inline-flex items-center gap-2 text-orange-400 hover:text-orange-300 font-semibold transition-colors text-sm">
-            Ismerje meg a csapatot →
-          </a>
+          <p class="text-orange-400 font-semibold text-xs uppercase tracking-widest mb-2">{photoLabel}</p>
+          <h2 class="text-2xl font-extrabold text-white mb-3">{photoTitle}</h2>
+          <p class="text-gray-400 leading-relaxed mb-4">{photoText}</p>
+          <a href="/rolunk" class="inline-flex items-center gap-2 text-orange-400 hover:text-orange-300 font-semibold transition-colors text-sm">Ismerje meg a csapatot →</a>
         </div>
         <div class="grid grid-cols-2 gap-3">
           <div class="overflow-hidden rounded-2xl aspect-[3/4]">
-            <img src="/images/juhasz-balazs/jb-manifold-letran-1.jpeg" alt="Juhász Balázs manifold mérősorral hűtőközeg ellenőrzés – Klímaépítő.hu klíma javítás Budapest" class="w-full h-full object-cover" loading="eager" />
+            <img src={photo1Src} alt={photo1Alt} class="w-full h-full object-cover" loading="eager" />
           </div>
           <div class="overflow-hidden rounded-2xl aspect-[3/4] mt-6">
-            <img src="/images/juhasz-balazs/jb-manifold-gree-napsutes.jpeg" alt="Klíma hűtőközeg töltés manifolddal – Klímaépítő.hu szerviz Budapest" class="w-full h-full object-cover" loading="eager" />
+            <img src={photo2Src} alt={photo2Alt} class="w-full h-full object-cover" loading="eager" />
           </div>
         </div>
       </div>
@@ -106,25 +98,25 @@ const faqs = serviceData?.faqs ?? [
 
   <section class="py-12 bg-white">
     <div class="container mx-auto px-4 max-w-4xl">
-      <div class="prose-klima">
-        <h2>Klímajavítás – Minden Hibát Megoldunk</h2>
-        <p>
-          Ha a klímája nem hűt megfelelően, furcsán zúg, csöpög, vagy hibakódot jelez, ne halassza tovább a javítást! A késedelmes szerviz súlyosabb és drágább meghibásodáshoz vezethet.
-        </p>
-
-        <h2>Leggyakoribb Klíma Hibák és Megoldásaink</h2>
-        <ul>
-          <li><strong>Nem hűt / nem fűt:</strong> Alacsony hűtőközeg szint, szivárgás diagnosztika és töltés</li>
-          <li><strong>Csöpög a beltéri egység:</strong> Eltömött kondenzvíz elvezető cső tisztítása</li>
-          <li><strong>Szokatlan zajok:</strong> Laza alkatrészek, ventilátor hiba javítása</li>
-          <li><strong>Hibakód jelzés:</strong> Hibakód kiolvasás, elektronikai javítás</li>
-          <li><strong>Nem indul be:</strong> Elektromos hiba diagnosztika és javítás</li>
-          <li><strong>Kellemetlen szag:</strong> Mélytisztítás, fertőtlenítés</li>
-        </ul>
-
-        <h2>Szervizelt Márkák</h2>
-        <p>Szervizeljük az összes elterjedt márkát: Fisher, Fujitsu, Toshiba, Daikin, Samsung, LG, Mitsubishi Electric, Midea, Gree, Panasonic, és más gyártók termékeit.</p>
-      </div>
+      {bodyHtml ? (
+        <div class="prose-klima" set:html={bodyHtml} />
+      ) : (
+        <div class="prose-klima">
+          <h2>Klímajavítás – Minden Hibát Megoldunk</h2>
+          <p>Ha a klímája nem hűt megfelelően, furcsán zúg, csöpög, vagy hibakódot jelez, ne halassza tovább a javítást! A késedelmes szerviz súlyosabb és drágább meghibásodáshoz vezethet.</p>
+          <h2>Leggyakoribb Klíma Hibák és Megoldásaink</h2>
+          <ul>
+            <li><strong>Nem hűt / nem fűt:</strong> Alacsony hűtőközeg szint, szivárgás diagnosztika és töltés</li>
+            <li><strong>Csöpög a beltéri egység:</strong> Eltömött kondenzvíz elvezető cső tisztítása</li>
+            <li><strong>Szokatlan zajok:</strong> Laza alkatrészek, ventilátor hiba javítása</li>
+            <li><strong>Hibakód jelzés:</strong> Hibakód kiolvasás, elektronikai javítás</li>
+            <li><strong>Nem indul be:</strong> Elektromos hiba diagnosztika és javítás</li>
+            <li><strong>Kellemetlen szag:</strong> Mélytisztítás, fertőtlenítés</li>
+          </ul>
+          <h2>Szervizelt Márkák</h2>
+          <p>Szervizeljük az összes elterjedt márkát: Fisher, Fujitsu, Toshiba, Daikin, Samsung, LG, Mitsubishi Electric, Midea, Gree, Panasonic, és más gyártók termékeit.</p>
+        </div>
+      )}
     </div>
   </section>
 

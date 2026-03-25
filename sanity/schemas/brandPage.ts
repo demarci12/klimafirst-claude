@@ -11,6 +11,7 @@ export const brandPage = defineType({
     defineField({ name: 'pros', title: 'Előnyök', type: 'array', of: [{ type: 'string' }] }),
     defineField({ name: 'priceRange', title: 'Árkategória (pl. 130.000 Ft-tól)', type: 'string' }),
     defineField({ name: 'icon', title: 'Emoji ikon', type: 'string' }),
+    defineField({ name: 'logoUrl', title: 'Logó URL (pl. https://logo.clearbit.com/gree.com)', type: 'url' }),
     defineField({ name: 'body', title: 'Oldal tartalma', type: 'blockContent' }),
     defineField({
       name: 'faqs',

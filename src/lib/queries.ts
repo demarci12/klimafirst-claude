@@ -49,6 +49,6 @@ export async function getBrandPage(slugStr: string) {
 
 export async function getBrandPages() {
   return sanityClient.fetch(
-    `*[_type == "brandPage"] | order(_createdAt asc) { name, slug, description, pros, priceRange, icon }`
+    `*[_type == "brandPage"] | order(_createdAt asc) { name, slug, description, pros, priceRange, icon, logoUrl }`
   );
 }

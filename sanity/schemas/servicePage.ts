@@ -1,5 +1,13 @@
 import { defineType, defineField } from 'sanity';
 
+const photoField = {
+  type: 'object' as const,
+  fields: [
+    defineField({ name: 'src', title: 'Kép útvonal', type: 'string' }),
+    defineField({ name: 'alt', title: 'Alt szöveg', type: 'string' }),
+  ],
+};
+
 export const servicePage = defineType({
   name: 'servicePage',
   title: 'Szolgáltatás oldal',
@@ -7,7 +15,30 @@ export const servicePage = defineType({
   fields: [
     defineField({ name: 'slug', title: 'Slug (azonosító)', type: 'slug', options: { source: 'title' } }),
     defineField({ name: 'title', title: 'Oldal cím (h1)', type: 'string' }),
-    defineField({ name: 'subtitle', title: 'Alcím', type: 'text', rows: 2 }),
+    defineField({ name: 'subtitle', title: 'Hero alcím', type: 'text', rows: 3 }),
+    defineField({ name: 'heroIcon', title: 'Hero emoji ikon (pl. ❄️)', type: 'string' }),
+    defineField({
+      name: 'photo1',
+      title: 'Szerelő fotó 1',
+      type: 'object',
+      fields: [
+        defineField({ name: 'src', title: 'Kép útvonal', type: 'string' }),
+        defineField({ name: 'alt', title: 'Alt szöveg', type: 'string' }),
+      ],
+    }),
+    defineField({
+      name: 'photo2',
+      title: 'Szerelő fotó 2',
+      type: 'object',
+      fields: [
+        defineField({ name: 'src', title: 'Kép útvonal', type: 'string' }),
+        defineField({ name: 'alt', title: 'Alt szöveg', type: 'string' }),
+      ],
+    }),
+    defineField({ name: 'photoSectionLabel', title: 'Fotó szekció felirat', type: 'string' }),
+    defineField({ name: 'photoSectionTitle', title: 'Fotó szekció cím', type: 'string' }),
+    defineField({ name: 'photoSectionText', title: 'Fotó szekció szöveg', type: 'text', rows: 3 }),
+    defineField({ name: 'body', title: 'Oldal tartalma (gazdag szöveg)', type: 'blockContent' }),
     defineField({
       name: 'priceItems',
       title: 'Ársorok',

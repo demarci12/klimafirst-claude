@@ -2,11 +2,38 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import TrustBar from '../components/TrustBar.astro';
+import { SITE } from '../data/site';
 import rolunkJson from '../data/rolunk.json';
 import { getRolunk } from '../lib/queries';
+import { toHTML } from '@portabletext/to-html';
 
 const pageData = (await getRolunk()) ?? rolunkJson;
+
+const heroLabel = pageData.heroLabel ?? 'Ismerjük meg egymást';
+const heroTitle = pageData.heroTitle ?? 'Juhász Balázs';
+const heroSubtitle = pageData.heroSubtitle ?? '10+ év szakmai tapasztalat, 5000+ elvégzett munka, Budapest mind a 23 kerületében. Tulajdonos-vezető, aki maga is kiszáll és dolgozik.';
 const { heroImageSrc, heroImageAlt, profileImageSrc, profileImageAlt, actionPhotos } = pageData;
+
+const stats = pageData.stats ?? [
+  { value: '10+', label: 'Év tapasztalat' },
+  { value: '5000+', label: 'Elvégzett munka' },
+  { value: '23', label: 'Budapest kerület' },
+  { value: '2 év', label: 'Garancia' },
+];
+
+const filmStripTitle = pageData.filmStripTitle ?? 'Munkában – minden nap Budapesten';
+const filmStripSubtitle = pageData.filmStripSubtitle ?? 'Valódi helyszínek, valódi szerelések';
+
+const aboutTitle = pageData.aboutTitle ?? 'A Klímaépítő.hu Csapata';
+const aboutBodyHtml = pageData.aboutBody ? toHTML(pageData.aboutBody) : null;
+
+const ownerName = pageData.ownerName ?? 'Juhász Balázs';
+const ownerRole = pageData.ownerRole ?? 'Tulajdonos · Főszerelő';
+const ownerQuote = pageData.ownerQuote ?? 'Számomra minden egyes ügyfél más és más. Nem sablonos megoldásokat kínálok, hanem az adott ház, az adott igény alapján szabott javaslatot – ez a különbség a Klímaépítő.hu és a többi vállalkozás között.';
+const companyName = pageData.companyName ?? 'Juhász Solutions Kft.';
+const location = pageData.location ?? 'Budapest';
+const typedPhotos = (actionPhotos ?? []) as Array<{ src: string; alt: string }>;
+const typedStats = stats as Array<{ value: string; label: string }>;
 ---
 
 <BaseLayout
@@ -21,52 +48,31 @@ const { heroImageSrc, heroImageAlt, profileImageSrc, profileImageAlt, actionPhot
     </div>
   </div>
 
-  <!-- Hero: split layout -->
   <section class="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white overflow-hidden">
     <div class="container mx-auto px-4 max-w-6xl">
       <div class="grid grid-cols-1 lg:grid-cols-2 min-h-[520px]">
-        <!-- Left: text -->
         <div class="flex flex-col justify-center py-14 pr-0 lg:pr-12">
-          <p class="text-orange-400 font-semibold text-sm uppercase tracking-widest mb-3">Ismerjük meg egymást</p>
+          <p class="text-orange-400 font-semibold text-sm uppercase tracking-widest mb-3">{heroLabel}</p>
           <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-5">
-            Juhász Balázs<br/>
+            {heroTitle}<br/>
             <span class="text-blue-300">Klímaépítő.hu Budapest</span>
           </h1>
-          <p class="text-blue-100 text-lg mb-8 leading-relaxed">
-            10+ év szakmai tapasztalat, 5000+ elvégzett munka, Budapest mind a 23 kerületében. Tulajdonos-vezető, aki maga is kiszáll és dolgozik.
-          </p>
+          <p class="text-blue-100 text-lg mb-8 leading-relaxed">{heroSubtitle}</p>
           <div class="flex flex-wrap gap-6 mb-8">
-            <div class="text-center">
-              <div class="text-3xl font-extrabold text-orange-400">10+</div>
-              <div class="text-blue-200 text-xs uppercase tracking-wide">Év tapasztalat</div>
-            </div>
-            <div class="text-center">
-              <div class="text-3xl font-extrabold text-orange-400">5000+</div>
-              <div class="text-blue-200 text-xs uppercase tracking-wide">Elvégzett munka</div>
-            </div>
-            <div class="text-center">
-              <div class="text-3xl font-extrabold text-orange-400">23</div>
-              <div class="text-blue-200 text-xs uppercase tracking-wide">Budapest kerület</div>
-            </div>
-            <div class="text-center">
-              <div class="text-3xl font-extrabold text-orange-400">2 év</div>
-              <div class="text-blue-200 text-xs uppercase tracking-wide">Garancia</div>
-            </div>
+            {typedStats.map((s) => (
+              <div class="text-center">
+                <div class="text-3xl font-extrabold text-orange-400">{s.value}</div>
+                <div class="text-blue-200 text-xs uppercase tracking-wide">{s.label}</div>
+              </div>
+            ))}
           </div>
           <a href="/ajanlatkeres" class="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold px-7 py-3.5 rounded-xl transition-colors shadow-lg w-fit">
             Ingyenes árajánlat
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </a>
         </div>
-        <!-- Right: hero photo -->
         <div class="relative hidden lg:block">
-          <img
-            src={heroImageSrc}
-            alt={heroImageAlt}
-            class="absolute inset-0 w-full h-full object-cover object-center"
-            width="600" height="520"
-            loading="eager"
-          />
+          <img src={heroImageSrc} alt={heroImageAlt} class="absolute inset-0 w-full h-full object-cover object-center" width="600" height="520" loading="eager" />
           <div class="absolute inset-0 bg-gradient-to-r from-blue-950/60 to-transparent"></div>
         </div>
       </div>
@@ -75,103 +81,84 @@ const { heroImageSrc, heroImageAlt, profileImageSrc, profileImageAlt, actionPhot
 
   <TrustBar />
 
-  <!-- Film strip: horizontal scroll gallery -->
   <section class="py-12 bg-gray-950 overflow-hidden">
     <div class="mb-6 px-6 lg:px-12">
-      <h2 class="text-white text-2xl font-bold">Munkában – minden nap Budapesten</h2>
-      <p class="text-gray-400 text-sm mt-1">Valódi helyszínek, valódi szerelések</p>
+      <h2 class="text-white text-2xl font-bold">{filmStripTitle}</h2>
+      <p class="text-gray-400 text-sm mt-1">{filmStripSubtitle}</p>
     </div>
     <div class="flex gap-3 overflow-x-auto pb-4 px-6 lg:px-12 snap-x snap-mandatory scrollbar-hide">
-      {actionPhotos.map((photo) => (
+      {typedPhotos.map((photo) => (
         <figure class="flex-none w-52 h-72 overflow-hidden rounded-2xl snap-start">
-          <img
-            src={photo.src}
-            alt={photo.alt + ' – Klímaépítő.hu Budapest klímaszerelő'}
-            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-            width="208" height="288"
-            loading="lazy"
-          />
+          <img src={photo.src} alt={photo.alt + ' – Klímaépítő.hu Budapest klímaszerelő'} class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" width="208" height="288" loading="lazy" />
         </figure>
       ))}
     </div>
     <p class="text-gray-600 text-xs text-center mt-4">← görgess →</p>
   </section>
 
-  <!-- About + owner -->
   <section class="py-14 bg-white">
     <div class="container mx-auto px-4 max-w-5xl">
       <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
-
-        <!-- Text: 3 cols -->
         <div class="lg:col-span-3">
-          <h2 class="text-2xl font-bold text-gray-900 mb-5">A Klímaépítő.hu Csapata</h2>
-          <div class="prose-klima">
-            <p>
-              A <strong>Klímaépítő.hu</strong> (Juhász Solutions Kft.) Budapesten tevékenykedő, professzionális klímaszerelési vállalkozás. Alapítója és tulajdonosa <strong>Juhász Balázs</strong>, aki 10+ év iparági tapasztalattal rendelkezik.
-            </p>
-            <p>
-              Mottónk: <em>"Elsők a Megoldásban"</em> – ez nem csupán szlogen, hanem minden munkánkat meghatározó elv. Gyorsan reagálunk, pontosan dolgozunk, és minden esetben az ügyfél érdekeit tartjuk szem előtt.
-            </p>
-            <h3>Szakterületeink</h3>
-            <ul>
-              <li>Split és multi-split klímarendszerek telepítése</li>
-              <li>Fisher, Fujitsu, Toshiba, Daikin, Gree készülékek</li>
-              <li>Klímarendszerek javítása és karbantartása</li>
-              <li>Hőszivattyús fűtési rendszerek tervezése és kivitelezése</li>
-            </ul>
-            <h3>Miért Vagyunk Mások?</h3>
-            <ul>
-              <li><strong>Ingyenes helyszíni felmérés</strong> – kiszállási díj nélkül</li>
-              <li><strong>Személyre szabott árak</strong> – nem sablonos ajánlatok</li>
-              <li><strong>Precíz munkavégzés</strong> – minőségi eszközök, tiszta munkaterület</li>
-              <li><strong>Gyors kiszállás</strong> – 1–3 napon belül Budapest egész területén</li>
-              <li><strong>2 év garancia</strong> – minden elvégzett munkára</li>
-            </ul>
-          </div>
+          <h2 class="text-2xl font-bold text-gray-900 mb-5">{aboutTitle}</h2>
+          {aboutBodyHtml ? (
+            <div class="prose-klima" set:html={aboutBodyHtml} />
+          ) : (
+            <div class="prose-klima">
+              <p>A <strong>Klímaépítő.hu</strong> (Juhász Solutions Kft.) Budapesten tevékenykedő, professzionális klímaszerelési vállalkozás. Alapítója és tulajdonosa <strong>Juhász Balázs</strong>, aki 10+ év iparági tapasztalattal rendelkezik.</p>
+              <p>Mottónk: <em>"Elsők a Megoldásban"</em> – ez nem csupán szlogen, hanem minden munkánkat meghatározó elv. Gyorsan reagálunk, pontosan dolgozunk, és minden esetben az ügyfél érdekeit tartjuk szem előtt.</p>
+              <h3>Szakterületeink</h3>
+              <ul>
+                <li>Split és multi-split klímarendszerek telepítése</li>
+                <li>Fisher, Fujitsu, Toshiba, Daikin, Gree készülékek</li>
+                <li>Klímarendszerek javítása és karbantartása</li>
+                <li>Hőszivattyús fűtési rendszerek tervezése és kivitelezése</li>
+              </ul>
+              <h3>Miért Vagyunk Mások?</h3>
+              <ul>
+                <li><strong>Ingyenes helyszíni felmérés</strong> – kiszállási díj nélkül</li>
+                <li><strong>Személyre szabott árak</strong> – nem sablonos ajánlatok</li>
+                <li><strong>Precíz munkavégzés</strong> – minőségi eszközök, tiszta munkaterület</li>
+                <li><strong>Gyors kiszállás</strong> – 1–3 napon belül Budapest egész területén</li>
+                <li><strong>2 év garancia</strong> – minden elvégzett munkára</li>
+              </ul>
+            </div>
+          )}
         </div>
 
-        <!-- Owner card: 2 cols -->
         <div class="lg:col-span-2 space-y-5">
-          <!-- Big profile card -->
           <div class="rounded-3xl overflow-hidden shadow-xl border border-gray-100">
             <div class="relative h-64">
-              <img
-                src={profileImageSrc}
-                alt={profileImageAlt}
-                class="w-full h-full object-cover object-top"
-                width="400" height="256"
-                loading="lazy"
-              />
+              <img src={profileImageSrc} alt={profileImageAlt} class="w-full h-full object-cover object-top" width="400" height="256" loading="lazy" />
               <div class="absolute inset-0 bg-gradient-to-t from-blue-950/80 to-transparent"></div>
               <div class="absolute bottom-4 left-4 right-4">
-                <div class="font-bold text-white text-xl">Juhász Balázs</div>
-                <div class="text-orange-300 text-sm font-medium">Tulajdonos · Főszerelő</div>
+                <div class="font-bold text-white text-xl">{ownerName}</div>
+                <div class="text-orange-300 text-sm font-medium">{ownerRole}</div>
               </div>
             </div>
             <div class="bg-blue-50 p-5">
               <blockquote class="text-gray-700 text-sm italic leading-relaxed border-l-4 border-orange-400 pl-4">
-                "Számomra minden egyes ügyfél más és más. Nem sablonos megoldásokat kínálok, hanem az adott ház, az adott igény alapján szabott javaslatot – ez a különbség a Klímaépítő.hu és a többi vállalkozás között."
+                "{ownerQuote}"
               </blockquote>
             </div>
           </div>
 
-          <!-- Contacts -->
           <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm text-sm space-y-3">
             <div class="flex justify-between">
               <span class="text-gray-500">Cég neve</span>
-              <span class="font-medium text-gray-900">Juhász Solutions Kft.</span>
+              <span class="font-medium text-gray-900">{companyName}</span>
             </div>
             <div class="flex justify-between">
               <span class="text-gray-500">Telephely</span>
-              <span class="font-medium text-gray-900">Budapest</span>
+              <span class="font-medium text-gray-900">{location}</span>
             </div>
             <div class="flex justify-between">
               <span class="text-gray-500">Telefon</span>
-              <a href="tel:+36203394164" class="font-medium text-orange-600 hover:text-orange-500">+36 20 339 4164</a>
+              <a href={`tel:${SITE.phoneTel}`} class="font-medium text-orange-600 hover:text-orange-500">{SITE.phone}</a>
             </div>
             <div class="flex justify-between">
               <span class="text-gray-500">E-mail</span>
-              <a href="mailto:info@klimaepito.hu" class="font-medium text-blue-700 hover:text-blue-500">info@klimaepito.hu</a>
+              <a href={`mailto:${SITE.email}`} class="font-medium text-blue-700 hover:text-blue-500">{SITE.email}</a>
             </div>
           </div>
 

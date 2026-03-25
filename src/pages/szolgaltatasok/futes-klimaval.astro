@@ -5,36 +5,37 @@ import FAQ from '../../components/FAQ.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import { SITE } from '../../data/site';
 import { getServicePage } from '../../lib/queries';
+import { toHTML } from '@portabletext/to-html';
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
 const serviceData = await getServicePage('futes-klimaval');
 
+const heroTitle = serviceData?.title ?? 'Fűtés Klímával Budapest';
+const heroSubtitle = serviceData?.subtitle ?? 'A modern inverteres klíma nem csak hűt – hőszivattyúként is funkcionál. 3-4x hatékonyabb, mint az elektromos fűtés, és akár -15°C külső hőmérsékleten is garantált teljesítménnyel fűt.';
+const heroIcon = serviceData?.heroIcon ?? '🌡️';
+const photo1Src = serviceData?.photo1?.src ?? '/images/juhasz-balazs/jb-vacuum-pumpa-bekoltes.jpeg';
+const photo1Alt = serviceData?.photo1?.alt ?? 'Klíma hűtőkör bekötése vákuumszivattyúval – Klímaépítő.hu fűtés klímával Budapest';
+const photo2Src = serviceData?.photo2?.src ?? '/images/juhasz-balazs/jb-gree-pozicionalas-hatul.jpeg';
+const photo2Alt = serviceData?.photo2?.alt ?? 'Kültéri klíma egység konzolra szerelése – Klímaépítő.hu Budapest';
+const photoLabel = serviceData?.photoSectionLabel ?? 'Hőszivattyú specialista';
+const photoTitle = serviceData?.photoSectionTitle ?? 'Inverteres fűtés – profi bekötéssel';
+const photoText = serviceData?.photoSectionText ?? 'A hűtőkör tökéletes bekötése kulcs a hatékony fűtési teljesítményhez. Vákuumolás, nyomáspróba, hűtőközeg töltés – mind a szabályok szerint.';
+const bodyHtml = serviceData?.body ? toHTML(serviceData.body) : null;
+
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  name: 'Fűtés Klímával Budapest – Hőszivattyús Fűtés',
-  description: 'Inverteres klíma hőszivattyúként is működik – hatékonyabb és olcsóbb, mint a villany- vagy gázfűtés. Akár -15°C-ig garantált teljesítmény.',
+  name: heroTitle,
+  description: heroSubtitle,
   provider: { '@type': 'HVACBusiness', name: 'Klímaépítő.hu', telephone: SITE.phoneTel, url: `${siteUrl}/` },
   areaServed: { '@type': 'City', name: 'Budapest' },
 };
 
 const faqs = serviceData?.faqs ?? [
-  {
-    question: 'Mennyire hatékony a klíma fűtési módban?',
-    answer: 'A modern inverteres klíma COP (hatékonysági) értéke 3.0–4.5, ami azt jelenti, hogy 1 kWh elektromos energiából 3–4.5 kWh hőt állít elő. Összehasonlításképpen: az elektromos fűtőtest 1:1 arányú. A klíma 3–4-szer hatékonyabb.',
-  },
-  {
-    question: 'Milyen hidegig fűt a klíma?',
-    answer: 'A modern inverteres klímák -15°C-ig, egyes modellek (pl. Daikin Ururu Sarara) -25°C-ig is hatékonyan fűtenek. Budapest éghajlatán ez több mint elegendő.',
-  },
-  {
-    question: 'Megéri-e klímával fűteni gáz helyett?',
-    answer: 'Ez az aktuális energiaáraktól függ. Jelenlegi magyarországi árak mellett a klíma fűtés általában olcsóbb vagy hasonló költségű, mint a gáz – de az árkalkulust érdemes egyedileg elvégezni.',
-  },
-  {
-    question: 'Kell-e külön fűtésre engedélyezett klíma?',
-    answer: 'Nem. Minden modern inverteres split klíma egyszerre képes hűteni és fűteni – ez a hőszivattyú funkció. Speciális engedély nem szükséges.',
-  },
+  { question: 'Mennyire hatékony a klíma fűtési módban?', answer: 'A modern inverteres klíma COP (hatékonysági) értéke 3.0–4.5, ami azt jelenti, hogy 1 kWh elektromos energiából 3–4.5 kWh hőt állít elő. Összehasonlításképpen: az elektromos fűtőtest 1:1 arányú. A klíma 3–4-szer hatékonyabb.' },
+  { question: 'Milyen hidegig fűt a klíma?', answer: 'A modern inverteres klímák -15°C-ig, egyes modellek (pl. Daikin Ururu Sarara) -25°C-ig is hatékonyan fűtenek. Budapest éghajlatán ez több mint elegendő.' },
+  { question: 'Megéri-e klímával fűteni gáz helyett?', answer: 'Ez az aktuális energiaáraktól függ. Jelenlegi magyarországi árak mellett a klíma fűtés általában olcsóbb vagy hasonló költségű, mint a gáz – de az árkalkulust érdemes egyedileg elvégezni.' },
+  { question: 'Kell-e külön fűtésre engedélyezett klíma?', answer: 'Nem. Minden modern inverteres split klíma egyszerre képes hűteni és fűteni – ez a hőszivattyú funkció. Speciális engedély nem szükséges.' },
 ];
 ---
 
@@ -53,40 +54,31 @@ const faqs = serviceData?.faqs ?? [
 
   <section class="bg-gradient-to-br from-orange-700 to-red-700 text-white py-14">
     <div class="container mx-auto px-4 max-w-4xl text-center">
-      <div class="text-5xl mb-4" aria-hidden="true">🌡️</div>
-      <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Fűtés Klímával Budapest</h1>
-      <p class="text-lg text-orange-100 mb-6 max-w-2xl mx-auto">
-        A modern inverteres klíma nem csak hűt – hőszivattyúként is funkcionál. 3-4x hatékonyabb, mint az elektromos fűtés, és akár -15°C külső hőmérsékleten is garantált teljesítménnyel fűt.
-      </p>
+      <div class="text-5xl mb-4" aria-hidden="true">{heroIcon}</div>
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-4">{heroTitle}</h1>
+      <p class="text-lg text-orange-100 mb-6 max-w-2xl mx-auto">{heroSubtitle}</p>
       <div class="flex flex-col sm:flex-row gap-3 justify-center">
-        <a href="/ajanlatkeres" class="bg-white text-orange-700 hover:bg-orange-50 px-6 py-3 rounded-xl font-bold transition-colors">
-          Ingyenes Felmérés Kérése
-        </a>
-        <a href="tel:+36203394164" class="border-2 border-white/40 hover:border-white text-white px-6 py-3 rounded-xl font-bold hover:bg-white/10 transition-colors">
-          ☎ +36 20 339 4164
-        </a>
+        <a href="/ajanlatkeres" class="bg-white text-orange-700 hover:bg-orange-50 px-6 py-3 rounded-xl font-bold transition-colors">Ingyenes Felmérés Kérése</a>
+        <a href="tel:+36203394164" class="border-2 border-white/40 hover:border-white text-white px-6 py-3 rounded-xl font-bold hover:bg-white/10 transition-colors">☎ +36 20 339 4164</a>
       </div>
     </div>
   </section>
 
-  <!-- JB photo -->
   <section class="bg-gray-950 py-10">
     <div class="container mx-auto px-4 max-w-5xl">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         <div>
-          <p class="text-orange-400 font-semibold text-xs uppercase tracking-widest mb-2">Hőszivattyú specialista</p>
-          <h2 class="text-2xl font-extrabold text-white mb-3">Inverteres fűtés – profi bekötéssel</h2>
-          <p class="text-gray-400 leading-relaxed mb-4">A hűtőkör tökéletes bekötése kulcs a hatékony fűtési teljesítményhez. Vákuumolás, nyomáspróba, hűtőközeg töltés – mind a szabályok szerint.</p>
-          <a href="/rolunk" class="inline-flex items-center gap-2 text-orange-400 hover:text-orange-300 font-semibold transition-colors text-sm">
-            Ismerje meg a csapatot →
-          </a>
+          <p class="text-orange-400 font-semibold text-xs uppercase tracking-widest mb-2">{photoLabel}</p>
+          <h2 class="text-2xl font-extrabold text-white mb-3">{photoTitle}</h2>
+          <p class="text-gray-400 leading-relaxed mb-4">{photoText}</p>
+          <a href="/rolunk" class="inline-flex items-center gap-2 text-orange-400 hover:text-orange-300 font-semibold transition-colors text-sm">Ismerje meg a csapatot →</a>
         </div>
         <div class="grid grid-cols-2 gap-3">
           <div class="overflow-hidden rounded-2xl aspect-[3/4]">
-            <img src="/images/juhasz-balazs/jb-vacuum-pumpa-bekoltes.jpeg" alt="Klíma hűtőkör bekötése vákuumszivattyúval – Klímaépítő.hu fűtés klímával Budapest" class="w-full h-full object-cover" loading="eager" />
+            <img src={photo1Src} alt={photo1Alt} class="w-full h-full object-cover" loading="eager" />
           </div>
           <div class="overflow-hidden rounded-2xl aspect-[3/4] mt-6">
-            <img src="/images/juhasz-balazs/jb-gree-pozicionalas-hatul.jpeg" alt="Kültéri klíma egység konzolra szerelése – Klímaépítő.hu Budapest" class="w-full h-full object-cover" loading="eager" />
+            <img src={photo2Src} alt={photo2Alt} class="w-full h-full object-cover" loading="eager" />
           </div>
         </div>
       </div>
@@ -95,59 +87,34 @@ const faqs = serviceData?.faqs ?? [
 
   <section class="py-12 bg-white">
     <div class="container mx-auto px-4 max-w-4xl">
-      <div class="prose-klima">
-        <h2>Hogyan Fűt a Klíma? – A Hőszivattyú Elve</h2>
-        <p>
-          Az inverteres klímaberendezés egy megfordítható hőszivattyú. Hűtési módban a helyiségből elvont hőt a kültéri levegőbe adja. Fűtési módban megfordítja a folyamatot: a kültéri levegőből nyeri ki a hőt (még -15°C-on is van hő a levegőben!), és azt a belső térbe juttatja.
-        </p>
-
-        <h2>Összehasonlítás: Klíma vs. Gáz vs. Villany Fűtés</h2>
-        <div class="overflow-x-auto">
-          <table>
-            <thead>
-              <tr>
-                <th>Fűtési mód</th>
-                <th>COP / hatékonyság</th>
-                <th>Beruházási ár</th>
-                <th>Üzemeltetési ktg.</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Inverteres klíma</strong></td>
-                <td>3.0 – 4.5 COP</td>
-                <td>150.000–350.000 Ft</td>
-                <td>Alacsony–Közepes</td>
-              </tr>
-              <tr>
-                <td>Gázfűtés</td>
-                <td>0.9 – 1.05 COP</td>
-                <td>300.000–800.000 Ft+</td>
-                <td>Közepes (gázár-függő)</td>
-              </tr>
-              <tr>
-                <td>Villany fűtőtest</td>
-                <td>1.0 COP</td>
-                <td>5.000–30.000 Ft</td>
-                <td>Magas</td>
-              </tr>
-            </tbody>
-          </table>
+      {bodyHtml ? (
+        <div class="prose-klima" set:html={bodyHtml} />
+      ) : (
+        <div class="prose-klima">
+          <h2>Hogyan Fűt a Klíma? – A Hőszivattyú Elve</h2>
+          <p>Az inverteres klímaberendezés egy megfordítható hőszivattyú. Hűtési módban a helyiségből elvont hőt a kültéri levegőbe adja. Fűtési módban megfordítja a folyamatot: a kültéri levegőből nyeri ki a hőt (még -15°C-on is van hő a levegőben!), és azt a belső térbe juttatja.</p>
+          <h2>Összehasonlítás: Klíma vs. Gáz vs. Villany Fűtés</h2>
+          <div class="overflow-x-auto">
+            <table>
+              <thead><tr><th>Fűtési mód</th><th>COP / hatékonyság</th><th>Beruházási ár</th><th>Üzemeltetési ktg.</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Inverteres klíma</strong></td><td>3.0 – 4.5 COP</td><td>150.000–350.000 Ft</td><td>Alacsony–Közepes</td></tr>
+                <tr><td>Gázfűtés</td><td>0.9 – 1.05 COP</td><td>300.000–800.000 Ft+</td><td>Közepes (gázár-függő)</td></tr>
+                <tr><td>Villany fűtőtest</td><td>1.0 COP</td><td>5.000–30.000 Ft</td><td>Magas</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h2>Ajánlott Klíma Márkák Fűtési Célra</h2>
+          <ul>
+            <li><strong>Daikin Perfera / Stylish:</strong> Kiemelkedő alacsony hőmérsékletű teljesítmény</li>
+            <li><strong>Fujitsu KE sorozat:</strong> -25°C-ig garantált fűtési teljesítmény</li>
+            <li><strong>Toshiba Haori / Shorai Edge:</strong> Intelligens fűtési algoritmus</li>
+            <li><strong>Fisher:</strong> Kiváló ár-érték arányú fűtési klíma</li>
+          </ul>
+          <h2>Mekkora Klíma Szükséges a Fűtéshez?</h2>
+          <p>Általános szabály: 50 W/m³ szükséges jól szigetelt épületnél, 70–100 W/m³ régi, szigeteletlen épületnél. Pontosabb méretezéshez használja <a href="/klima-meretezo-kalkulator">ingyenes klíma méretező kalkulátorunkat</a>.</p>
         </div>
-
-        <h2>Ajánlott Klíma Márkák Fűtési Célra</h2>
-        <ul>
-          <li><strong>Daikin Perfera / Stylish:</strong> Kiemelkedő alacsony hőmérsékletű teljesítmény</li>
-          <li><strong>Fujitsu KE sorozat:</strong> -25°C-ig garantált fűtési teljesítmény</li>
-          <li><strong>Toshiba Haori / Shorai Edge:</strong> Intelligens fűtési algoritmus</li>
-          <li><strong>Fisher:</strong> Kiváló ár-érték arányú fűtési klíma</li>
-        </ul>
-
-        <h2>Mekkora Klíma Szükséges a Fűtéshez?</h2>
-        <p>
-          Általános szabály: 50 W/m³ szükséges jól szigetelt épületnél, 70–100 W/m³ régi, szigeteletlen épületnél. Pontosabb méretezéshez használja <a href="/klima-meretezo-kalkulator">ingyenes klíma méretező kalkulátorunkat</a>.
-        </p>
-      </div>
+      )}
     </div>
   </section>
 

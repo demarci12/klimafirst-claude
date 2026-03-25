@@ -5,7 +5,6 @@ import ServiceCard from '../components/ServiceCard.astro';
 import FAQ from '../components/FAQ.astro';
 import DistrictGrid from '../components/DistrictGrid.astro';
 import ContactForm from '../components/ContactForm.astro';
-import { Image } from 'astro:assets';
 import { SITE } from '../data/site';
 import { getCollection } from 'astro:content';
 import homepageJson from '../data/homepage.json';
@@ -100,6 +99,38 @@ const websiteSchema = {
 };
 
 const { faqs: homeFaqs, services, brands, processSteps } = homepageData;
+
+const heroBadge = homepageData.heroBadgeText ?? '5000+ elvégzett referencia Budapesten';
+const heroTitle = homepageData.heroTitle ?? 'Klímaszerelés Budapest –\nProfi, Gyors, Megbízható';
+const heroSubtitle = homepageData.heroSubtitle ?? 'Fisher, Fujitsu, Toshiba és Daikin klímarendszerek telepítése, javítása és karbantartása. Ingyenes helyszíni felmérés, kiszállási díj nélkül Budapest mind a 23 kerületében.';
+const heroTrustBadges: string[] = homepageData.heroTrustBadges ?? ['Kiszállási díj nélkül', '2 év garancia', 'Ingyenes helyszíni felmérés'];
+const jbStripLabel = homepageData.jbStripLabel ?? 'A mester maga is kiszáll';
+const jbStripTitle = homepageData.jbStripTitle ?? 'Juhász Balázs – Tulajdonos és Főszerelő';
+const jbStripText = homepageData.jbStripText ?? 'Nem call centert, hanem tapasztalt szakembert kap. Juhász Balázs 10+ éve személyesen végzi és felügyeli Budapest egész területén az összes klímaszerelési munkát.';
+const jbStripLinkText = homepageData.jbStripLinkText ?? 'Ismerjen meg minket';
+const ctaTitle = homepageData.ctaTitle ?? 'Kész a Klímaszerelésre? Hívjon Minket Most!';
+const ctaSubtitle = homepageData.ctaSubtitle ?? 'Ingyenes helyszíni felmérés, kötelezettségmentes árajánlat. Kiszállási díj nélkül Budapest egész területén.';
+const processSectionTitle = homepageData.processSectionTitle ?? 'Hogyan Dolgozunk? – 5 Egyszerű Lépés';
+const processSectionSubtitle = homepageData.processSectionSubtitle ?? 'Átlátható folyamat, meglepetések nélkül.';
+const brandsSectionTitle = homepageData.brandsSectionTitle ?? 'Forgalmazott Klíma Márkák';
+const brandsSectionSubtitle = homepageData.brandsSectionSubtitle ?? 'Csak elismert, megbízható gyártók termékeit értékesítjük és szervizeljük.';
+const servicesSectionTitle = homepageData.servicesSectionTitle ?? 'Klímaszerelési Szolgáltatásaink Budapesten';
+const servicesSectionSubtitle = homepageData.servicesSectionSubtitle ?? 'Teljes körű klímaszolgáltatás – a telepítéstől a karbantartásig. Minden munkára 2 év garanciát vállalunk.';
+
+type JbPhoto = { src: string; alt: string };
+type Service = { title: string; description: string; href: string; icon: string; image: string; imageAlt: string; highlight: boolean };
+type ProcessStep = { step: string; title: string; desc: string };
+type Brand = { name: string; desc: string; href: string };
+
+const typedServices = (services ?? []) as Service[];
+const typedProcessSteps = (processSteps ?? []) as ProcessStep[];
+const typedBrands = (brands ?? []) as Brand[];
+
+const jbPhotos: JbPhoto[] = homepageData.jbPhotos ?? [
+  { src: '/images/juhasz-balazs/jb-gree-beszereles-letran-1.jpeg', alt: 'Juhász Balázs kültéri klíma beszerelése – Klímaépítő.hu Budapest' },
+  { src: '/images/juhasz-balazs/jb-belso-egyseg-telepites-mosoly.jpeg', alt: 'Juhász Balázs beltéri klíma telepítés – Klímaépítő.hu Budapest' },
+  { src: '/images/juhasz-balazs/jb-teto-munka-heveder.jpeg', alt: 'Klímaépítő.hu szerelő tetőn biztonsági hevederrel – Budapest' },
+];
 ---
 
 <BaseLayout
@@ -122,42 +153,29 @@ const { faqs: homeFaqs, services, brands, processSteps } = homepageData;
         <div>
           <div class="inline-flex items-center gap-2 bg-blue-800/60 text-orange-300 text-xs font-semibold px-3 py-1.5 rounded-full mb-4">
             <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
-            5000+ elvégzett referencia Budapesten
+            {heroBadge}
           </div>
 
           <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-4">
-            Klímaszerelés Budapest –<br />
-            <span class="text-orange-400">Profi, Gyors, Megbízható</span>
+            {heroTitle.split('\n').map((line: string, i: number) => (
+              i === 0 ? <>{line}<br /></> : <span class="text-orange-400">{line}</span>
+            ))}
           </h1>
 
-          <p class="text-lg text-blue-100 leading-relaxed mb-6">
-            Fisher, Fujitsu, Toshiba és Daikin klímarendszerek telepítése, javítása és karbantartása.
-            <strong class="text-white">Ingyenes helyszíni felmérés, kiszállási díj nélkül</strong> Budapest mind a 23 kerületében.
-          </p>
+          <p class="text-lg text-blue-100 leading-relaxed mb-6" set:html={heroSubtitle} />
 
           <div class="flex flex-col sm:flex-row gap-3 mb-8">
-            <a
-              href="/ajanlatkeres"
-              class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3.5 rounded-xl font-bold text-base shadow-lg hover:shadow-xl transition-all duration-300 text-center"
-            >
+            <a href="/ajanlatkeres" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3.5 rounded-xl font-bold text-base shadow-lg hover:shadow-xl transition-all duration-300 text-center">
               Ingyenes Árajánlat Kérése
             </a>
-            <a
-              href="tel:+36203394164"
-              class="border-2 border-white/40 hover:border-white text-white px-6 py-3.5 rounded-xl font-bold text-base text-center hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2"
-            >
+            <a href="tel:+36203394164" class="border-2 border-white/40 hover:border-white text-white px-6 py-3.5 rounded-xl font-bold text-base text-center hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg>
               +36 20 339 4164
             </a>
           </div>
 
-          <!-- Trust badges -->
           <div class="flex flex-wrap gap-4 text-sm text-blue-200">
-            {[
-              'Kiszállási díj nélkül',
-              '2 év garancia',
-              'Ingyenes helyszíni felmérés',
-            ].map((badge) => (
+            {heroTrustBadges.map((badge: string) => (
               <div class="flex items-center gap-1.5">
                 <svg class="w-4 h-4 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
                 {badge}
@@ -183,25 +201,23 @@ const { faqs: homeFaqs, services, brands, processSteps } = homepageData;
     <div class="container mx-auto px-4 max-w-6xl">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         <div>
-          <p class="text-orange-400 font-semibold text-xs uppercase tracking-widest mb-2">A mester maga is kiszáll</p>
-          <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-3">Juhász Balázs – Tulajdonos és Főszerelő</h2>
-          <p class="text-gray-400 leading-relaxed mb-5">
-            Nem call centert, hanem tapasztalt szakembert kap. Juhász Balázs 10+ éve személyesen végzi és felügyeli Budapest egész területén az összes klímaszerelési munkát.
-          </p>
+          <p class="text-orange-400 font-semibold text-xs uppercase tracking-widest mb-2">{jbStripLabel}</p>
+          <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-3">{jbStripTitle}</h2>
+          <p class="text-gray-400 leading-relaxed mb-5">{jbStripText}</p>
           <a href="/rolunk" class="inline-flex items-center gap-2 text-orange-400 hover:text-orange-300 font-semibold transition-colors">
-            Ismerjen meg minket
+            {jbStripLinkText}
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </a>
         </div>
         <div class="grid grid-cols-3 gap-2">
           <div class="overflow-hidden rounded-xl aspect-[3/4]">
-            <img src="/images/juhasz-balazs/jb-gree-beszereles-letran-1.jpeg" alt="Juhász Balázs kültéri klíma beszerelése – Klímaépítő.hu Budapest" class="w-full h-full object-cover" loading="lazy" />
+            <img src={jbPhotos[0]?.src ?? '/images/juhasz-balazs/jb-gree-beszereles-letran-1.jpeg'} alt={jbPhotos[0]?.alt ?? ''} class="w-full h-full object-cover" loading="lazy" />
           </div>
           <div class="overflow-hidden rounded-xl aspect-[3/4] mt-4">
-            <img src="/images/juhasz-balazs/jb-belso-egyseg-telepites-mosoly.jpeg" alt="Juhász Balázs beltéri klíma telepítés – Klímaépítő.hu Budapest" class="w-full h-full object-cover object-top" loading="lazy" />
+            <img src={jbPhotos[1]?.src ?? '/images/juhasz-balazs/jb-belso-egyseg-telepites-mosoly.jpeg'} alt={jbPhotos[1]?.alt ?? ''} class="w-full h-full object-cover object-top" loading="lazy" />
           </div>
           <div class="overflow-hidden rounded-xl aspect-[3/4]">
-            <img src="/images/juhasz-balazs/jb-teto-munka-heveder.jpeg" alt="Klímaépítő.hu szerelő tetőn biztonsági hevederrel – Budapest" class="w-full h-full object-cover" loading="lazy" />
+            <img src={jbPhotos[2]?.src ?? '/images/juhasz-balazs/jb-teto-munka-heveder.jpeg'} alt={jbPhotos[2]?.alt ?? ''} class="w-full h-full object-cover" loading="lazy" />
           </div>
         </div>
       </div>
@@ -213,15 +229,13 @@ const { faqs: homeFaqs, services, brands, processSteps } = homepageData;
     <div class="container mx-auto px-4">
       <div class="text-center mb-10">
         <h2 id="services-heading" class="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 mb-3">
-          Klímaszerelési Szolgáltatásaink Budapesten
+          {servicesSectionTitle}
         </h2>
-        <p class="text-gray-600 max-w-2xl mx-auto leading-relaxed">
-          Teljes körű klímaszolgáltatás – a telepítéstől a karbantartásig. Minden munkára 2 év garanciát vállalunk.
-        </p>
+        <p class="text-gray-600 max-w-2xl mx-auto leading-relaxed">{servicesSectionSubtitle}</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-        {services.map((s) => (
+        {typedServices.map((s) => (
           <ServiceCard
             title={s.title}
             description={s.description}
@@ -248,20 +262,20 @@ const { faqs: homeFaqs, services, brands, processSteps } = homepageData;
     <div class="container mx-auto px-4">
       <div class="text-center mb-10">
         <h2 id="process-heading" class="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 mb-3">
-          Hogyan Dolgozunk? – 5 Egyszerű Lépés
+          {processSectionTitle}
         </h2>
-        <p class="text-gray-600 leading-relaxed">Átlátható folyamat, meglepetések nélkül.</p>
+        <p class="text-gray-600 leading-relaxed">{processSectionSubtitle}</p>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-        {processSteps.map((step, i) => (
+        {typedProcessSteps.map((step, i) => (
           <div class="relative text-center bg-white rounded-2xl border border-gray-100 shadow-sm p-5 hover:shadow-md transition-all duration-300 group">
             <div class="w-14 h-14 bg-blue-900 text-white rounded-2xl flex items-center justify-center text-xl font-extrabold mx-auto mb-3 shadow-md group-hover:bg-blue-800 transition-colors">
               {step.step}
             </div>
             <h3 class="font-bold text-gray-900 mb-1 tracking-tight">{step.title}</h3>
             <p class="text-sm text-gray-600 leading-relaxed">{step.desc}</p>
-            {i < processSteps.length - 1 && (
+            {i < typedProcessSteps.length - 1 && (
               <div class="hidden lg:block absolute top-10 -right-2 text-gray-300 text-lg font-bold z-10">›</div>
             )}
           </div>
@@ -275,13 +289,13 @@ const { faqs: homeFaqs, services, brands, processSteps } = homepageData;
     <div class="container mx-auto px-4">
       <div class="text-center mb-8">
         <h2 id="brands-heading" class="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 mb-3">
-          Forgalmazott Klíma Márkák
+          {brandsSectionTitle}
         </h2>
-        <p class="text-gray-600 leading-relaxed">Csak elismert, megbízható gyártók termékeit értékesítjük és szervizeljük.</p>
+        <p class="text-gray-600 leading-relaxed">{brandsSectionSubtitle}</p>
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {brands.map((brand) => (
+        {typedBrands.map((brand) => (
           <a
             href={brand.href}
             class="group bg-white rounded-2xl border border-gray-100 p-6 text-center shadow-md hover:shadow-xl hover:border-blue-200 transition-all duration-300 hover:-translate-y-1"
@@ -354,12 +368,8 @@ const { faqs: homeFaqs, services, brands, processSteps } = homepageData;
   <!-- FINAL CTA -->
   <section class="py-16 bg-blue-900 text-white">
     <div class="container mx-auto px-4 text-center">
-      <h2 class="text-2xl md:text-3xl font-bold mb-3">
-        Kész a Klímaszerelésre? Hívjon Minket Most!
-      </h2>
-      <p class="text-blue-200 mb-8 max-w-xl mx-auto">
-        Ingyenes helyszíni felmérés, kötelezettségmentes árajánlat. Kiszállási díj nélkül Budapest egész területén.
-      </p>
+      <h2 class="text-2xl md:text-3xl font-bold mb-3">{ctaTitle}</h2>
+      <p class="text-blue-200 mb-8 max-w-xl mx-auto">{ctaSubtitle}</p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a
           href="tel:+36203394164"
