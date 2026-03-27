@@ -43,6 +43,15 @@ const {
       breadcrumbs={breadcrumbs}
     />
 
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-B89BF8V9KW"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-B89BF8V9KW');
+    </script>
+
     <!-- Inter font via Google Fonts (swap display, preconnect already in SEO) -->
     <link
       rel="stylesheet"
