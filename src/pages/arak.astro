@@ -9,7 +9,11 @@ const SITE = await getSite();
 import pricingJson from '../data/pricing.json';
 import { getPricing } from '../lib/queries';
 
-const pricingData = (await getPricing()) ?? pricingJson;
+const rawPricing = await getPricing();
+const installPrices = rawPricing?.installPrices ?? pricingJson.installPrices;
+const devicePrices = rawPricing?.devicePrices ?? pricingJson.devicePrices;
+const servicePrices = rawPricing?.servicePrices ?? pricingJson.servicePrices;
+const faqs = rawPricing?.faqs ?? pricingJson.faqs;
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
 
@@ -28,8 +32,6 @@ const priceSchema = {
     ],
   },
 };
-
-const { installPrices, devicePrices, servicePrices, faqs } = pricingData;
 ---
 
 <BaseLayout
