@@ -5,4 +5,4 @@ Disallow: /404
 Disallow: /api/
 
 # Sitemap URL auto-resolves via Astro config site
-Sitemap: https://klimafirst-claude.vercel.app/sitemap-index.xml
+Sitemap: https://klimaepito.hu/sitemap.xml

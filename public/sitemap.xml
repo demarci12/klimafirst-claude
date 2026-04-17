@@ -3,259 +3,259 @@
 
   <!-- Homepage -->
   <url>
-    <loc>https://klimafirst-claude.vercel.app/</loc>
+    <loc>https://klimaepito.hu/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   <!-- Service pages -->
   <url>
-    <loc>https://klimafirst-claude.vercel.app/szolgaltatasok/klima-telepites/</loc>
+    <loc>https://klimaepito.hu/szolgaltatasok/klima-telepites/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/szolgaltatasok/klima-javitas/</loc>
+    <loc>https://klimaepito.hu/szolgaltatasok/klima-javitas/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/szolgaltatasok/klima-tisztitas/</loc>
+    <loc>https://klimaepito.hu/szolgaltatasok/klima-tisztitas/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/szolgaltatasok/futes-klimaval/</loc>
+    <loc>https://klimaepito.hu/szolgaltatasok/futes-klimaval/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <!-- Pricing & devices -->
   <url>
-    <loc>https://klimafirst-claude.vercel.app/arak/</loc>
+    <loc>https://klimaepito.hu/arak/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/keszulekek/</loc>
+    <loc>https://klimaepito.hu/keszulekek/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/keszulekek/fisher-klima/</loc>
+    <loc>https://klimaepito.hu/keszulekek/fisher-klima/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/keszulekek/fujitsu-klima/</loc>
+    <loc>https://klimaepito.hu/keszulekek/fujitsu-klima/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/keszulekek/toshiba-klima/</loc>
+    <loc>https://klimaepito.hu/keszulekek/toshiba-klima/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Other main pages -->
   <url>
-    <loc>https://klimafirst-claude.vercel.app/klima-meretezo-kalkulator/</loc>
+    <loc>https://klimaepito.hu/klima-meretezo-kalkulator/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/ajanlatkeres/</loc>
+    <loc>https://klimaepito.hu/ajanlatkeres/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/rolunk/</loc>
+    <loc>https://klimaepito.hu/rolunk/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/referenciak/</loc>
+    <loc>https://klimaepito.hu/referenciak/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/kapcsolat/</loc>
+    <loc>https://klimaepito.hu/kapcsolat/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Budapest district pages -->
   <url>
-    <loc>https://klimafirst-claude.vercel.app/budapest/i-kerulet/</loc>
+    <loc>https://klimaepito.hu/budapest/i-kerulet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/budapest/ii-kerulet/</loc>
+    <loc>https://klimaepito.hu/budapest/ii-kerulet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/budapest/iii-kerulet/</loc>
+    <loc>https://klimaepito.hu/budapest/iii-kerulet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/budapest/iv-kerulet/</loc>
+    <loc>https://klimaepito.hu/budapest/iv-kerulet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/budapest/v-kerulet/</loc>
+    <loc>https://klimaepito.hu/budapest/v-kerulet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/budapest/vi-kerulet/</loc>
+    <loc>https://klimaepito.hu/budapest/vi-kerulet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/budapest/vii-kerulet/</loc>
+    <loc>https://klimaepito.hu/budapest/vii-kerulet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/budapest/viii-kerulet/</loc>
+    <loc>https://klimaepito.hu/budapest/viii-kerulet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/budapest/ix-kerulet/</loc>
+    <loc>https://klimaepito.hu/budapest/ix-kerulet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/budapest/x-kerulet/</loc>
+    <loc>https://klimaepito.hu/budapest/x-kerulet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/budapest/xi-kerulet/</loc>
+    <loc>https://klimaepito.hu/budapest/xi-kerulet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/budapest/xii-kerulet/</loc>
+    <loc>https://klimaepito.hu/budapest/xii-kerulet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/budapest/xiii-kerulet/</loc>
+    <loc>https://klimaepito.hu/budapest/xiii-kerulet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/budapest/xiv-kerulet/</loc>
+    <loc>https://klimaepito.hu/budapest/xiv-kerulet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/budapest/xv-kerulet/</loc>
+    <loc>https://klimaepito.hu/budapest/xv-kerulet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/budapest/xvi-kerulet/</loc>
+    <loc>https://klimaepito.hu/budapest/xvi-kerulet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/budapest/xvii-kerulet/</loc>
+    <loc>https://klimaepito.hu/budapest/xvii-kerulet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/budapest/xviii-kerulet/</loc>
+    <loc>https://klimaepito.hu/budapest/xviii-kerulet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/budapest/xix-kerulet/</loc>
+    <loc>https://klimaepito.hu/budapest/xix-kerulet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/budapest/xx-kerulet/</loc>
+    <loc>https://klimaepito.hu/budapest/xx-kerulet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/budapest/xxi-kerulet/</loc>
+    <loc>https://klimaepito.hu/budapest/xxi-kerulet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/budapest/xxii-kerulet/</loc>
+    <loc>https://klimaepito.hu/budapest/xxii-kerulet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/budapest/xxiii-kerulet/</loc>
+    <loc>https://klimaepito.hu/budapest/xxiii-kerulet/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Blog index -->
   <url>
-    <loc>https://klimafirst-claude.vercel.app/tudastar/</loc>
+    <loc>https://klimaepito.hu/tudastar/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Blog posts -->
   <url>
-    <loc>https://klimafirst-claude.vercel.app/tudastar/futes-klimaval-gazdasagos-e/</loc>
+    <loc>https://klimaepito.hu/tudastar/futes-klimaval-gazdasagos-e/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/tudastar/h-tarifa-geo-tarifa-klima/</loc>
+    <loc>https://klimaepito.hu/tudastar/h-tarifa-geo-tarifa-klima/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/tudastar/inverteres-klima-elonyei/</loc>
+    <loc>https://klimaepito.hu/tudastar/inverteres-klima-elonyei/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/tudastar/klima-hibak-megoldasok/</loc>
+    <loc>https://klimaepito.hu/tudastar/klima-hibak-megoldasok/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/tudastar/klima-karbantartas-fontossaga/</loc>
+    <loc>https://klimaepito.hu/tudastar/klima-karbantartas-fontossaga/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/tudastar/klima-kulteri-egyseg-engedely/</loc>
+    <loc>https://klimaepito.hu/tudastar/klima-kulteri-egyseg-engedely/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/tudastar/klima-szereles-ar-budapest-2025/</loc>
+    <loc>https://klimaepito.hu/tudastar/klima-szereles-ar-budapest-2025/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/tudastar/klima-telepites-menete/</loc>
+    <loc>https://klimaepito.hu/tudastar/klima-telepites-menete/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/tudastar/mikor-erdemes-klimat-szerelni/</loc>
+    <loc>https://klimaepito.hu/tudastar/mikor-erdemes-klimat-szerelni/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://klimafirst-claude.vercel.app/tudastar/milyen-klimat-vegyek/</loc>
+    <loc>https://klimaepito.hu/tudastar/milyen-klimat-vegyek/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
