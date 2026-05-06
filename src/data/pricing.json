@@ -1,27 +1,27 @@
 {
   "installPrices": [
-    { "service": "Split klíma telepítés (2.5 kW)", "description": "Normál falvastagság, max 3m rézcső", "price": "35.000", "note": "Munkadíj", "highlight": false },
-    { "service": "Split klíma telepítés (3.5 kW)", "description": "Normál falvastagság, max 3m rézcső", "price": "38.000", "note": "Munkadíj", "highlight": false },
-    { "service": "Split klíma telepítés (5.0 kW)", "description": "Nagy teljesítmény, normál falvastagság", "price": "42.000", "note": "Munkadíj", "highlight": false },
-    { "service": "Multi-split 2 beltéri egység", "description": "1 kültéri + 2 beltéri, max 5m rézcső/ág", "price": "65.000", "note": "Munkadíj", "highlight": true },
-    { "service": "Multi-split 3 beltéri egység", "description": "1 kültéri + 3 beltéri, max 5m rézcső/ág", "price": "85.000", "note": "Munkadíj", "highlight": false },
-    { "service": "Rézcső pár (méterenkénti)", "description": "3/8\" + 1/4\" standard rézcső pár", "price": "3.500", "note": "/fm", "highlight": false },
-    { "service": "Extra falátvezetés", "description": "Vastag fal, lépcsős fal, stb.", "price": "3.000–8.000", "note": "Eseti díjszabás", "highlight": false }
+    { "service": "Split klíma telepítés 3,5 kW", "description": "Standard telepítés, beltéri + kültéri egység", "price": "80.000", "note": "+ ÁFA", "highlight": false },
+    { "service": "Split klíma telepítés 5,3 kW", "description": "Nagyobb teljesítményű lakossági vagy irodai megoldás", "price": "100.000", "note": "+ ÁFA", "highlight": false },
+    { "service": "Split klíma telepítés 7,1 kW", "description": "Erősebb, nagyobb helyiségekhez vagy helyiségcsoportokhoz", "price": "120.000", "note": "+ ÁFA", "highlight": false },
+    { "service": "Rézcső pár", "description": "Standard 3/8\" + 1/4\" rézcső pár", "price": "10.000", "note": "+ ÁFA /fm", "highlight": false },
+    { "service": "Multisplit telepítés", "description": "Beltéri egység árban, kültéri az árban", "price": "60.000", "note": "+ ÁFA / beltéri egység", "highlight": false },
+    { "service": "Klíma alapszerelés, előcsövezés", "description": "Kérje ajánlatunkat személyre szabottan", "price": "Kérje ajánlatunkat", "highlight": false }
   ],
   "devicePrices": [
-    { "service": "Fisher split klíma (2.5 kW)", "description": "Beltéri + kültéri egység, távirányítóval", "price": "130.000", "highlight": false },
-    { "service": "Fisher split klíma (3.5 kW)", "description": "Beltéri + kültéri egység, távirányítóval", "price": "155.000", "highlight": false },
-    { "service": "Fujitsu split klíma (2.5 kW)", "description": "Japán minőség, A++++ energiaosztály", "price": "180.000", "highlight": true },
-    { "service": "Toshiba split klíma (2.5 kW)", "description": "Prémium, Wi-Fi vezérlés, self-cleaning", "price": "185.000", "highlight": false },
-    { "service": "Daikin split klíma (2.5 kW)", "description": "Piacvezető, maximális megbízhatóság", "price": "200.000", "highlight": false }
+    { "service": "Gree", "description": "Klímakészülék", "price": "209.000", "note": "Ft-tól", "highlight": false },
+    { "service": "Syen", "description": "Klímakészülék", "price": "199.000", "note": "Ft-tól", "highlight": false },
+    { "service": "Midea", "description": "Klímakészülék", "price": "218.000", "note": "Ft-tól", "highlight": false },
+    { "service": "Kinghome", "description": "Klímakészülék", "price": "184.000", "note": "Ft-tól", "highlight": false },
+    { "service": "Daikin", "description": "Klímakészülék", "price": "339.000", "note": "Ft-tól", "highlight": false },
+    { "service": "Aux", "description": "Klímakészülék", "price": "221.900", "note": "Ft-tól", "highlight": false }
   ],
   "servicePrices": [
-    { "service": "Helyszíni diagnosztika", "description": "Hiba azonosítás, hibakód kiolvasás", "price": "8.000", "highlight": false },
-    { "service": "Hűtőközeg utántöltés (R32)", "description": "per 100g + munkadíj", "price": "5.000", "highlight": false },
-    { "service": "Vákuum + töltés", "description": "Teljes rendszer feltöltés", "price": "25.000", "highlight": false },
-    { "service": "Split klíma karbantartás", "description": "Beltéri egység tisztítás, ellenőrzés", "price": "15.000", "highlight": false },
-    { "service": "Split klíma karbantartás (teljes)", "description": "Beltéri + kültéri, rendszerellenőrzés", "price": "25.000", "highlight": true },
-    { "service": "Mélytisztítás + fertőtlenítés", "description": "Professzionális klímatisztítás", "price": "30.000", "highlight": false }
+    { "service": "Hibafeltárás", "description": "Helyszíni hibaazonosítás és diagnosztika", "price": "8.000", "note": "+ ÁFA-tól", "highlight": false },
+    { "service": "Panel csere munkadíj", "description": "Vezérlőpanel csere a beltéri egységben", "price": "18.000", "note": "+ ÁFA-tól", "highlight": false },
+    { "service": "Hűtőkör megbontásával járó javítások", "description": "Komplex szerelési és javítási munkák", "price": "60.000", "note": "+ ÁFA-tól", "highlight": false },
+    { "service": "Klíma fertőtlenítés", "description": "Professzionális fertőtlenítő kezelés beltéri egységhez", "price": "9.000", "note": "+ ÁFA", "highlight": false },
+    { "service": "Klíma mosás", "description": "Beltéri egység mosása (3 beltéri felett kedvezményes ár)", "price": "18.000", "note": "+ ÁFA", "highlight": false },
+    { "service": "Klíma mosás és fertőtlenítés", "description": "Teljes körű tisztítás és baktériummentesítés", "price": "22.000", "note": "+ ÁFA", "highlight": false }
   ],
   "faqs": [
     {

@@ -12,7 +12,7 @@ const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
 const serviceData = await getServicePage('futes-klimaval');
 
 const heroTitle = serviceData?.title ?? 'Fűtés Klímával Budapest';
-const heroSubtitle = serviceData?.subtitle ?? 'A modern inverteres klíma nem csak hűt – hőszivattyúként is funkcionál. 3-4x hatékonyabb, mint az elektromos fűtés, és akár -15°C külső hőmérsékleten is garantált teljesítménnyel fűt.';
+const heroSubtitle = serviceData?.subtitle ?? 'A modern inverteres klíma nem csak hűt – hőszivattyúként is működik. 3-4x hatékonyabb, mint az elektromos fűtés, és akár -25°C-ig is megbízható fűtést biztosít.';
 const heroIcon = serviceData?.heroIcon ?? '🌡️';
 const photo1Src = serviceData?.photo1?.src ?? '/images/juhasz-balazs/jb-vacuum-pumpa-bekoltes.jpeg';
 const photo1Alt = serviceData?.photo1?.alt ?? 'Klíma hűtőkör bekötése vákuumszivattyúval – Klímaépítő.hu fűtés klímával Budapest';
@@ -92,8 +92,9 @@ const faqs = serviceData?.faqs ?? [
         <div class="prose-klima" set:html={bodyHtml} />
       ) : (
         <div class="prose-klima">
-          <h2>Hogyan Fűt a Klíma? – A Hőszivattyú Elve</h2>
-          <p>Az inverteres klímaberendezés egy megfordítható hőszivattyú. Hűtési módban a helyiségből elvont hőt a kültéri levegőbe adja. Fűtési módban megfordítja a folyamatot: a kültéri levegőből nyeri ki a hőt (még -15°C-on is van hő a levegőben!), és azt a belső térbe juttatja.</p>
+          <h2>Hogyan Fűt a Klíma? – Klíma fűtés, nem hőszivattyú</h2>
+          <p>Az inverteres klíma fűtési módban a kültéri levegőből vonja el a hőt, és azt a beltérbe továbbítja. Ez a klíma gyári fűtési funkciója – nem hőszivattyús rendszer telepítése.</p>
+          <p class="font-semibold text-orange-600">Fontos: nem vállaljuk a hőszivattyú rendszerek telepítését, csak klíma alapú fűtési megoldásokat.</p>
           <h2>Összehasonlítás: Klíma vs. Gáz vs. Villany Fűtés</h2>
           <div class="overflow-x-auto">
             <table>

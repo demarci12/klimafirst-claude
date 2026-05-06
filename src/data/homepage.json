@@ -1,7 +1,7 @@
 {
-  "heroTitle": "Klímaszerelés Budapest –\nProfi, Gyors, Megbízható",
-  "heroSubtitle": "Fisher, Fujitsu, Toshiba és Daikin klímarendszerek telepítése, javítása és karbantartása. Ingyenes helyszíni felmérés, kiszállási díj nélkül Budapest mind a 23 kerületében.",
-  "heroBadgeText": "5000+ elvégzett referencia Budapesten",
+  "heroTitle": "Klímaszerelés Budapest és környéke –\nProfi, Gyors, Megbízható",
+  "heroSubtitle": "Fisher, Fujitsu, Toshiba és Daikin klímarendszerek telepítése, javítása és karbantartása. Ingyenes helyszíni felmérés, kiszállási díj nélkül Budapesten és a környező településeken.",
+  "heroBadgeText": "Több száz elvégzett referencia",
   "heroCtaPrimary": "Ingyenes Árajánlat Kérése",
   "heroCtaSecondary": "+36 20 339 4164",
   "heroImageUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=560&h=280&fit=crop&auto=format&q=80",
@@ -49,7 +49,7 @@
   "processSteps": [
     { "step": "1", "title": "Kapcsolatfelvétel", "desc": "Hívjon minket vagy töltse ki az online árajánlatkérőt." },
     { "step": "2", "title": "Ingyenes Felmérés", "desc": "Szerelőink kiszállnak, felmérnek és pontos ajánlatot adnak." },
-    { "step": "3", "title": "Árajánlat", "desc": "Átlátható, tételes árajánlatot küldünk írásban." },
+    { "step": "3", "title": "Árajánlat", "desc": "Átlátható, tételes árajánlatot küldünk mihamarabb." },
     { "step": "4", "title": "Telepítés", "desc": "Precíz, tiszta munkavégzés a megbeszélt időpontban." },
     { "step": "5", "title": "Átadás + Garancia", "desc": "Betanítás, dokumentáció, 2 év garancia." }
   ],

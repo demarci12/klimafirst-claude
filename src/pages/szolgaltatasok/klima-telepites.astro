@@ -7,11 +7,9 @@ import QuizForm from '../../components/QuizForm.astro';
 import TrustBar from '../../components/TrustBar.astro';
 import { getSite } from '../../lib/getSite';
 const SITE = await getSite();
-import { getServicePage } from '../../lib/queries';
-import { toHTML } from '@portabletext/to-html';
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
-const serviceData = await getServicePage('klima-telepites');
+const serviceData = null;
 
 const heroTitle = serviceData?.title ?? 'Klíma Telepítés és Értékesítés Budapest';
 const heroSubtitle = serviceData?.subtitle ?? 'Fisher, Fujitsu, Toshiba és Daikin split és multi-split klímarendszerek professzionális telepítése. Ingyenes helyszíni felmérés, kiszállási díj nélkül mind a 23 kerületben.';

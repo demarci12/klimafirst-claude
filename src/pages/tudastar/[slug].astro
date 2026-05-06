@@ -4,74 +4,35 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import RelatedPosts from '../../components/RelatedPosts.astro';
 import QuizForm from '../../components/QuizForm.astro';
-import { getBlogPosts, getBlogPostBySlug } from '../../lib/queries';
-import { toHTML } from '@portabletext/to-html';
 
 export async function getStaticPaths() {
   const mdPosts = await getCollection('tudastar');
-  const sanityPosts = (await getBlogPosts()) ?? [];
-  const sanitySlugSet = new Set(sanityPosts.map((p: any) => p.slug.current));
 
-  return [
-    ...mdPosts
-      .filter((p) => !sanitySlugSet.has(p.slug))
-      .map((post) => ({ params: { slug: post.slug }, props: { mdPost: post, source: 'md' as const } })),
-    ...sanityPosts.map((p: any) => ({
-      params: { slug: p.slug.current },
-      props: { mdPost: null, source: 'sanity' as const, sanitySlug: p.slug.current },
-    })),
-  ];
+  return mdPosts.map((post) => ({
+    params: { slug: post.slug },
+    props: { mdPost: post },
+  }));
 }
 
 interface Props {
-  mdPost: CollectionEntry<'tudastar'> | null;
-  source: 'md' | 'sanity';
-  sanitySlug?: string;
+  mdPost: CollectionEntry<'tudastar'>;
 }
 
-const { mdPost, source, sanitySlug } = Astro.props;
+const { mdPost } = Astro.props;
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
 
-let title = '';
-let description = '';
-let pubDate: Date = new Date();
-let updatedDate: Date | undefined;
-let author = 'Juhász Balázs';
-let tags: string[] = [];
-let image: string | undefined;
-let imageAlt: string | undefined;
-let keywords: string[] = [];
-let slug = '';
-let bodyHtml = '';
-let MdContent: any = null;
-
-if (source === 'sanity' && sanitySlug) {
-  const sp = await getBlogPostBySlug(sanitySlug);
-  title = sp.title;
-  description = sp.description;
-  pubDate = new Date(sp.pubDate);
-  updatedDate = sp.updatedDate ? new Date(sp.updatedDate) : undefined;
-  author = sp.author ?? 'Juhász Balázs';
-  tags = sp.tags ?? [];
-  image = sp.image;
-  imageAlt = sp.imageAlt;
-  keywords = sp.keywords ?? [];
-  slug = sp.slug.current;
-  bodyHtml = sp.body ? toHTML(sp.body) : '';
-} else if (mdPost) {
-  const rendered = await mdPost.render();
-  MdContent = rendered.Content;
-  title = mdPost.data.title;
-  description = mdPost.data.description;
-  pubDate = mdPost.data.pubDate;
-  updatedDate = mdPost.data.updatedDate;
-  author = mdPost.data.author;
-  tags = mdPost.data.tags;
-  image = mdPost.data.image;
-  imageAlt = mdPost.data.imageAlt;
-  keywords = mdPost.data.keywords;
-  slug = mdPost.slug;
-}
+const rendered = await mdPost.render();
+const MdContent = rendered.Content;
+const title = mdPost.data.title;
+const description = mdPost.data.description;
+const pubDate = mdPost.data.pubDate;
+const updatedDate = mdPost.data.updatedDate;
+const author = mdPost.data.author ?? 'Juhász Balázs';
+const tags = mdPost.data.tags ?? [];
+const image = mdPost.data.image;
+const imageAlt = mdPost.data.imageAlt;
+const keywords = mdPost.data.keywords ?? [];
+const slug = mdPost.slug;
 
 const articleSchema = {
   '@context': 'https://schema.org',
@@ -163,11 +124,7 @@ const articleSchema = {
 
       <!-- Content -->
       <div class="prose-klima max-w-none">
-        {source === 'sanity' ? (
-          <Fragment set:html={bodyHtml} />
-        ) : (
-          MdContent && <MdContent />
-        )}
+        {MdContent && <MdContent />}
       </div>
 
       <!-- CTA box -->

@@ -12,14 +12,14 @@ const pageData = (await getRolunk()) ?? rolunkJson;
 
 const heroLabel = pageData.heroLabel ?? 'Ismerjük meg egymást';
 const heroTitle = pageData.heroTitle ?? 'Juhász Balázs';
-const heroSubtitle = pageData.heroSubtitle ?? '10+ év szakmai tapasztalat, 5000+ elvégzett munka, Budapest mind a 23 kerületében. Tulajdonos-vezető, aki maga is kiszáll és dolgozik.';
+const heroSubtitle = pageData.heroSubtitle ?? 'Sokéves tapasztalat, több száz elvégzett klíma munka Budapesten és környékén. Tulajdonos-vezető, aki már 5+ éve személyesen végzi a munkát.';
 const { heroImageSrc, heroImageAlt, profileImageSrc, profileImageAlt, actionPhotos } = pageData;
 
 const stats = pageData.stats ?? [
-  { value: '10+', label: 'Év tapasztalat' },
-  { value: '5000+', label: 'Elvégzett munka' },
-  { value: '23', label: 'Budapest kerület' },
-  { value: '2 év', label: 'Garancia' },
+  { value: '5+', label: 'Év tapasztalat' },
+  { value: 'Több száz', label: 'Elvégzett munka' },
+  { value: 'Budapest és környéke', label: 'Szolgáltatási terület' },
+  { value: 'Akár 10 év', label: 'Garancia' },
 ];
 
 const filmStripTitle = pageData.filmStripTitle ?? 'Munkában – minden nap Budapesten';
@@ -39,7 +39,7 @@ const typedStats = stats as Array<{ value: string; label: string }>;
 
 <BaseLayout
   title="Rólunk – Klímaépítő.hu Klímaszerelő Budapest | Juhász Solutions Kft."
-  description="Ismerje meg a Klímaépítő.hu csapatát! Juhász Solutions Kft., 10+ év tapasztalat, 5000+ elvégzett referencia, 23 kerület. Tulajdonos: Juhász Balázs."
+  description="Ismerje meg a Klímaépítő.hu csapatát! Juhász Solutions Kft., 5+ év tapasztalat, több száz elvégzett munka Budapest és környékén. Tulajdonos: Juhász Balázs."
   canonical="/rolunk"
   breadcrumbs={[{ name: 'Rólunk', url: '/rolunk' }]}
 >
@@ -120,9 +120,10 @@ const typedStats = stats as Array<{ value: string; label: string }>;
                 <li><strong>Ingyenes helyszíni felmérés</strong> – kiszállási díj nélkül</li>
                 <li><strong>Személyre szabott árak</strong> – nem sablonos ajánlatok</li>
                 <li><strong>Precíz munkavégzés</strong> – minőségi eszközök, tiszta munkaterület</li>
-                <li><strong>Gyors kiszállás</strong> – 1–3 napon belül Budapest egész területén</li>
+                <li><strong>Gyors kiszállás</strong> – 1–3 napon belül Budapesten és a környéken</li>
                 <li><strong>2 év garancia</strong> – minden elvégzett munkára</li>
               </ul>
+              <p class="mt-4 text-sm text-gray-600"><strong>Fontos:</strong> Hőszivattyú telepítését nem vállaljuk, kizárólag klímafűtési megoldásokat kínálunk.</p>
             </div>
           )}
         </div>

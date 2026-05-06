@@ -46,7 +46,7 @@ const localBusinessSchema = {
   },
   areaServed: {
     '@type': 'City',
-    name: 'Budapest',
+    name: 'Budapest és környéke',
   },
   openingHoursSpecification: [
     {
@@ -100,9 +100,9 @@ const websiteSchema = {
 
 const { faqs: homeFaqs, services, brands, processSteps } = homepageData;
 
-const heroBadge = homepageData.heroBadgeText ?? '5000+ elvégzett referencia Budapesten';
+const heroBadge = homepageData.heroBadgeText ?? 'Több száz elvégzett referencia Budapesten és környékén';
 const heroTitle = homepageData.heroTitle ?? 'Klímaszerelés Budapest –\nProfi, Gyors, Megbízható';
-const heroSubtitle = homepageData.heroSubtitle ?? 'Fisher, Fujitsu, Toshiba és Daikin klímarendszerek telepítése, javítása és karbantartása. Ingyenes helyszíni felmérés, kiszállási díj nélkül Budapest mind a 23 kerületében.';
+const heroSubtitle = homepageData.heroSubtitle ?? 'Fisher, Fujitsu, Toshiba és Daikin klímarendszerek telepítése, javítása és karbantartása. Ingyenes helyszíni felmérés, kiszállási díj nélkül Budapesten és környékén.';
 const heroTrustBadges: string[] = homepageData.heroTrustBadges ?? ['Kiszállási díj nélkül', '2 év garancia', 'Ingyenes helyszíni felmérés'];
 const jbStripLabel = homepageData.jbStripLabel ?? 'A mester maga is kiszáll';
 const jbStripTitle = homepageData.jbStripTitle ?? 'Juhász Balázs – Tulajdonos és Főszerelő';
@@ -135,7 +135,7 @@ const jbPhotos: JbPhoto[] = homepageData.jbPhotos ?? [
 
 <BaseLayout
   title="Klímaépítő.hu – Klímaszerelés Budapest | Telepítés, Javítás, Karbantartás"
-  description="Professzionális klímaszerelés, javítás és karbantartás Budapesten. Ingyenes helyszíni felmérés, kiszállási díj nélkül mind a 23 kerületbe. Fisher, Fujitsu, Toshiba, Daikin. ☎ +36 20 339 4164"
+  description="Professzionális klímaszerelés, javítás és karbantartás Budapesten és környékén. Ingyenes helyszíni felmérés, kiszállási díj nélkül. Fisher, Fujitsu, Toshiba, Daikin. ☎ +36 20 339 4164"
   canonical="/"
   ogType="website"
   schema={[localBusinessSchema, websiteSchema]}

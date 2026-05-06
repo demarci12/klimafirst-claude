@@ -1,54 +1,45 @@
-import { sanityClient } from './sanity';
+import siteConfig from '../data/site-config.json';
+import homepageJson from '../data/homepage.json';
+import rolunkJson from '../data/rolunk.json';
+import pricingJson from '../data/pricing.json';
+import referenciakJson from '../data/referenciak.json';
 
 export async function getSiteConfig() {
-  return sanityClient.fetch(`*[_type == "siteConfig" && _id == "siteConfig"][0]`);
+  return siteConfig;
 }
 
 export async function getHomepage() {
-  return sanityClient.fetch(`*[_type == "homepage" && _id == "homepage"][0]`);
+  return homepageJson;
 }
 
 export async function getRolunk() {
-  return sanityClient.fetch(`*[_type == "rolunk" && _id == "rolunk"][0]`);
+  return rolunkJson;
 }
 
 export async function getReferenciak() {
-  return sanityClient.fetch(`*[_type == "referenciak" && _id == "referenciak"][0]`);
+  return referenciakJson;
 }
 
 export async function getPricing() {
-  return sanityClient.fetch(`*[_type == "pricing" && _id == "pricing"][0]`);
+  return pricingJson;
 }
 
 export async function getBlogPosts() {
-  return sanityClient.fetch(
-    `*[_type == "blogPost"] | order(pubDate desc) { title, slug, description, pubDate, updatedDate, author, tags, image, imageAlt, keywords }`
-  );
+  return [];
 }
 
 export async function getBlogPostBySlug(slug: string) {
-  return sanityClient.fetch(
-    `*[_type == "blogPost" && slug.current == $slug][0]`,
-    { slug }
-  );
+  return null;
 }
 
 export async function getServicePage(slugStr: string) {
-  return sanityClient.fetch(
-    `*[_type == "servicePage" && slug.current == $slug][0]`,
-    { slug: slugStr }
-  );
+  return null;
 }
 
 export async function getBrandPage(slugStr: string) {
-  return sanityClient.fetch(
-    `*[_type == "brandPage" && slug.current == $slug][0]`,
-    { slug: slugStr }
-  );
+  return null;
 }
 
 export async function getBrandPages() {
-  return sanityClient.fetch(
-    `*[_type == "brandPage"] | order(_createdAt asc) { name, slug, description, pros, priceRange, icon, logoUrl }`
-  );
+  return [];
 }

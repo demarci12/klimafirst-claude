@@ -8,7 +8,7 @@ export interface Props {
 }
 
 const {
-  title = 'Klímaszerelés Budapest Mind a 23 Kerületében',
+  title = 'Klímaszerelés Budapest és környékén',
   limit,
   showAll = true,
 } = Astro.props;
@@ -23,7 +23,7 @@ const displayDistricts = limit ? districts.slice(0, limit) : districts;
         {title}
       </h2>
       <p class="text-gray-600 max-w-2xl mx-auto leading-relaxed">
-        Budapesten belül kiszállási díj nélkül vállalunk klímaszerelési, javítási és karbantartási munkákat mind a 23 kerületben.
+        Budapesten és környékén kiszállási díj nélkül vállalunk klímaszerelési, javítási és karbantartási munkákat.
       </p>
     </div>
 

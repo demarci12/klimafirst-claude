@@ -18,7 +18,7 @@ const uid = Math.random().toString(36).slice(2, 8);
 
   <div class="p-6">
     <h3 class="text-lg font-bold text-gray-900 mb-1">{title}</h3>
-    <p class="text-xs text-gray-400 mb-5">3 gyors kérdés → visszahívjuk 24 órán belül</p>
+    <p class="text-xs text-gray-400 mb-5">3 gyors kérdés → visszahívjuk mihamarabb</p>
 
     <!-- Step indicator -->
     <div class="flex items-center justify-between mb-4">
@@ -107,10 +107,7 @@ const uid = Math.random().toString(36).slice(2, 8);
     <div class="quiz-step hidden text-center py-3" data-step="success">
       <div class="text-4xl mb-3">✅</div>
       <p class="font-bold text-gray-900 mb-1">Köszönjük!</p>
-      <p class="text-sm text-gray-500">24 órán belül visszahívjuk a megadott telefonszámon.</p>
-    </div>
-
-    <!-- Back -->
+      <p class="text-sm text-gray-500">Mihamarabb visszahívjuk a megadott telefonszámon.</p>
     <button type="button" class="quiz-back hidden mt-3 text-xs text-gray-400 hover:text-gray-600 transition-colors">← Vissza</button>
   </div>
 </div>
